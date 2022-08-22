@@ -5,6 +5,7 @@ const appController = require('../controllers/appController')
 
 // put routes here
 
+appRouter.get('/', appController.getTestPage)
 
 
 

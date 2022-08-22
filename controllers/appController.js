@@ -1,5 +1,9 @@
 const DB = require('../models/db')
 const bcrypt = require('bcryptjs')
 
-
-module.exports = {}
+const getTestPage = async (req, res) => {
+    res.render('login.hbs')
+}
+module.exports = {
+    getTestPage
+}
