@@ -21,6 +21,7 @@ app.set('view engine', 'hbs')
 // routes to pages
 app.use('/', appRouter)
 
+app.use("/bootstrap",express.static(__dirname+"/node_modules/bootstrap/dist"))
 
 app.listen(3000, () => { 
     console.log('Demo app is listening on port 3000!') 
