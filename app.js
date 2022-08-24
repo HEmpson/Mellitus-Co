@@ -3,13 +3,12 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const req = require('express/lib/request')
 const appRouter = require('./routes/appRouter')
+const models = require('./models')
 
-
-// Set your app up as an express app 
-const app = express() 
+// Set your app up as an express app
+const app = express()
 
 app.use(express.static('public'))
-
 
 app.engine(
     'hbs',
@@ -29,6 +28,6 @@ app.use(
     express.static(__dirname + '/node_modules/bootstrap/dist')
 )
 
-app.listen(process.env.PORT || 3000, () => { 
-    console.log('App is running!') 
-  }) 
+app.listen(process.env.PORT || 3000, () => {
+    console.log('App is running!')
+})

@@ -11,6 +11,7 @@ mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost', {
     useUnifiedTopology: true,
     dbName: 'Mellitus',
 })
+
 // Exit on error
 const db = mongoose.connection.on('error', (err) => {
     console.error(err)
