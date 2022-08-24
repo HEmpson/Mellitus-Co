@@ -1,4 +1,14 @@
 .login_container{
-    background-color: rgba(0, 0, 0, 0.4);
-    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: var(--color-primary);
+    border-radius: 12px;
+
+}
+
+.login_container h2{
+    color: black;
 }
