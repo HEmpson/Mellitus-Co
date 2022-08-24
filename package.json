@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "prettier": "prettier --single-quote --no-semi --tab-width 4 --write **/*.js *.js"
   },
   "repository": {
     "type": "git",
@@ -28,5 +29,8 @@
     "mongoose": "^6.5.2",
     "node": "^16.17.0",
     "passport": "^0.6.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1"
   }
 }
