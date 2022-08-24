@@ -4,15 +4,12 @@ const exphbs = require('express-handlebars')
 const req = require('express/lib/request')
 const appRouter = require('./routes/appRouter')
 
-<<<<<<< HEAD
+
 // Set your app up as an express app 
 const app = express() 
 
 app.use(express.static('public'))
-=======
-// Set your app up as an express app
-const app = express()
->>>>>>> 99679ae9803e6e98e7541ce66f9972707bf31725
+
 
 app.engine(
     'hbs',
