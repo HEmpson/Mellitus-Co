@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap');
+
+:root {
+    --color-bg: #40798c;
+    --color-bg-variant: #5c80BC;
+    --color-black: #0D1321;
+    --color-primay: #AFE0CE;
+    --color-primary-variant: #4d5061;
+    --color-white: white;
+    --color-light: #FFEDDF;
+    --color-green: #c5D864;
+    --color-pink: #CCA7A2;
+    --color-taupe: #86615c;
+
+
+    --container-width-lg: 75%;
+    --container-width-md: 86%;
+    --container-width-ms: 95%;
+}
