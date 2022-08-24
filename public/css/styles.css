@@ -29,7 +29,7 @@
 
 body {
     font-family: "Raleway", serif;
-    background: var(--color-bg);
+    background: linear-gradient(60deg, --color-bg);
     color: var(--color-white);
     line-height: 1.7;
 }
