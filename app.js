@@ -3,7 +3,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const req = require('express/lib/request')
 const appRouter = require('./routes/appRouter')
-
+const models = require("./models")
 
 // Set your app up as an express app 
 const app = express() 
