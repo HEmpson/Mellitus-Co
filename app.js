@@ -7,6 +7,7 @@ const appRouter = require('./routes/appRouter')
 // Set your app up as an express app 
 const app = express() 
 
+app.use(express.static('public'))
 
 app.engine(
     'hbs',
