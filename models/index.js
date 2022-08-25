@@ -17,6 +17,16 @@ const db = mongoose.connection.on('error', (err) => {
     console.error(err)
     process.exit(1)
 })
+
+// Create Bucket To Accept File Uploads
+let bucket;
+db.on("connected", () => {
+    bucket = new mongoose.mongo.GridFSBucket(mongoose.connections[0].db, {
+        bucketName: "uploads"
+    })
+    console.log(bucket)
+})
+
 // Log to console once the database is open
 db.once('open', async () => {
     console.log(`Mongo connection started on ${db.host}:${db.port}`)

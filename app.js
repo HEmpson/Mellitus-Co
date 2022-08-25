@@ -8,7 +8,14 @@ const models = require('./models')
 // Set your app up as an express app
 const app = express()
 
+// Set Location of static resources
 app.use(express.static('public'))
+
+// To Parse JSON Objects
+app.use(express.json());
+
+// To Parse Body From URL
+app.use(express.urlencoded({extended: false}));
 
 app.engine(
     'hbs',
