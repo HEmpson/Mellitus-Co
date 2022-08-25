@@ -13,10 +13,10 @@ const app = express()
 app.use(express.static('public'))
 
 // To Parse JSON Objects
-app.use(express.json());
+app.use(express.json())
 
 // To Parse Body From URL
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }))
 
 app.engine(
     'hbs',
@@ -32,7 +32,7 @@ app.set('view engine', 'hbs')
 app.use('/', appRouter)
 
 // File upload and download routes
-app.use("/files", fileRouter)
+app.use('/files', fileRouter)
 
 app.use(
     '/bootstrap',

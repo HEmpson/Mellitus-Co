@@ -3,9 +3,9 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
 const mongoose = require('mongoose')
-const ObjectId = require('mongodb').ObjectId;
+const ObjectId = require('mongodb').ObjectId
 const multer = require('multer')
-const {GridFsStorage} = require('multer-gridfs-storage')
+const { GridFsStorage } = require('multer-gridfs-storage')
 
 // Connect to your mongo database using the MONGO_URL environmentvariable.
 // Locally, MONGO_URL will be loaded by dotenv from .env.
@@ -22,10 +22,10 @@ const db = mongoose.connection.on('error', (err) => {
 })
 
 // Create Bucket To Accept File Uploads
-let bucket;
-db.on("connected", () => {
+let bucket
+db.on('connected', () => {
     bucket = new mongoose.mongo.GridFSBucket(mongoose.connections[0].db, {
-        bucketName: "uploads"
+        bucketName: 'uploads',
     })
     console.log(bucket)
 })
@@ -34,32 +34,33 @@ const storage = new GridFsStorage({
     url: process.env.MONGO_URL || 'mongodb://localhost',
     file: (req, file) => {
         return new Promise((resolve, reject) => {
-            const filename = file.originalname;
+            const filename = file.originalname
             const fileInfo = {
                 filename: filename,
-                bucketName: "uploads"
+                bucketName: 'uploads',
             }
             resolve(fileInfo)
         })
-    }
+    },
 })
 
 // Utility for file uploads
-const upload = multer({storage})
+const upload = multer({ storage })
 
 // Function For Downloading Files
 const downloadFile = async (req, res) => {
-    bucket.find({
-        "_id" : ObjectId(req.params.id)
-    })
-    .toArray((err, files) => {
-        if (!files || files.length === 0) {
-            return res.status(404).json({
-                err: "no files exist"
-            })
-        }
-        bucket.openDownloadStream(ObjectId(req.params.id)).pipe(res)
-    })
+    bucket
+        .find({
+            _id: ObjectId(req.params.id),
+        })
+        .toArray((err, files) => {
+            if (!files || files.length === 0) {
+                return res.status(404).json({
+                    err: 'no files exist',
+                })
+            }
+            bucket.openDownloadStream(ObjectId(req.params.id)).pipe(res)
+        })
 }
 
 // Log to console once the database is open
@@ -69,4 +70,4 @@ db.once('open', async () => {
 
 require('./db')
 
-module.exports = {upload, downloadFile}
+module.exports = { upload, downloadFile }
