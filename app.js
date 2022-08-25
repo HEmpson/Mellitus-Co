@@ -3,6 +3,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const req = require('express/lib/request')
 const appRouter = require('./routes/appRouter')
+const fileRouter = require('./routes/fileRouter')
 const models = require('./models')
 
 // Set your app up as an express app
@@ -29,6 +30,9 @@ app.set('view engine', 'hbs')
 
 // routes to pages
 app.use('/', appRouter)
+
+// File upload and download routes
+app.use("/files", fileRouter)
 
 app.use(
     '/bootstrap',
