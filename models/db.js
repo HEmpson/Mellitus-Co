@@ -9,8 +9,8 @@ const userSchema = new mongoose.Schema({
     email: String,
     status: String,
     bio: String,
-    friends: [userSchema],
-    files: [postSchema],
+  //  friends: [userSchema],
+  //  files: [postSchema],
 
 })
 
