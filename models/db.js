@@ -11,7 +11,11 @@ const postSchema = new mongoose.Schema({
 		ref: 'Category',
 	},
 	description: String,
-	fileId: mongoose.Schema.Types.ObjectId
+	fileId: mongoose.Schema.Types.ObjectId,
+	dateCreated: {
+		type: Date,
+		default: new Date()
+	}
 })
 
 const userSchema = new mongoose.Schema({
