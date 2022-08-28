@@ -1,21 +1,71 @@
 const mongoose = require('mongoose')
 
-// add schemas
+const postSchema = new mongoose.Schema({
+	visibility: String, 
+	createdBy: {
+		type:mongoose.Schema.Types.ObjectId,
+		ref: 'User',
+    default: null
+	},
+	categoryId: {
+		type:mongoose.Schema.Types.ObjectId,
+		ref: 'Category',
+    default: null
+	},
+	description: String,
+	fileId: mongoose.Schema.Types.ObjectId,
+	dateCreated: {
+		type: Date,
+		default: new Date()
+	}
+})
 
 const userSchema = new mongoose.Schema({
-    userFirstName: String,
-    userLastName: String,
-    displayName: String, // idk if we are doing a display name??
+    username: String,
+    displayName: String, 
     email: String,
     status: String,
-    bio: String,
-  //  friends: [userSchema],
-  //  files: [postSchema],
+    role: String,
+    friends: [
+      {
+        	type:mongoose.Schema.Types.ObjectId,
+        	ref: 'User',
+      },
+    ],
+
+    files: [
+		{
+		type:mongoose.Schema.Types.ObjectId,
+		ref: 'Post',
+	}
+	],
+
+	categories: [
+		{
+		type:mongoose.Schema.Types.ObjectId,
+		ref: 'Category',
+	}
+	]
 
 })
 
-const postSchema = new mongoose.Schema({
-
+const categorySchema = new mongoose.Schema({
+	name: String,
+	posts: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Post',
+		}
+	]
 })
 
-module.exports = {}
+
+const User = mongoose.model('User', userSchema, 'user')
+const Post = mongoose.model('Post', postSchema, 'post')
+const Category = mongoose.model('Category', categorySchema, 'category')
+
+module.exports = {
+  User,
+  Post,
+  Category,
+}
