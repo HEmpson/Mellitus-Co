@@ -108,4 +108,4 @@ dist
 .idea/
 
 # test html files
-.html
+*.html

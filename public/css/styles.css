@@ -46,3 +46,8 @@ h1 {
 a:hover{
     color: var(--color-white);
 }
+
+
+.sidebar {
+    background-color: #86615c;
+}

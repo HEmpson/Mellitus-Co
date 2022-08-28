@@ -76,3 +76,37 @@ input[type = "submit"]:hover{
     border-color: white;
     transition: 0.5s;
 }
+
+body {
+    font-family: "Raleway", serif;
+    background: linear-gradient(60deg, var(--color-bg), transparent, var(--color-primary));
+    color: var(--color-black);
+    line-height: 1.7;
+    font-size: 14px;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ============ general styles ============ */
+
+.contrainer {
+    width: var(--container-width-lg);
+    margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight: 500;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+a:hover{
+    color: var(--color-white);
+}
+
+
+.sidebar {
+    background-color: #86615c;
+}
