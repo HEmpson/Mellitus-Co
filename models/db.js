@@ -22,6 +22,7 @@ const postSchema = new mongoose.Schema({
 
 const userSchema = new mongoose.Schema({
     username: String,
+	password: String,
     displayName: String, 
     email: String,
     status: String,

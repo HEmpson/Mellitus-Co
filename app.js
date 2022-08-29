@@ -4,6 +4,7 @@ const exphbs = require('express-handlebars')
 const req = require('express/lib/request')
 const appRouter = require('./routes/appRouter')
 const fileRouter = require('./routes/fileRouter')
+const userRouter = require('./routes/userRouter')
 const models = require('./models')
 
 // Set your app up as an express app
@@ -33,6 +34,8 @@ app.use('/', appRouter)
 
 // File upload and download routes
 app.use('/files', fileRouter)
+
+app.use('/user', userRouter)
 
 app.use(
     '/bootstrap',

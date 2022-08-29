@@ -11,7 +11,7 @@ fileRouter.post('/makePost', upload.single('file'), async (req, res) => {
     const newPost = new db.Post({
         visibility: body.visibility,
         description: body.description,
-        fileId: mongoose.Types.ObjectId(req.file.id)
+        fileId: mongoose.Types.ObjectId(req.file.id),
     })
     await newPost.save()
     res.send(newPost)
