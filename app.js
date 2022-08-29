@@ -13,8 +13,6 @@ const passport = require('./passport')
 // Set your app up as an express app
 const app = express()
 
-// enable flash
-app.use(flash())
 
 // Set Location of static resources
 app.use(express.static('public'))
@@ -73,3 +71,7 @@ if (app.get('env') === 'production') {
 
 
 app.use(passport.authenticate('session'))
+
+
+// enable flash
+app.use(flash())
