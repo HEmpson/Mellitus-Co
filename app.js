@@ -6,9 +6,15 @@ const appRouter = require('./routes/appRouter')
 const fileRouter = require('./routes/fileRouter')
 const userRouter = require('./routes/userRouter')
 const models = require('./models')
+const flash = require('express-flash')
+const session = require('express-session')
+const passport = require('./passport')
 
 // Set your app up as an express app
 const app = express()
+
+// enable flash
+app.use(flash())
 
 // Set Location of static resources
 app.use(express.static('public'))
@@ -45,3 +51,25 @@ app.use(
 app.listen(process.env.PORT || 3000, () => {
     console.log('App is running!')
 })
+
+app.use(
+    session({
+        // The secret used to sign session cookies (ADD ENV VAR)
+        secret: process.env.SESSION_SECRET || 'keyboard cat',
+        name: 'mellitus-co', 
+        saveUninitialized: false,
+        resave: false,
+        cookie: {
+        sameSite: 'strict',
+        httpOnly: true,
+        secure: app.get('env') === 'production'
+        },
+    })
+)
+
+if (app.get('env') === 'production') {
+    app.set('trust proxy', 1); // Trust first proxy
+}
+
+
+app.use(passport.authenticate('session'))
