@@ -25,7 +25,7 @@ const hasRole = (thisRole) => {
 
 // put routes here
 
-appRouter.get('/', appController.getTestPage)
+appRouter.get('/', appController.getLoginPage)
 appRouter.get('/dashboard', appController.getDashboard)
 appRouter.get('/profile', appController.getProfile)
 

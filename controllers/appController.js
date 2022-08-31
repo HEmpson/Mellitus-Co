@@ -1,6 +1,6 @@
 
 
-const getTestPage = async (req, res) => {
+const getLoginPage = async (req, res) => {
     res.render('login.hbs')
 }
 
@@ -17,7 +17,7 @@ const getProfile = async (req, res) => {
 }
 
 module.exports = {
-    getTestPage,
+    getLoginPage,
     getDashboard,
     getProfile, 
 }
