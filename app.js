@@ -3,7 +3,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const req = require('express/lib/request')
 const appRouter = require('./routes/appRouter')
-const fileRouter = require('./routes/fileRouter')
+const postRouter = require('./routes/postRouter')
 const userRouter = require('./routes/userRouter')
 const models = require('./models')
 const flash = require('express-flash')
@@ -37,7 +37,7 @@ app.set('view engine', 'hbs')
 app.use('/', appRouter)
 
 // File upload and download routes
-app.use('/files', fileRouter)
+app.use('/posts', postRouter)
 
 app.use('/user', userRouter)
 
