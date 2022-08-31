@@ -20,6 +20,9 @@ const postSchema = new mongoose.Schema({
     },
 })
 
+const getUserPosts = async (req, res) => {
+    
+}
 
 const Post = mongoose.model('Post', postSchema, 'post')
 
