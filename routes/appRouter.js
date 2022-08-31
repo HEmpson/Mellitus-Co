@@ -27,6 +27,6 @@ const hasRole = (thisRole) => {
 
 appRouter.get('/', appController.getTestPage)
 appRouter.get('/dashboard', appController.getDashboard)
-
+appRouter.get('/profile', appController.getProfile)
 
 module.exports = appRouter
