@@ -13,7 +13,7 @@ const createAccount = async (req, res) => {
     }
 
     // email already exists
-    if (await User.findOne({ email: newUser.email })) {
+    if (await User.findOne({ username: newUser.username })) {
         req.flash('newAccountError', 'User already exists')
         return res.redirect('/')
     }
@@ -23,7 +23,6 @@ const createAccount = async (req, res) => {
             username: newUser.username,
             password: newUser.password,
             displayName: newUser.displayName,
-            email: newUser.email,
             status: newUser.status,
             role: 'User',
             friends: [],
@@ -34,7 +33,7 @@ const createAccount = async (req, res) => {
         // save the new account to the DB
         await newUserProfile.save()
     } catch (err) {
-        await User.deleteOne({ email: newUser.email })
+        await User.deleteOne({ username: newUser.username })
         req.flash('newAccountError', 'Invalid Data Type(s) Entered')
         return res.redirect('/')
     }
@@ -45,7 +44,7 @@ const createAccount = async (req, res) => {
 // Verify the email address of the new patient is correct
 const verifyNewPatientProfile = (newUser) => {
     try {
-        const email = newUser.email
+        const email = newUser.username
         // Check email has only 1 @ symbol
         const emailTokens = email.split('@')
         if (emailTokens.length != 2) {
