@@ -29,7 +29,7 @@ db.on('connected', () => {
     bucket = new mongoose.mongo.GridFSBucket(mongoose.connections[0].db, {
         bucketName: 'uploads',
     })
-    console.log(bucket)
+    
 })
 
 const storage = new GridFsStorage({

@@ -6,6 +6,29 @@ const { downloadFile } = require('../models/index')
 const db = require('../models/db')
 const mongoose = require('mongoose')
 
+
+// Authentication middleware
+const isAuthenticated = (req, res, next) => {
+    // If user is not authenticated via passport, redirect to login page
+    if (!req.isAuthenticated()) {
+        return res.redirect('/login')
+    }
+    // Otherwise, proceed to next middleware function
+    return next()
+}
+
+// Set up role based authentication
+const hasRole = (thisRole) => {
+    return (req, res, next) => {
+        if (req.user.role === thisRole) {
+            return next()
+        } else {
+            res.redirect('/login')
+        }
+    }
+}
+
+
 fileRouter.post('/makePost', upload.single('file'), async (req, res) => {
     const body = req.body;
     const newPost = new db.Post({
