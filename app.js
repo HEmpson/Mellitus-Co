@@ -33,9 +33,11 @@ app.engine(
 app.set('view engine', 'hbs')
 
 // routes to pages
-app.use('/', appRouter)
 
 // File upload and download routes
+
+app.use('/', appRouter)
+
 app.use('/posts', postRouter)
 
 app.use('/user', userRouter)
