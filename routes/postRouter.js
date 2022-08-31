@@ -2,8 +2,7 @@ const express = require('express')
 const postRouter = express.Router()
 const { upload } = require('../models/index')
 const { downloadFile } = require('../models/index')
-const post = require('../models/post')
-const mongoose = require('mongoose')
+const postController = require('../controllers/postController')
 
 // Authentication middleware
 const isAuthenticated = (req, res, next) => {
@@ -26,16 +25,7 @@ const hasRole = (thisRole) => {
     }
 }
 
-postRouter.post('/makePost', upload.single('file'), async (req, res) => {
-    const body = req.body
-    const newPost = new post.Post({
-        visibility: body.visibility,
-        description: body.description,
-        fileId: mongoose.Types.ObjectId(req.file.id),
-    })
-    await newPost.save()
-    res.send(newPost)
-})
+postRouter.post('/makePost', upload.single('file'), postController.makePost)
 
 postRouter.get('/download/:id', downloadFile)
 
