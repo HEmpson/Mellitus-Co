@@ -10,7 +10,14 @@ const getDashboard = async (req, res) => {
     })
 }
 
+const getProfile = async (req, res) => {
+    res.render('profile.hbs', {
+        pageName: "Profile",
+    })
+}
+
 module.exports = {
     getTestPage,
     getDashboard,
+    getProfile, 
 }
