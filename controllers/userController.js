@@ -1,10 +1,9 @@
-
 const DB = require('../models/db')
 const bcrypt = require('bcryptjs')
-const {User} = require("../models/db")
+const { User } = require('../models/db')
 const { mainModule } = require('process')
 
-const createAccount = async (req,res) => {
+const createAccount = async (req, res) => {
     const newUser = req.body
 
     // checks if email is a valid email
@@ -14,37 +13,34 @@ const createAccount = async (req,res) => {
     }
 
     // email already exists
-    if (await User.findOne({email: newUser.email})){
+    if (await User.findOne({ email: newUser.email })) {
         req.flash('newAccountError', 'User already exists')
         return res.redirect('/')
     }
 
     try {
         const newUserProfile = new User({
-        username : newUser.username,
-        password: newUser.password,
-        displayName: newUser.displayName,
-        email: newUser.email,
-        status: newUser.status,
-        role: 'User',
-        friends: [],
-        files: [],
-        categories: [],
+            username: newUser.username,
+            password: newUser.password,
+            displayName: newUser.displayName,
+            email: newUser.email,
+            status: newUser.status,
+            role: 'User',
+            friends: [],
+            files: [],
+            categories: [],
         })
-        
+
         // save the new account to the DB
         await newUserProfile.save()
-    }catch(err){
-        await User.deleteOne({email: newUser.email})
+    } catch (err) {
+        await User.deleteOne({ email: newUser.email })
         req.flash('newAccountError', 'Invalid Data Type(s) Entered')
         return res.redirect('/')
     }
 
-    
     return res.redirect('/')
-
 }
-
 
 // Verify the email address of the new patient is correct
 const verifyNewPatientProfile = (newUser) => {
@@ -78,9 +74,6 @@ const verifyNewPatientProfile = (newUser) => {
         return false
     }
 }
-
-
-
 
 module.exports = {
     createAccount,

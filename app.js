@@ -13,7 +13,6 @@ const passport = require('./passport')
 // Set your app up as an express app
 const app = express()
 
-
 // Set Location of static resources
 app.use(express.static('public'))
 
@@ -54,24 +53,22 @@ app.use(
     session({
         // The secret used to sign session cookies (ADD ENV VAR)
         secret: process.env.SESSION_SECRET || 'keyboard cat',
-        name: 'mellitus-co', 
+        name: 'mellitus-co',
         saveUninitialized: false,
         resave: false,
         cookie: {
-        sameSite: 'strict',
-        httpOnly: true,
-        secure: app.get('env') === 'production'
+            sameSite: 'strict',
+            httpOnly: true,
+            secure: app.get('env') === 'production',
         },
     })
 )
 
 if (app.get('env') === 'production') {
-    app.set('trust proxy', 1); // Trust first proxy
+    app.set('trust proxy', 1) // Trust first proxy
 }
 
-
 app.use(passport.authenticate('session'))
-
 
 // enable flash
 app.use(flash())

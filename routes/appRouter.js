@@ -2,7 +2,6 @@ const express = require('express')
 const appRouter = express.Router()
 const appController = require('../controllers/appController')
 
-
 // Authentication middleware
 const isAuthenticated = (req, res, next) => {
     // If user is not authenticated via passport, redirect to login page
@@ -23,7 +22,6 @@ const hasRole = (thisRole) => {
         }
     }
 }
-
 
 // put routes here
 
