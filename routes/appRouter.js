@@ -28,5 +28,6 @@ const hasRole = (thisRole) => {
 appRouter.get('/', appController.getLoginPage)
 appRouter.get('/dashboard', appController.getDashboard)
 appRouter.get('/profile', appController.getProfile)
+appRouter.get('/sharedrive', appController.getShareDrive)
 
 module.exports = appRouter
