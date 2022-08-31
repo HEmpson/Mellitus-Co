@@ -2,6 +2,7 @@
 const DB = require('../models/db')
 const bcrypt = require('bcryptjs')
 const {User} = require("../models/db")
+const { mainModule } = require('process')
 
 const createAccount = async (req,res) => {
     const newUser = req.body
