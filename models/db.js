@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
 
 const postSchema = new mongoose.Schema({
     visibility: String,
@@ -58,9 +59,35 @@ const categorySchema = new mongoose.Schema({
     ],
 })
 
+const SALT_FACTOR = 10
+
+userSchema.methods.verifyPassword = function (password, callback) {
+    bcrypt.compare(password, this.password, (err, valid) => {
+        callback(err, valid)
+    })
+}
+
+userSchema.pre('save', function save(next) {
+    const user = this
+    // Go to next if password field has not been modified
+    if (!user.isModified('password')) {
+    }
+    // Automatically generate salt, and calculate hash
+    bcrypt.hash(user.password, SALT_FACTOR, (err, hash) => {
+        if (err) {
+            return next(err)
+        }
+        // Replace password with hamesssh
+        user.password = hash
+        next()
+    })
+})
+
+
 const User = mongoose.model('User', userSchema, 'user')
 const Post = mongoose.model('Post', postSchema, 'post')
 const Category = mongoose.model('Category', categorySchema, 'category')
+
 
 module.exports = {
     User,

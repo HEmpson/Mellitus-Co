@@ -26,4 +26,15 @@ const hasRole = (thisRole) => {
 
 userRouter.post('/api/createAccount', userController.createAccount)
 
+userRouter.post(
+    '/login',
+    passport.authenticate('local', {
+        failureRedirect: '/',
+        failureFlash: true,
+    }),
+    (req, res) => {
+        res.redirect("/dashboard")
+    }
+)
+
 module.exports = userRouter

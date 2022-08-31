@@ -1,3 +1,4 @@
+const passport = require('passport')
 const express = require('express')
 const appRouter = express.Router()
 const appController = require('../controllers/appController')
@@ -27,5 +28,6 @@ const hasRole = (thisRole) => {
 
 appRouter.get('/', appController.getTestPage)
 appRouter.get('/dashboard', appController.getDashboard)
+
 
 module.exports = appRouter

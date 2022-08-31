@@ -8,7 +8,7 @@ const userRouter = require('./routes/userRouter')
 const models = require('./models')
 const flash = require('express-flash')
 const session = require('express-session')
-const passport = require('./passport')
+
 
 // Set your app up as an express app
 const app = express()
@@ -32,24 +32,8 @@ app.engine(
 
 app.set('view engine', 'hbs')
 
-// routes to pages
-
-// File upload and download routes
-
-app.use('/', appRouter)
-
-app.use('/posts', postRouter)
-
-app.use('/user', userRouter)
-
-app.use(
-    '/bootstrap',
-    express.static(__dirname + '/node_modules/bootstrap/dist')
-)
-
-app.listen(process.env.PORT || 3000, () => {
-    console.log('App is running!')
-})
+// enable flash
+app.use(flash())
 
 app.use(
     session({
@@ -66,11 +50,34 @@ app.use(
     })
 )
 
+const passport = require('./passport')
+app.use(passport.authenticate('session'))
+
+
+// File upload and download routes
+
+app.use('/', appRouter)
+
+app.use('/posts', postRouter)
+
+app.use('/user', userRouter)
+
+app.use(
+    '/bootstrap',
+    express.static(__dirname + '/node_modules/bootstrap/dist')
+)
+
+
+
+
+
 if (app.get('env') === 'production') {
     app.set('trust proxy', 1) // Trust first proxy
 }
 
-app.use(passport.authenticate('session'))
 
-// enable flash
-app.use(flash())
+app.listen(process.env.PORT || 3000, () => {
+    console.log('App is running!')
+})
+
+

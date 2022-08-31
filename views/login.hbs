@@ -1,16 +1,16 @@
 <div class = "login_container">
     <h1>Meldrive</h1>
-    <form method = post>
+    <form autocomplete = "off" action="/user/login" method = "POST">
         <div class = "text_form">
-            <input type = "text" required>
+            <input placeholder = "Username" type = "text" id = "username" name="username">
             <span></span>
-            <label>Username</label>
+            
         </div>
 
         <div class = "text_form">
-            <input type = "text" required>
+            <input placeholder ="Password" type = "text" id = "password" name="password">
             <span></span>
-            <label>Password</label>
+            
         </div>
 
         <input type = "submit" value = "log-in">
