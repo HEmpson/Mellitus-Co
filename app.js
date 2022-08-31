@@ -37,7 +37,7 @@ app.set('view engine', 'hbs')
 app.use('/', appRouter)
 
 // File upload and download routes
-app.use('/files', fileRouter)
+app.use('/files', appRouter)
 
 app.use('/user', userRouter)
 
