@@ -1,9 +1,8 @@
-const passport = require('passport')
 const express = require('express')
 const postRouter = express.Router()
 const { upload } = require('../models/index')
 const { downloadFile } = require('../models/index')
-const db = require('../models/db')
+const post = require('../models/post')
 const mongoose = require('mongoose')
 
 // Authentication middleware
@@ -29,7 +28,7 @@ const hasRole = (thisRole) => {
 
 postRouter.post('/makePost', upload.single('file'), async (req, res) => {
     const body = req.body
-    const newPost = new db.Post({
+    const newPost = new post.Post({
         visibility: body.visibility,
         description: body.description,
         fileId: mongoose.Types.ObjectId(req.file.id),

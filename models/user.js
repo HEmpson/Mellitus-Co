@@ -1,26 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 
-const postSchema = new mongoose.Schema({
-    visibility: String,
-    createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        default: null,
-    },
-    categoryId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category',
-        default: null,
-    },
-    description: String,
-    fileId: mongoose.Schema.Types.ObjectId,
-    dateCreated: {
-        type: Date,
-        default: new Date(),
-    },
-})
-
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
@@ -49,15 +29,6 @@ const userSchema = new mongoose.Schema({
     ],
 })
 
-const categorySchema = new mongoose.Schema({
-    name: String,
-    posts: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Post',
-        },
-    ],
-})
 
 const SALT_FACTOR = 10
 
@@ -85,12 +56,5 @@ userSchema.pre('save', function save(next) {
 
 
 const User = mongoose.model('User', userSchema, 'user')
-const Post = mongoose.model('Post', postSchema, 'post')
-const Category = mongoose.model('Category', categorySchema, 'category')
 
-
-module.exports = {
-    User,
-    Post,
-    Category,
-}
+module.exports = {User}

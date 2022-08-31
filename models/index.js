@@ -68,6 +68,8 @@ db.once('open', async () => {
     console.log(`Mongo connection started on ${db.host}:${db.port}`)
 })
 
-require('./db')
+require('./user')
+require('./post')
+require('./category')
 
 module.exports = { upload, downloadFile }
