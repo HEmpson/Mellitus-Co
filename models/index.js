@@ -8,7 +8,6 @@ const ObjectId = require('mongodb').ObjectId
 const multer = require('multer')
 const { GridFsStorage } = require('multer-gridfs-storage')
 
-
 // Connect to your mongo database using the MONGO_URL environmentvariable.
 // Locally, MONGO_URL will be loaded by dotenv from .env.
 // We've also used Heroku CLI to set MONGO_URL for our Heroku app before.
@@ -29,7 +28,6 @@ db.on('connected', () => {
     bucket = new mongoose.mongo.GridFSBucket(mongoose.connections[0].db, {
         bucketName: 'uploads',
     })
-    
 })
 
 const storage = new GridFsStorage({

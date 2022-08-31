@@ -24,9 +24,6 @@ const hasRole = (thisRole) => {
     }
 }
 
-
 userRouter.post('/api/createAccount', userController.createAccount)
-
-
 
 module.exports = userRouter

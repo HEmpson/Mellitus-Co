@@ -1,17 +1,17 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
-const {User} = require("./models/db.js")
+const { User } = require('./models/db.js')
 
 // Serialize information to be stored in session/cookie
 passport.serializeUser((user, done) => {
     // Use id to serialize user
     done(undefined, user.id)
-    })
+})
 
 passport.deserializeUser((userId, done) => {
     User.findById(userId, { password: 0 }, (err, user) => {
         if (err) {
-            return done(err, undefined)     
+            return done(err, undefined)
         }
         return done(undefined, user)
     })
