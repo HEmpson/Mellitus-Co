@@ -16,9 +16,9 @@ const getProfile = async (req, res) => {
     })
 }
 
-const getShareDrive = async (req, res) => {
-    res.render("sharedrive.hbs", {
-        pageName: "Sharedrive",
+const getFile = async (req, res) => {
+    res.render("file.hbs", {
+        pageName: "File",
     })
 }
 
@@ -26,5 +26,5 @@ module.exports = {
     getLoginPage,
     getDashboard,
     getProfile, 
-    getShareDrive,
+    getFile,
 }
