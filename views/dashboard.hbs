@@ -15,215 +15,98 @@
 
 
 <div class="container-fluid gedf-wrapper">
-        <div class="row">
-    
-            <div class="col-md-9 gedf-main">
-                <!--- \\\\\\\Post-->
-                <div class="card gedf-card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="mr-2">
-                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                </div>
-                                <div class="ml-2">
-                                    <div class="h5 m-0">@MaryAdams</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="card-body">
-                        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
-                        <a class="card-link" href="#">
-                            <h5 class="card-title">POST TITLE</h5>
-                        </a>
-
-                        <p class="card-text">
-                            FILE DESCRIPTION AND ICON
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                    </div>
+    <div class="row">
+        {{!-- This div is the upload feature --}}
+        {{!-- Note: Although this div is above the document post div, 
+        it is only rendered first if the viewport is <=992 - using bootstrap "order-md-2"  --}}
+        <div class="col-md-3 order-md-2">
+            <div class="card gedf-card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images" aria-selected="false" href="#images">+ New File</a>
+                        </li>
+                    </ul>
                 </div>
-                <!-- Post /////-->
-            </div>
-
-            <div class="col-md-3">
-                <div class="card gedf-card">
-                    <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images" aria-selected="false" href="#images">+ New File</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-                                <div class="form-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile">
-                                        <label class="custom-file-label" for="customFile">Select Document</label>
-                                    </div>
-
-                                    <div class="py-4"></div>
-
-                                    <label class="sr-only" for="message">post</label>
-                                    <textarea class="form-control" id="message" rows="3" placeholder="Description..."></textarea>
+                <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                            <div class="form-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile">
+                                    <label class="custom-file-label" for="customFile">Select Document</label>
                                 </div>
 
                                 <div class="py-4"></div>
-                                <div class="btn-toolbar justify-content-between">
 
-                                    <div class="btn-group">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            <i class="fa fa-globe"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                                            <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
-                                            <a class="dropdown-item" href="#"><i class="fa fa-users"></i> Friends</a>
-                                            <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Just me</a>
-                                        </div>
-                                    </div>
+                                <label class="sr-only" for="message">post</label>
+                                <textarea class="form-control" id="message" rows="3" placeholder="Description..."></textarea>
+                            </div>
 
+                            <div class="py-4"></div>
+                            <div class="btn-toolbar justify-content-between">
+
+                                <div class="btn-group">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                                <div class="btn-group">
+                                    <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        <i class="fa fa-globe"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                                        <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-users"></i> Friends</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Just me</a>
+                                    </div>
                                 </div>
 
                             </div>
-                        </div>   
-                    </div>
+
+                        </div>
+                    </div>   
                 </div>
             </div>
         </div>
-    </div>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{!-- <div class="container-fluid wrapper">
-    <div class="row">
-        <div class="col-md-10 main">
-
-            <div class="card card">
+        {{!-- This div is the wide document pane --}}
+        <div class="col-md-9 gedf-main order-md-1">
+            {{!-- A single post or view of the document, loop the below div using hbs variables --}}
+            <div class="card gedf-card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="mr-2">
-                                <img class="rounded-circle" width="45" src="data:image/jpeg;base64,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" alt="">
+                                <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                             </div>
                             <div class="ml-2">
-                                <div class="h5 m-0">@MaryAsams</div>
-                                <div class="h7 text-muted">Full Name</div>
+                                <div class="h5 m-0">@MaryAdams</div>
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <div class="card-body">
+                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
                     <a class="card-link" href="#">
-                        <h5 class="card-title"> Description</h5>
+                        <h5 class="card-title">POST TITLE</h5>
                     </a>
 
                     <p class="card-text">
-                        FILE
+                        FILE DESCRIPTION AND ICON
                     </p>
                 </div>
-            </div>
-        </div>
-    
-        <div class= "class=col-md-3">
-            <!--- post submission -->
-            <div class="card gedf-card">
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                        <label for="">Add a file</label>
-                    </ul>
-                </div>
-                <div class="card-body">
-                    <div class="btn-toolbar justify-content-between">
-                        <div class="btn-group">
-                            <button type="submit" class="btn btn-primary">Upload</button>
-                        </div>
-                    </div>
+                <div class="card-footer">
+                    <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+                    <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                    <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
                 </div>
             </div>
+            <!-- End of a single document post /////-->
         </div>
 
-
-        <!--post starts here-->
-        <div class = "container">
-            <table class="table table-success table-responsive table-hover table-bordered">
-                <thead>
-                    <tr class = "table-light">
-                        <th scope="col text-lg-justify text-sm-left">Your post</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">
-                            <div class="card" style = "width: max;">
-                                <div class="mr-2">
-                                    <img src="../public/assets/Eren.jpg" class="card-img-top" alt="Example">
-                                </div>
-                                
-                                <div class = "card-body">
-                                    <div class = "card-title">File Name</div>
-                                </div>
-
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">card size: 128 gb</li>
-                                    <li class="list-group-item">uploaded: 02/08/2022</li>
-                                </ul>
-
-                                <div class = "card-body">
-                                    <p class="card-text">Description</div>
-                                </div>
-                            </div>
-                        </th>
-                    </tr>
-    
-                </tbody>
-            </table>
-        </div>
-        <!--post ends here-->
     </div>
-</div> --}}
+</div>
+
