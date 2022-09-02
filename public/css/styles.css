@@ -19,9 +19,10 @@
     box-sizing: border-box;
 }
 
-body, p-4 my-container {
+body{
+    font-family: "Raleway", serif;
     min-height: 100vh;
-    background-color: linear-gradient(60deg, var(--color-bg), transparent, var(--color-primary));
+    background: linear-gradient(60deg, var(--color-bg), transparent, var(--color-primary));
     color: var(--color-black);
 }
 
@@ -86,4 +87,14 @@ body, p-4 my-container {
 
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,102,203, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+
+.form-inline {
+    width: 30vw;
+    min-width: 20vw;
+    margin-left: 60vw;
+    margin-right: 30vw;
+    margin-top: 30px;
+    vertical-align: middle;
 }
