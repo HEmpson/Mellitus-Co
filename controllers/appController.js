@@ -1,6 +1,10 @@
+const { NONAME } = require("dns")
 
 const getLoginPage = async (req, res) => {
-    res.render('login.hbs')
+    res.render('login.hbs',{
+        pageName : "Login",
+        layout : "",
+    })
 }
 
 const getDashboard = async (req, res) => {
