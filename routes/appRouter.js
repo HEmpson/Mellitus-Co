@@ -29,5 +29,6 @@ appRouter.get('/', appController.getLoginPage)
 appRouter.get('/dashboard', appController.getDashboard)
 appRouter.get('/profile', appController.getProfile)
 appRouter.get('/file', appController.getFile)
+appRouter.get("/friends", appController.getFriends)
 
 module.exports = appRouter

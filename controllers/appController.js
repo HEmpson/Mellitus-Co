@@ -22,9 +22,16 @@ const getFile = async (req, res) => {
     })
 }
 
+const getFriends = async (req, res) => {
+    res.render("friends.hbs", {
+        pageName: "Friends",
+    })
+}
+
 module.exports = {
     getLoginPage,
     getDashboard,
     getProfile, 
     getFile,
+    getFriends,
 }
