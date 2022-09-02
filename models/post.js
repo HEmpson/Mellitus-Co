@@ -29,7 +29,7 @@ const getUserPosts = async (user) => {
         path: 'posts',
         options: { ean: true}
     })
-    posts = userPosts.toObject()
+    posts = posts.toObject()
 
     userPosts = posts.posts
 

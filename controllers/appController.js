@@ -1,10 +1,12 @@
+const Post = require('../models/post')
 
 const getLoginPage = async (req, res) => {
     res.render('login.hbs')
 }
 
 const getDashboard = async (req, res) => {
- //   getUserPosts(req.body.user)
+    
+    Post.getUserPosts(req.user)
     res.render('dashboard.hbs', {
         pageName: 'Dashboard',
     })
