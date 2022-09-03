@@ -23,7 +23,7 @@ const getProfile = async (req, res) => {
 }
 
 const getFile = async (req, res) => {
-    res.render("file.hbs", {
+    res.render("files.hbs", {
         pageName: "File",
     })
 }
@@ -34,10 +34,27 @@ const getFriends = async (req, res) => {
     })
 }
 
+
+const getCategories = async (req, res) => {
+    res.render("categories.hbs", {
+        pageName: "Categories",
+    })
+}
+
+
+const getAllFiles = async (req, res) => {
+    res.render("allFiles.hbs", {
+        pageName: "All Files",
+    })
+}
+
+
 module.exports = {
     getLoginPage,
     getDashboard,
     getProfile, 
     getFile,
     getFriends,
+    getAllFiles,
+    getCategories,
 }
