@@ -23,19 +23,21 @@ const postSchema = new mongoose.Schema({
 
 // gets all the posts of a single user
 const getUserPosts = async (user) => {
-    postIDs = user.posts
-
+    
     posts = await user.populate({
         path: 'posts',
-        options: { ean: true },
+        options: { lean: true}
     })
     posts = posts.toObject()
 
     userPosts = posts.posts
 
-    console.log(userPosts)
+    return userPosts
+
 }
 
+
+// gets all the posts of a single user and posts of all their friends
 const getAllPosts = async (user) => {
     allPosts = []
 
