@@ -31,11 +31,11 @@
                 <div class="card-body">
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-                            <form action="">
+                            <form action="/posts/makePost" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile">
-                                        <label class="custom-file-label" for="customFile">Select Document</label>
+                                        <input type="file" class="custom-file-input" id="file" name="file">
+                                        <label class="custom-file-label" for="file">Select Document</label>
                                     </div>
 
                                     <div class="py-4"></div>
@@ -83,7 +83,7 @@
                                 <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                             </div>
                             <div class="ml-2">
-                                <div class="h5 m-0">@MaryAdams</div>
+                                <div class="h5 m-0">{{this.createdByName}}</div>
                             </div>
                         </div>
                     </div>

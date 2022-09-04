@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 
 const makePost = async (req, res) => {
     const body = req.body
+    console.log(body)
     const newPost = new Post({
         visibility: body.visibility,
         description: body.description,
@@ -17,7 +18,7 @@ const makePost = async (req, res) => {
         )
     })
 
-    res.send(newPost)
+    return res.redirect("/dashboard")
 }
 
 module.exports = {

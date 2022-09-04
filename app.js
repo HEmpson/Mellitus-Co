@@ -19,7 +19,7 @@ app.use(express.static('public'))
 app.use(express.json())
 
 // To Parse Body From URL
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 
 app.engine(
     'hbs',

@@ -65,8 +65,7 @@ const downloadFile = async (req, res) => {
 
 // Function for getting the filename for a specific fileId
 const getFilename = async (fileId) => {
-    const filename = await bucket.find({ _id: ObjectId(fileId) }).toArray()[0]
-        .filename
+    const filename = (await bucket.find({ _id: ObjectId(fileId) }).toArray())[0].filename
     return filename
 }
 
@@ -79,4 +78,4 @@ require('./user')
 require('./post')
 require('./category')
 
-module.exports = { upload, downloadFile, getFilename }
+module.exports = { upload, downloadFile, getFilename}
