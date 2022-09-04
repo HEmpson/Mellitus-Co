@@ -49,7 +49,7 @@ const upload = multer({ storage })
 
 // Function For Downloading Files
 const downloadFile = async (req, res) => {
-    bucket
+    await bucket
         .find({
             _id: ObjectId(req.params.id),
         })
@@ -63,6 +63,13 @@ const downloadFile = async (req, res) => {
         })
 }
 
+// Function for getting the filename for a specific fileId
+const getFilename = async (fileId) => {
+    const filename = await bucket.find({ _id: ObjectId(fileId) }).toArray()[0]
+        .filename
+    return filename
+}
+
 // Log to console once the database is open
 db.once('open', async () => {
     console.log(`Mongo connection started on ${db.host}:${db.port}`)
@@ -72,4 +79,4 @@ require('./user')
 require('./post')
 require('./category')
 
-module.exports = { upload, downloadFile }
+module.exports = { upload, downloadFile, getFilename }

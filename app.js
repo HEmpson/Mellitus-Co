@@ -9,7 +9,6 @@ const models = require('./models')
 const flash = require('express-flash')
 const session = require('express-session')
 
-
 // Set your app up as an express app
 const app = express()
 
@@ -53,7 +52,6 @@ app.use(
 const passport = require('./passport')
 app.use(passport.authenticate('session'))
 
-
 // File upload and download routes
 
 app.use('/', appRouter)
@@ -67,17 +65,10 @@ app.use(
     express.static(__dirname + '/node_modules/bootstrap/dist')
 )
 
-
-
-
-
 if (app.get('env') === 'production') {
     app.set('trust proxy', 1) // Trust first proxy
 }
 
-
 app.listen(process.env.PORT || 3000, () => {
     console.log('App is running!')
 })
-
-

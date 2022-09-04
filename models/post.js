@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const {User} = require('../models/user')
+const { User } = require('../models/user')
 
 const postSchema = new mongoose.Schema({
     visibility: String,
@@ -24,30 +24,26 @@ const postSchema = new mongoose.Schema({
 // gets all the posts of a single user
 const getUserPosts = async (user) => {
     postIDs = user.posts
-    
+
     posts = await user.populate({
         path: 'posts',
-        options: { ean: true}
+        options: { ean: true },
     })
     posts = posts.toObject()
 
     userPosts = posts.posts
 
     console.log(userPosts)
-
 }
-
-
 
 const getAllPosts = async (user) => {
     allPosts = []
 
     allPosts.push(user.posts)
 
-    for (var i = 0; i < user.friends.length; i++){
+    for (var i = 0; i < user.friends.length; i++) {
         allPosts.push(getUserPosts(user.friends[i]))
     }
-
 }
 
 const Post = mongoose.model('Post', postSchema, 'post')
@@ -56,5 +52,4 @@ module.exports = {
     Post,
     getUserPosts,
     getAllPosts,
-    
 }

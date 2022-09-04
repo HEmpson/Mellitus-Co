@@ -29,7 +29,6 @@ const userSchema = new mongoose.Schema({
     ],
 })
 
-
 const SALT_FACTOR = 10
 
 userSchema.methods.verifyPassword = function (password, callback) {
@@ -54,7 +53,6 @@ userSchema.pre('save', function save(next) {
     })
 })
 
-
 const User = mongoose.model('User', userSchema, 'user')
 
-module.exports = {User}
+module.exports = { User }
