@@ -8,6 +8,7 @@ const makePost = async (req, res) => {
         visibility: body.visibility,
         description: body.description,
         fileId: mongoose.Types.ObjectId(req.file.id),
+        createdBy: req.user._id
     })
     await newPost.save(async (err, post) => {
         await User.updateOne(

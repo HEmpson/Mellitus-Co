@@ -1,5 +1,6 @@
 const { NONAME } = require('dns')
 const Post = require('../models/post')
+const DB = require('../models/index')
 
 const getLoginPage = async (req, res) => {
     res.render('login.hbs', {
@@ -9,9 +10,17 @@ const getLoginPage = async (req, res) => {
 }
 
 const getDashboard = async (req, res) => {
-    Post.getUserPosts(req.user)
+    const posts = Post.getUserPosts(req.user)
+
+    const dashboardPosts = posts.map((post) => {
+        let newPost = post
+        newPost.filename = DB.getFilename(post.fileId)
+        return newPost
+    })
+
     res.render('dashboard.hbs', {
         pageName: 'Dashboard',
+        posts: dashboardPosts
     })
 }
 

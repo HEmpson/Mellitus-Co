@@ -74,6 +74,7 @@
         {{!-- This div is the wide document pane --}}
         <div class="col-md-9 gedf-main order-md-1">
             {{!-- A single post or view of the document, loop the below div using hbs variables --}}
+            {{#each posts}}
             <div class="card gedf-card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
@@ -89,13 +90,14 @@
 
                 </div>
                 <div class="card-body">
-                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
-                    <a class="card-link" href="#">
-                        <h5 class="card-title">POST TITLE</h5>
+                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}</div>
+                    {{!-- PLACEHOLDER LINK!!! Instead of opening detailed view it currently downloads file immediately --}}
+                    <a class="card-link" href="/posts/download/{{this.fileId}}">
+                        <h5 class="card-title">{{this.filename}}</h5>
                     </a>
 
                     <p class="card-text">
-                        FILE DESCRIPTION AND ICON
+                        {{this.description}}
                     </p>
                 </div>
                 <div class="card-footer">
@@ -104,6 +106,7 @@
                     <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
                 </div>
             </div>
+            {{/each}}
             <!-- End of a single document post /////-->
         </div>
 
