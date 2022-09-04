@@ -2,6 +2,7 @@ const { User } = require('../models/user')
 const { Post } = require('../models/post')
 const mongoose = require('mongoose')
 
+// Makes a new post
 const makePost = async (req, res) => {
     const body = req.body
     console.log(body)
@@ -9,7 +10,7 @@ const makePost = async (req, res) => {
         visibility: body.visibility,
         description: body.description,
         fileId: mongoose.Types.ObjectId(req.file.id),
-        createdBy: req.user._id
+        createdBy: req.user._id,
     })
     await newPost.save(async (err, post) => {
         await User.updateOne(
@@ -18,7 +19,7 @@ const makePost = async (req, res) => {
         )
     })
 
-    return res.redirect("/dashboard")
+    return res.redirect('/dashboard')
 }
 
 module.exports = {

@@ -1,6 +1,6 @@
 const { NONAME } = require('dns')
 const Post = require('../models/post')
-const {User} = require('../models/user')
+const { User } = require('../models/user')
 const DB = require('../models/index')
 
 const getLoginPage = async (req, res) => {
@@ -15,11 +15,13 @@ const getDashboard = async (req, res) => {
 
     const dashboardPosts = []
 
-    for (let i=0; i < posts.length; i++) {
+    for (let i = 0; i < posts.length; i++) {
         let newPost = posts[i]
         console.log(newPost)
         newPost.filename = await DB.getFilename(posts[i].fileId)
-        newPost.createdByName = (await User.findOne({_id: posts[i].createdBy})).displayName
+        newPost.createdByName = (
+            await User.findOne({ _id: posts[i].createdBy })
+        ).displayName
         dashboardPosts[i] = newPost
     }
 
@@ -27,7 +29,7 @@ const getDashboard = async (req, res) => {
 
     res.render('dashboard.hbs', {
         pageName: 'Dashboard',
-        posts: dashboardPosts
+        posts: dashboardPosts,
     })
 }
 
