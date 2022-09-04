@@ -17,9 +17,10 @@ const makePost = async (req, res) => {
             { _id: req.user._id },
             { $push: { posts: post._id } }
         )
+        return res.redirect('/dashboard')
     })
-
-    return res.redirect('/dashboard')
+    
+    
 }
 
 module.exports = {
