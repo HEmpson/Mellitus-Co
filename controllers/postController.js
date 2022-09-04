@@ -7,7 +7,7 @@ const makePost = async (req, res) => {
     const body = req.body
     console.log(body)
     const newPost = new Post({
-        visibility: body.visibility,
+        visibility: req.bosy.visibility,
         description: req.body.message,
         fileId: mongoose.Types.ObjectId(req.file.id),
         createdBy: req.user._id,
