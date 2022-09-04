@@ -7,7 +7,7 @@ const makePost = async (req, res) => {
     const body = req.body
     console.log(body)
     const newPost = new Post({
-        visibility: req.bosy.visibility,
+        visibility: req.body.visibility,
         description: req.body.message,
         fileId: mongoose.Types.ObjectId(req.file.id),
         createdBy: req.user._id,
@@ -17,9 +17,10 @@ const makePost = async (req, res) => {
             { _id: req.user._id },
             { $push: { posts: post._id } }
         )
+        return res.redirect('/dashboard')
     })
-
-    return res.redirect('/dashboard')
+    
+    
 }
 
 module.exports = {
