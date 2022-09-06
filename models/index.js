@@ -62,18 +62,20 @@ const downloadFile = async (req, res) => {
                     })
                 }
                 const file = files[0]
-                
-                // Set response headers for file downloads 
-                res.set('Content-Type', file.contentType);
-                res.set('Content-Disposition', 'attachment; filename="' + file.filename + '"');
+
+                // Set response headers for file downloads
+                res.set('Content-Type', file.contentType)
+                res.set(
+                    'Content-Disposition',
+                    'attachment; filename="' + file.filename + '"'
+                )
 
                 // Open download stream to user
                 bucket.openDownloadStream(ObjectId(req.params.id)).pipe(res)
             })
-    }
-    catch (err) {
+    } catch (err) {
         // Return Error message if file failed to download
-        console.log("File failed to download")
+        console.log('File failed to download')
         return res.redirect('/')
     }
 }
