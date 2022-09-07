@@ -39,14 +39,15 @@ const getUserPosts = async (user) => {
 }
 
 // gets all the posts of a single user and posts of all their friends
-const getAllPosts = async (user) => {
-    allPosts = []
+const getPublicPosts = async () => {
+    
+    publicPosts = Post.find({visibility: 'Public'})
 
-    allPosts.push(user.posts)
-
-    for (var i = 0; i < user.friends.length; i++) {
-        allPosts.push(getUserPosts(user.friends[i]))
-    }
+    publicPosts.sort((a, b) => {
+        return b.dateCreated- a.dateCreated
+    })  
+    
+    return publicPosts
 }
 
 const Post = mongoose.model('Post', postSchema, 'post')
@@ -54,5 +55,5 @@ const Post = mongoose.model('Post', postSchema, 'post')
 module.exports = {
     Post,
     getUserPosts,
-    getAllPosts,
+    getPublicPosts,
 }
