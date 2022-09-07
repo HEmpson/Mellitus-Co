@@ -31,6 +31,10 @@ const getUserPosts = async (user) => {
 
     userPosts = posts.posts
 
+    userPosts.sort((a, b) => {
+        return b.dateCreated- a.dateCreated
+    })
+
     return userPosts
 }
 
