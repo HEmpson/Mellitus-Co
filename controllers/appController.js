@@ -63,6 +63,12 @@ const getAllFiles = async (req, res) => {
     })
 }
 
+const getRegistration = async (req, res) => {
+    res.render("registration.hbs", {
+        pageName: 'Registration',
+    })
+}
+
 module.exports = {
     getLoginPage,
     getDashboard,
@@ -71,4 +77,5 @@ module.exports = {
     getFriends,
     getAllFiles,
     getCategories,
+    getRegistration,
 }

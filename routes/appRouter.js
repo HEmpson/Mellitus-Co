@@ -32,5 +32,6 @@ appRouter.get('/files', appController.getFile)
 appRouter.get('/friends', appController.getFriends)
 appRouter.get('/allfiles', appController.getAllFiles)
 appRouter.get('/categories', appController.getCategories)
+appRouter.get('/registration', appController.getRegistration)
 
 module.exports = appRouter
