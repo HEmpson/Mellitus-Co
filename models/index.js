@@ -49,18 +49,42 @@ const upload = multer({ storage })
 
 // Function For Downloading Files
 const downloadFile = async (req, res) => {
-    bucket
-        .find({
-            _id: ObjectId(req.params.id),
-        })
-        .toArray((err, files) => {
-            if (!files || files.length === 0) {
-                return res.status(404).json({
-                    err: 'no files exist',
-                })
-            }
-            bucket.openDownloadStream(ObjectId(req.params.id)).pipe(res)
-        })
+    try {
+        // Check if file exists and if it does download it
+        await bucket
+            .find({
+                _id: ObjectId(req.params.id),
+            })
+            .toArray((err, files) => {
+                if (!files || files.length === 0) {
+                    return res.status(404).json({
+                        err: 'no files exist',
+                    })
+                }
+                const file = files[0]
+
+                // Set response headers for file downloads
+                res.set('Content-Type', file.contentType)
+                res.set(
+                    'Content-Disposition',
+                    'attachment; filename="' + file.filename + '"'
+                )
+
+                // Open download stream to user
+                bucket.openDownloadStream(ObjectId(req.params.id)).pipe(res)
+            })
+    } catch (err) {
+        // Return Error message if file failed to download
+        console.log('File failed to download')
+        return res.redirect('/')
+    }
+}
+
+// Function for getting the filename for a specific fileId
+const getFilename = async (fileId) => {
+    const filename = (await bucket.find({ _id: ObjectId(fileId) }).toArray())[0]
+        .filename
+    return filename
 }
 
 // Log to console once the database is open
@@ -68,8 +92,9 @@ db.once('open', async () => {
     console.log(`Mongo connection started on ${db.host}:${db.port}`)
 })
 
+// Import schemas
 require('./user')
 require('./post')
 require('./category')
 
-module.exports = { upload, downloadFile }
+module.exports = { upload, downloadFile, getFilename }

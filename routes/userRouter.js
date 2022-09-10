@@ -33,7 +33,7 @@ userRouter.post(
         failureFlash: true,
     }),
     (req, res) => {
-        res.redirect("/dashboard")
+        res.redirect('/dashboard')
     }
 )
 

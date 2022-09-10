@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     password: String,
     displayName: String,
     status: String,
+    description: String,
     role: String,
     friends: [
         {
@@ -28,7 +29,6 @@ const userSchema = new mongoose.Schema({
         },
     ],
 })
-
 
 const SALT_FACTOR = 10
 
@@ -54,7 +54,6 @@ userSchema.pre('save', function save(next) {
     })
 })
 
-
 const User = mongoose.model('User', userSchema, 'user')
 
-module.exports = {User}
+module.exports = { User }

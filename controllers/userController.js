@@ -20,13 +20,14 @@ const createAccount = async (req, res) => {
             username: newUser.username,
             password: newUser.password,
             displayName: newUser.displayName,
-            status: newUser.status,
+            status: ' ',
+            description: ' ',
             role: 'User',
             friends: [],
             files: [],
             categories: [],
         })
-
+        
         // save the new account to the DB
         await newUserProfile.save()
     } catch (err) {
