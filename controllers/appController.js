@@ -10,7 +10,7 @@ const getLoginPage = async (req, res) => {
 
 const getDashboard = async (req, res) => {
     
-    Post.getUserPosts(req.user)
+    //Post.getUserPosts(req.user)
     res.render('dashboard.hbs', {
         pageName: 'Dashboard',
     })
