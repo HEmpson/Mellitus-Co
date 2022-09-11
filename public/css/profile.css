@@ -11,3 +11,36 @@
     -webkit-background-clip: padding-box; /* for Safari */
     background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
 }
+
+.status-container{
+    width:15rem;
+    height: 3rem;
+    padding: 10px 0;
+    border: 2px solid rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    border-width: 1px;
+    background-color: #D3D3D3;
+    text-align: center;
+}
+
+.description-container{
+    width:30rem;
+    height: 10rem;
+    padding: 10px 0;
+    border: 2px solid rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    border-width: 1px;
+    background-color: #D3D3D3;
+    text-align: center;
+    
+}
+
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+  }
