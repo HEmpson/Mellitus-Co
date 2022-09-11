@@ -27,6 +27,9 @@ const hasRole = (thisRole) => {
 
 postRouter.post('/makePost', upload.single('file'), postController.makePost)
 
+// WIP: Needs authorization stuff
+postRouter.post('/removePost/:id', postController.removePost)
+
 postRouter.get('/download/:id', downloadFile)
 
 module.exports = postRouter

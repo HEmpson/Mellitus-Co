@@ -64,7 +64,7 @@ const getAllFiles = async (req, res) => {
 }
 
 const getRegistration = async (req, res) => {
-    res.render("registration.hbs", {
+    res.render('registration.hbs', {
         pageName: 'Registration',
     })
 }

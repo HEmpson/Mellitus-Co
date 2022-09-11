@@ -1,5 +1,6 @@
 const { User } = require('../models/user')
 const { Post } = require('../models/post')
+const { deletePost } = require('../models/post')
 const mongoose = require('mongoose')
 
 // Makes a new post
@@ -21,6 +22,12 @@ const makePost = async (req, res) => {
     })
 }
 
+const removePost = async (req, res) => {
+    await deletePost(req.params.id)
+    //return res.redirect('/dashboard')
+}
+
 module.exports = {
     makePost,
+    removePost,
 }

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
-const { User } = require('../models/user')
+const { User } = require('./user')
+const db = require('./index')
 
 const postSchema = new mongoose.Schema({
     visibility: String,
@@ -21,6 +22,8 @@ const postSchema = new mongoose.Schema({
     },
 })
 
+const Post = mongoose.model('Post', postSchema, 'post')
+
 // gets all the posts of a single user
 const getUserPosts = async (user) => {
     posts = await user.populate({
@@ -32,7 +35,7 @@ const getUserPosts = async (user) => {
     userPosts = posts.posts
 
     userPosts.sort((a, b) => {
-        return b.dateCreated- a.dateCreated
+        return b.dateCreated - a.dateCreated
     })
 
     return userPosts
@@ -40,20 +43,41 @@ const getUserPosts = async (user) => {
 
 // gets all the posts of a single user and posts of all their friends
 const getPublicPosts = async () => {
-    
-    publicPosts = Post.find({visibility: 'Public'})
+    publicPosts = Post.find({ visibility: 'Public' })
 
     publicPosts.sort((a, b) => {
-        return b.dateCreated- a.dateCreated
-    })  
-    
+        return b.dateCreated - a.dateCreated
+    })
+
     return publicPosts
 }
 
-const Post = mongoose.model('Post', postSchema, 'post')
+// Removes a post from a user's post list
+const delistPost = async (post) => {
+    const userId = post.createdBy
+    await User.updateOne({ _id: userId }, { $pull: { posts: post._id } })
+}
+
+// Deletes a post and its associated file
+const deletePost = async (postId) => {
+    const post = await Post.findOne({ _id: postId })
+    try {
+        const fileId = post.fileId
+        if (fileId) {
+            await db.deleteFile(fileId)
+            await Post.deleteOne({ _id: postId })
+            await delistPost(post)
+        } else {
+            console.log('Error: Failed to find post')
+        }
+    } catch (err) {
+        console.log('Error: Failed to delete post')
+    }
+}
 
 module.exports = {
     Post,
     getUserPosts,
     getPublicPosts,
+    deletePost,
 }
