@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const { User } = require('./user')
-const db = require('./index')
+const DB = require('./index')
 
 const postSchema = new mongoose.Schema({
     visibility: String,
@@ -59,9 +59,9 @@ const delistPost = async (post) => {
 }
 
 // Checks if the given user has permission to edit/delete a given post
-const hasPermission = (post, user) => {
+const hasEditPermissions = (post, user) => {
     if (user) {
-        console.log(user._id.equals(post.createdBy))
+        console.log(post.createdBy)
         if (user._id.equals(post.createdBy) || user.role === 'Admin') {
             return true
         }
@@ -74,11 +74,11 @@ const hasPermission = (post, user) => {
 const deletePost = async (postId, user) => {
     try {
         const post = await Post.findOne({ _id: postId })
-        if (hasPermission(post, user)) {
+        if (hasEditPermissions(post, user)) {
             try {
                 const fileId = post.fileId
                 if (fileId) {
-                    await db.deleteFile(fileId)
+                    await DB.deleteFile(fileId)
                     await Post.deleteOne({ _id: postId })
                     await delistPost(post)
                 } else {
@@ -93,9 +93,31 @@ const deletePost = async (postId, user) => {
     }
 }
 
+// Checks if user has permission to rename the post and renames it if so
+const changePostname = async (postId, user, filename) => {
+    try {
+        const post = await Post.findOne({ _id: postId })
+        if (hasEditPermissions(post, user)) {
+            try {
+                const fileId = post.fileId
+                if (fileId) {
+                    await DB.renameFile(fileId, filename)
+                } else {
+                    console.log('Error: Failed to find post')
+                }
+            } catch (err) {
+                console.log('Error: Failed to rename post')
+            }
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 module.exports = {
     Post,
     getUserPosts,
     getPublicPosts,
     deletePost,
+    changePostname,
 }

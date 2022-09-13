@@ -1,6 +1,8 @@
 const { User } = require('../models/user')
 const { Post } = require('../models/post')
 const { deletePost } = require('../models/post')
+const { changePostname } = require('../models/post')
+const DB = require('../models/index')
 const mongoose = require('mongoose')
 
 // Makes a new post
@@ -29,7 +31,14 @@ const removePost = async (req, res) => {
     return res.redirect('/dashboard')
 }
 
+// Takes a "filename" and renames the file associated with the post
+const renamePost = async (req, res) => {
+    await changePostname(req.params.id, req.user, req.body.filename)
+    return res.redirect('/dashboard')
+}
+
 module.exports = {
     makePost,
     removePost,
+    renamePost,
 }
