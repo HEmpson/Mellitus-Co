@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 // Makes a new post
 const makePost = async (req, res) => {
     const body = req.body
+    console.log(req.user)
     console.log(body)
     const newPost = new Post({
         visibility: req.body.visibility,
@@ -22,9 +23,10 @@ const makePost = async (req, res) => {
     })
 }
 
+// Removes a post and returns the user back to the dashboard
 const removePost = async (req, res) => {
-    await deletePost(req.params.id)
-    //return res.redirect('/dashboard')
+    await deletePost(req.params.id, req.user)
+    return res.redirect('/dashboard')
 }
 
 module.exports = {

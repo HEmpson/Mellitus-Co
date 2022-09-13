@@ -27,8 +27,8 @@ const hasRole = (thisRole) => {
 
 postRouter.post('/makePost', upload.single('file'), postController.makePost)
 
-// WIP: Needs authorization stuff
-postRouter.post('/removePost/:id', postController.removePost)
+// Deletes a given post (provided the user has significant permissions)
+postRouter.post('/removePost/:id', isAuthenticated, postController.removePost)
 
 postRouter.get('/download/:id', downloadFile)
 
