@@ -100,7 +100,7 @@
                 <div class="card-body">
                     <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}</div>
                     {{!-- PLACEHOLDER LINK!!! Instead of opening detailed view it currently downloads file immediately --}}
-                    <a class="card-link" href="/posts/download/{{this.fileId}}">
+                    <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter">
                         <h5 class="card-title">{{this.filename}}</h5>
                     </a>
 
@@ -133,7 +133,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Download</button>
+                        <a type="button" class="btn btn-primary" href="/posts/download/{{this.fileId}}">Download</a>
                     </div>
                     </div>
                 </div>
