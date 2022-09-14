@@ -51,7 +51,7 @@ const getPublicPosts = async () => {
 
     return publicPosts
 }
-/*
+
 // gets a user posts + their friends posts
 const getFriendsPosts = async (user) => {
     
@@ -65,11 +65,9 @@ const getFriendsPosts = async (user) => {
 
         friendPosts = posts.posts
 
-
-
     }
 }
-*/
+
 
 // Removes a post from a user's post list
 const delistPost = async (post) => {
@@ -139,4 +137,5 @@ module.exports = {
     getPublicPosts,
     deletePost,
     changePostname,
+    getFriendsPosts,
 }

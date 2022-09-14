@@ -2,7 +2,6 @@ const { User } = require('../models/user')
 const { Post } = require('../models/post')
 const { deletePost } = require('../models/post')
 const { changePostname } = require('../models/post')
-const DB = require('../models/index')
 const mongoose = require('mongoose')
 
 // Makes a new post

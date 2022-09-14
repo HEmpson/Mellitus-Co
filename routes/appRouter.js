@@ -6,7 +6,7 @@ const appController = require('../controllers/appController')
 const isAuthenticated = (req, res, next) => {
     // If user is not authenticated via passport, redirect to login page
     if (!req.isAuthenticated()) {
-        return res.redirect('/login')
+        return res.redirect('/')
     }
     // Otherwise, proceed to next middleware function
     return next()
@@ -18,7 +18,7 @@ const hasRole = (thisRole) => {
         if (req.user.role === thisRole) {
             return next()
         } else {
-            res.redirect('/login')
+            res.redirect('/')
         }
     }
 }
@@ -26,12 +26,12 @@ const hasRole = (thisRole) => {
 // put routes here
 
 appRouter.get('/', appController.getLoginPage)
-appRouter.get('/dashboard', appController.getDashboard)
-appRouter.get('/profile', appController.getProfile)
-appRouter.get('/files', appController.getFile)
-appRouter.get('/friends', appController.getFriends)
-appRouter.get('/allfiles', appController.getAllFiles)
-appRouter.get('/categories', appController.getCategories)
-appRouter.get('/registration', appController.getRegistration)
+appRouter.get('/dashboard',isAuthenticated, appController.getDashboard)
+appRouter.get('/profile',isAuthenticated, appController.getProfile)
+appRouter.get('/files',isAuthenticated, appController.getFile)
+appRouter.get('/friends',isAuthenticated, appController.getFriends)
+appRouter.get('/allfiles',isAuthenticated, appController.getAllFiles)
+appRouter.get('/categories',isAuthenticated, appController.getCategories)
+appRouter.get('/registration',isAuthenticated, appController.getRegistration)
 
 module.exports = appRouter
