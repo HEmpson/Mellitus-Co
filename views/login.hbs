@@ -1,23 +1,40 @@
 <head>
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Hide Password -->
+    <script>
+        function HidePassword() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+        
 </head>
 
 <div class="login_container">
     <h1>Meldrive</h1>
     <form autocomplete="off" action="/user/login" method="POST">
         <div class="text_form">
-            <input placeholder="Username" type="text" id="username" name="username">
+            <input placeholder="Username" type="text" id="username" name="username" autocomplete="on">
             <span></span>
 
         </div>
 
         <div class="text_form">
-            <input placeholder="Password" type="text" id="password" name="password">
+            <input placeholder="Password" type="text" id="password" name="password" onclick="HidePassword()" autocomplete="on">
             <span></span>
 
         </div>
 
         <input type="submit" value="log-in">
+
+        <div class = "signUpLink">
+            Not a member yet? <a href = "/registration">Click to join!</a>
+        </div>
     </form>
 </div>

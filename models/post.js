@@ -52,6 +52,7 @@ const getPublicPosts = async () => {
     return publicPosts
 }
 
+
 // gets a user posts + their friends posts
 const getFriendsPosts = async (user) => {
     
@@ -85,6 +86,32 @@ const hasEditPermissions = (post, user) => {
         return false
     }
     return false
+}
+
+// Checks if the given user has permission to download a given post
+const hasDownloadPermissions = (post, user) => {
+    try {
+        if (post.visibility === 'Public') {
+            return true
+        } else if (post.visibility === 'Friends') {
+            const poster = post.createdBy
+            const friends = user.friends
+            for (var i = 0; i < friends.length; i++) {
+                if (poster.equals(friends[i])) {
+                    return true
+                }
+            }
+            return false
+        } else {
+            if (post.createdBy.equals(user._id)) {
+                return true
+            }
+            return false
+        }
+    } catch (err) {
+        console.log(err)
+        return false
+    }
 }
 
 // Deletes a post and its associated file, checking if the associated user has permission to delete that post
@@ -131,6 +158,17 @@ const changePostname = async (postId, user, filename) => {
     }
 }
 
+const downloadPost = async (postId, user) => {
+    try {
+        const post = await Post.findOne({ _id: postId })
+        if (hasDownloadPermissions(post, user)) {
+            await DB.downloadFile(post.fileId)
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 module.exports = {
     Post,
     getUserPosts,
@@ -138,4 +176,5 @@ module.exports = {
     deletePost,
     changePostname,
     getFriendsPosts,
+    downloadPost,
 }

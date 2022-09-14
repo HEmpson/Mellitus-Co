@@ -77,6 +77,18 @@ input[type = "submit"]:hover{
     transition: 0.5s;
 }
 
+.signUpLink{
+    margin: 30 px 0;
+    text-align: center;
+    font-size: 17px;
+    color: var(--color-black);
+}
+
+.signUpLink a{
+    color: var(--color-pink);
+    text-decoration: none;
+}
+
 body {
     font-family: "Raleway", serif;
     background: linear-gradient(60deg, var(--color-bg), transparent, var(--color-primary));
