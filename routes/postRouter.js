@@ -8,7 +8,7 @@ const postController = require('../controllers/postController')
 const isAuthenticated = (req, res, next) => {
     // If user is not authenticated via passport, redirect to login page
     if (!req.isAuthenticated()) {
-        return res.redirect('/login')
+        return res.redirect('/')
     }
     // Otherwise, proceed to next middleware function
     return next()
@@ -20,7 +20,7 @@ const hasRole = (thisRole) => {
         if (req.user.role === thisRole) {
             return next()
         } else {
-            res.redirect('/login')
+            res.redirect('/')
         }
     }
 }
