@@ -1,0 +1,9 @@
+body {
+    font-family: "Raleway", serif;
+    background: linear-gradient(60deg, var(--color-bg), transparent, var(--color-primary));
+    color: var(--color-black);
+    line-height: 1.7;
+    font-size: 14px;
+    height: 100vh;
+    overflow: hidden;
+}
