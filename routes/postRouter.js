@@ -32,6 +32,10 @@ postRouter.post('/removePost/:id', isAuthenticated, postController.removePost)
 
 postRouter.post('/renamePost/:id', isAuthenticated, postController.renamePost)
 
-postRouter.get('/download/:id', downloadFile)
+postRouter.get(
+    '/download/:id',
+    isAuthenticated,
+    postController.downloadPostController
+)
 
 module.exports = postRouter
