@@ -17,15 +17,12 @@ const getDashboard = async (req, res) => {
 
     for (let i = 0; i < posts.length; i++) {
         let newPost = posts[i]
-        console.log(newPost)
         newPost.filename = await DB.getFilename(posts[i].fileId)
         newPost.createdByName = (
             await User.findOne({ _id: posts[i].createdBy })
         ).displayName
         dashboardPosts[i] = newPost
     }
-
-    console.log(dashboardPosts)
 
     res.render('dashboard.hbs', {
         pageName: 'Dashboard',
@@ -64,7 +61,7 @@ const getAllFiles = async (req, res) => {
 }
 
 const getRegistration = async (req, res) => {
-    res.render("registration.hbs", {
+    res.render('registration.hbs', {
         pageName: 'Registration',
     })
 }

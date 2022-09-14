@@ -27,7 +27,7 @@ const createAccount = async (req, res) => {
             files: [],
             categories: [],
         })
-        
+
         // save the new account to the DB
         await newUserProfile.save()
     } catch (err) {

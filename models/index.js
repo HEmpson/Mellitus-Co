@@ -82,9 +82,24 @@ const downloadFile = async (req, res) => {
 
 // Function for getting the filename for a specific fileId
 const getFilename = async (fileId) => {
-    const filename = (await bucket.find({ _id: ObjectId(fileId) }).toArray())[0]
-        .filename
-    return filename
+    try {
+        const filename = (
+            await bucket.find({ _id: ObjectId(fileId) }).toArray()
+        )[0].filename
+        return filename
+    } catch (err) {
+        return 'Unknown'
+    }
+}
+
+// Takes a fileId and renames the corresponding file to the new filename given
+const renameFile = async (fileId, newFilename) => {
+    await bucket.rename(ObjectId(fileId), newFilename)
+}
+
+// Takes a fileId and deletes the corresponding file with that Id
+const deleteFile = async (fileId) => {
+    await bucket.delete(ObjectId(fileId))
 }
 
 // Log to console once the database is open
@@ -92,9 +107,4 @@ db.once('open', async () => {
     console.log(`Mongo connection started on ${db.host}:${db.port}`)
 })
 
-// Import schemas
-require('./user')
-require('./post')
-require('./category')
-
-module.exports = { upload, downloadFile, getFilename }
+module.exports = { upload, downloadFile, getFilename, renameFile, deleteFile }
