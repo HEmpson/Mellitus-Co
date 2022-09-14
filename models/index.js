@@ -78,7 +78,6 @@ const downloadFile = async (fileId, res) => {
         console.log('File failed to download')
         return res.redirect('/dashboard')
     }
-    
 }
 
 // Function for getting the filename for a specific fileId

@@ -30,8 +30,6 @@ const userSchema = new mongoose.Schema({
     ],
 })
 
-
-
 const SALT_FACTOR = 10
 
 userSchema.methods.verifyPassword = function (password, callback) {
@@ -126,34 +124,32 @@ const verifyNewPatientProfile = (newUser) => {
     }
 }
 
-
 const addFriends = async (req, res) => {
     friendName = req.body.displayName
-    friend = await User.findOne({displayName: friendName})
+    friend = await User.findOne({ displayName: friendName })
 
-    try{
+    try {
         // if friend exists
-        if (friend){
-            req.user.friends.push(friend._id) 
+        if (friend) {
+            req.user.friends.push(friend._id)
             friend.friends.push(req.user._id)
         }
-        
+
         // friend doesn't exist
-        else{
+        else {
             req.flash('noFriendError', 'Friend does not exist')
             redirect('/') // edit this redirect
         }
-    }catch(err){
+    } catch (err) {
         console.log(err)
     }
 }
 
 const User = mongoose.model('User', userSchema, 'user')
 
-module.exports = { 
+module.exports = {
     User,
     createAccount,
     verifyNewPatientProfile,
     addFriends,
-
 }

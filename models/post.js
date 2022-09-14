@@ -52,11 +52,9 @@ const getPublicPosts = async () => {
     return publicPosts
 }
 
-
 // gets a user posts + their friends posts
 const getFriendsPosts = async (user) => {
-    
-    for (i = 0; i < user.friends.length; i++){
+    for (i = 0; i < user.friends.length; i++) {
         friend = user.friends[i]
         posts = await friend.populate({
             path: 'posts',
@@ -65,10 +63,8 @@ const getFriendsPosts = async (user) => {
         posts = posts.toObject()
 
         friendPosts = posts.posts
-
     }
 }
-
 
 // Removes a post from a user's post list
 const delistPost = async (post) => {
