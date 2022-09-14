@@ -158,14 +158,15 @@ const changePostname = async (postId, user, filename) => {
     }
 }
 
-const downloadPost = async (postId, user) => {
+const downloadPost = async (postId, user, res) => {
     try {
         const post = await Post.findOne({ _id: postId })
         if (hasDownloadPermissions(post, user)) {
-            await DB.downloadFile(post.fileId)
+            await DB.downloadFile(post.fileId, res)
         }
     } catch (err) {
         console.log(err)
+        return res.redirect('/dashboard')
     }
 }
 
