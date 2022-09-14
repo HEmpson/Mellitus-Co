@@ -41,7 +41,7 @@ const getUserPosts = async (user) => {
     return userPosts
 }
 
-// gets all the posts of a single user and posts of all their friends
+// gets all the public posts
 const getPublicPosts = async () => {
     publicPosts = Post.find({ visibility: 'Public' })
 
@@ -51,6 +51,25 @@ const getPublicPosts = async () => {
 
     return publicPosts
 }
+/*
+// gets a user posts + their friends posts
+const getFriendsPosts = async (user) => {
+    
+    for (i = 0; i < user.friends.length; i++){
+        friend = user.friends[i]
+        posts = await friend.populate({
+            path: 'posts',
+            options: { lean: true },
+        })
+        posts = posts.toObject()
+
+        friendPosts = posts.posts
+
+
+
+    }
+}
+*/
 
 // Removes a post from a user's post list
 const delistPost = async (post) => {
