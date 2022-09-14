@@ -100,7 +100,7 @@
                 <div class="card-body">
                     <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}</div>
                     {{!-- PLACEHOLDER LINK!!! Instead of opening detailed view it currently downloads file immediately --}}
-                    <a class="card-link" href="/posts/download/{{this.fileId}}">
+                    <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter">
                         <h5 class="card-title">{{this.filename}}</h5>
                     </a>
 
@@ -112,6 +112,30 @@
                     <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
                     <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
                     <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                    <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter">
+                        View Details
+                    </a>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">{{this.filename}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{this.description}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a type="button" class="btn btn-primary" href="/posts/download/{{this._id}}">Download</a>
+                    </div>
+                    </div>
                 </div>
             </div>
             {{/each}}
@@ -119,5 +143,9 @@
         </div>
 
     </div>
+
+
 </div>
+
+
 
