@@ -29,13 +29,13 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images" aria-selected="false" href="#images">+ New File</a>
+                            <a class="nav-link" id="nfile-tab" data-toggle="tab" role="tab" aria-controls="newfile" aria-selected="false" href="#newfile">+ New File</a>
                         </li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                        <div class="tab-pane fade" id="newfile" role="tabpanel" aria-labelledby="nfile-tab">
                             <form id = "post-form" action="/posts/makePost" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <div class="custom-file">
@@ -81,71 +81,92 @@
 
         {{!-- This div is the wide document pane --}}
         <div class="col-md-9 gedf-main order-md-1">
-            {{!-- A single post or view of the document, loop the below div using hbs variables --}}
-            {{#each posts}}
-            <div class="card gedf-card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="mr-2">
-                                <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="public-tab" data-toggle="tab" href="#postsPublic" role="tab" aria-controls="postsPublic" aria-selected="true">
+                            Public
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="private-tab" data-toggle="tab" role="tab" aria-controls="postsPrivate" aria-selected="false" href="#postsPrivate">
+                            Private
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="py-2"></div>
+
+            <div class="card-body">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="postsPublic" role="tabpanel" aria-labelledby="public-tab">
+                        {{!-- A single post or view of the document, loop the below div using hbs variables --}}
+                        {{#each posts}}
+                        <div class="card gedf-card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="mr-2">
+                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                        </div>
+                                        <div class="ml-2">
+                                            <div class="h5 m-0">{{this.createdByName}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="ml-2">
-                                <div class="h5 m-0">{{this.createdByName}}</div>
+                            <div class="card-body">
+                                <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}</div>
+                                {{!-- PLACEHOLDER LINK!!! Instead of opening detailed view it currently downloads file immediately --}}
+                                <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter">
+                                    <h5 class="card-title">{{this.filename}}</h5>
+                                </a>
+
+                                <p class="card-text" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                    {{this.description}}
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+                                <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                                <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                                <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter">
+                                    View Details
+                                </a>
                             </div>
                         </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">{{this.filename}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{this.description}}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <a type="button" class="btn btn-primary" href="/posts/download/{{this._id}}">Download</a>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                        <!-- End of a single document post /////-->
                     </div>
 
-                </div>
-                <div class="card-body">
-                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}</div>
-                    {{!-- PLACEHOLDER LINK!!! Instead of opening detailed view it currently downloads file immediately --}}
-                    <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter">
-                        <h5 class="card-title">{{this.filename}}</h5>
-                    </a>
-
-                    <p class="card-text">
-                        {{this.description}}
-                    </p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                    <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                    <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                    <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter">
-                        View Details
-                    </a>
-                </div>
-            </div>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">{{this.filename}}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        {{this.description}}
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a type="button" class="btn btn-primary" href="/posts/download/{{this._id}}">Download</a>
-                    </div>
+                    <div class="tab-pane fade" id="postsPrivate" role="tabpanel" aria-labelledby="private-tab">
+                        {{!-- HBS each loop to display private posts --}}
                     </div>
                 </div>
-            </div>
-            {{/each}}
-            <!-- End of a single document post /////-->
+            </div>                
         </div>
-
     </div>
-
-
 </div>
-
-
-
