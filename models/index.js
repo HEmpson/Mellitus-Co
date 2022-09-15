@@ -48,12 +48,12 @@ const storage = new GridFsStorage({
 const upload = multer({ storage })
 
 // Function For Downloading Files
-const downloadFile = async (req, res) => {
+const downloadFile = async (fileId, res) => {
     try {
         // Check if file exists and if it does download it
         await bucket
             .find({
-                _id: ObjectId(req.params.id),
+                _id: ObjectId(fileId),
             })
             .toArray((err, files) => {
                 if (!files || files.length === 0) {
@@ -71,12 +71,12 @@ const downloadFile = async (req, res) => {
                 )
 
                 // Open download stream to user
-                bucket.openDownloadStream(ObjectId(req.params.id)).pipe(res)
+                bucket.openDownloadStream(ObjectId(fileId)).pipe(res)
             })
     } catch (err) {
         // Return Error message if file failed to download
         console.log('File failed to download')
-        return res.redirect('/')
+        return res.redirect('/dashboard')
     }
 }
 

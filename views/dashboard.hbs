@@ -153,6 +153,12 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <!-- Delete and Rename only appear if the user has edit permission on the post-->
+                                    {{#if user.hasEditPermissions}}
+                                        <button type="button" class = "btn btn-secondary" data-dismiss="modal">Delete</button>
+                                        <button type="button" class = "btn btn-secondary" data-dismiss="modal">Rename</button>
+                                        <abutton type="button" class = "btn btn-secondary" data-dismiss="modal">Visible to</button>
+                                    {{/if}}
                                     <a type="button" class="btn btn-primary" href="/posts/download/{{this._id}}">Download</a>
                                 </div>
                                 </div>

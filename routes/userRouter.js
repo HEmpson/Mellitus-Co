@@ -24,7 +24,7 @@ const hasRole = (thisRole) => {
     }
 }
 
-userRouter.post('/api/createAccount', userController.createAccount)
+userRouter.post('/api/createAccount', userController.createAccountController)
 
 userRouter.post(
     '/login',

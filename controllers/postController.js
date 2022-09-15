@@ -3,7 +3,6 @@ const { Post } = require('../models/post')
 const { deletePost } = require('../models/post')
 const { downloadPost } = require('../models/post')
 const { changePostname } = require('../models/post')
-const DB = require('../models/index')
 const mongoose = require('mongoose')
 
 // Makes a new post
@@ -40,8 +39,7 @@ const renamePost = async (req, res) => {
 
 // Downloads the file associated with a post then redirects back
 const downloadPostController = async (req, res) => {
-    await downloadPost(req.params.id, req.user)
-    return res.redirect('/dashboard')
+    await downloadPost(req.params.id, req.user, res)
 }
 
 module.exports = {

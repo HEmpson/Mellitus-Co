@@ -52,11 +52,9 @@ const getPublicPosts = async () => {
     return publicPosts
 }
 
-/*
 // gets a user posts + their friends posts
 const getFriendsPosts = async (user) => {
-    
-    for (i = 0; i < user.friends.length; i++){
+    for (i = 0; i < user.friends.length; i++) {
         friend = user.friends[i]
         posts = await friend.populate({
             path: 'posts',
@@ -65,12 +63,8 @@ const getFriendsPosts = async (user) => {
         posts = posts.toObject()
 
         friendPosts = posts.posts
-
-
-
     }
 }
-*/
 
 // Removes a post from a user's post list
 const delistPost = async (post) => {
@@ -160,14 +154,15 @@ const changePostname = async (postId, user, filename) => {
     }
 }
 
-const downloadPost = async (postId, user) => {
+const downloadPost = async (postId, user, res) => {
     try {
         const post = await Post.findOne({ _id: postId })
         if (hasDownloadPermissions(post, user)) {
-            await DB.downloadFile(post.fileId)
+            await DB.downloadFile(post.fileId, res)
         }
     } catch (err) {
         console.log(err)
+        return res.redirect('/dashboard')
     }
 }
 
@@ -177,5 +172,6 @@ module.exports = {
     getPublicPosts,
     deletePost,
     changePostname,
+    getFriendsPosts,
     downloadPost,
 }
