@@ -37,10 +37,49 @@
 
 hr { 
     display: block;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 20px;
+    margin-bottom: 5px;
     margin-left: auto;
     margin-right: auto;
     border-style: inset;
     border-width: 1px;
   }
+
+.modal .tag-container-1{
+    border: 2px solid rgba(106, 27, 189,0.4);
+    border-radius: 10px;
+    border-width: 1px;
+    width: 100%;
+    background-color: #9CC3D5FF;
+    color:#0063B2FF;
+    text-align: center;
+    padding: 3px 2px;
+    margin-top: 0.8rem;
+}
+
+.tag-container-2{
+    border: 2px solid rgba(106, 27, 189,0.4);
+    border-radius: 10px;
+    border-width: 1px;
+    width: 100%;
+    background-color: #F2EDD7FF;
+    color: #755139FF;
+    text-align: center;
+    padding: 3px 2px;
+    margin-top: 0.8rem;
+  
+}
+
+.post-content-container{
+    margin-top: 1rem;
+    width: 90%;
+    height: auto;
+    border-width: 1px;
+}
+.modal-content img{
+    border-radius: 2rem;
+}
+.post-title{
+    margin-right: 15%;
+    margin-top: 0.8rem;
+}
