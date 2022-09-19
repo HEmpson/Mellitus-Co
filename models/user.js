@@ -131,8 +131,14 @@ const addFriends = async (req, res) => {
     try {
         // if friend exists
         if (friend) {
-            req.user.friends.push(friend._id)
-            friend.friends.push(req.user._id)
+            await User.updateOne(
+                { _id: friend._id },
+                { $push: { friends: req.user._id } }
+            )
+            await User.updateOne(
+                { _id: req.user._id },
+                { $push: { friends: friend._id } }
+            )
         }
 
         // friend doesn't exist
