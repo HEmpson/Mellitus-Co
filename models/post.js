@@ -110,6 +110,22 @@ const hasDownloadPermissions = (post, user) => {
     }
 }
 
+// Makes a new post
+const makePost = async (req, res) => {
+    const newPost = new Post({
+        visibility: req.body.visibility,
+        description: req.body.message,
+        fileId: mongoose.Types.ObjectId(req.file.id),
+        createdBy: req.user._id,
+    })
+    await newPost.save(async (err, post) => {
+        await User.updateOne(
+            { _id: req.user._id },
+            { $push: { posts: post._id } }
+        )
+    })
+}
+
 // Deletes a post and its associated file, checking if the associated user has permission to delete that post
 const deletePost = async (postId, user) => {
     try {
@@ -174,4 +190,5 @@ module.exports = {
     changePostname,
     getFriendsPosts,
     downloadPost,
+    makePost,
 }
