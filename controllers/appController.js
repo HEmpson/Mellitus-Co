@@ -28,11 +28,11 @@ const getDashboard = async (req, res) => {
     }
 
     // get all friends posts
-    for (let i =0; i < friendsPosts.length; i++){
+    for (let i = 0; i < friendsPosts.length; i++) {
         let newFriendPost = friendsPosts[i]
         newFriendPost.filename = await DB.getFilename(friendsPosts[i].fileId)
         newFriendPost.createdByName = (
-            await User.findOne({_id: friendsPosts[i].createdBy})
+            await User.findOne({ _id: friendsPosts[i].createdBy })
         ).displayName
         friendDashboardPosts[i] = newFriendPost
     }

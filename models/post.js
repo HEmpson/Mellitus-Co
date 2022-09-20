@@ -48,19 +48,18 @@ const getPublicPosts = async () => {
     publicPosts.sort((a, b) => {
         return b.dateCreated - a.dateCreated
     })
-    
+
     return publicPosts
 }
 
 // gets a user posts + their friends posts
 const getFriendsPosts = async (user) => {
-    allPosts = await getUserPosts(user)  // gets the logged in users posts
-
+    allPosts = await getUserPosts(user) // gets the logged in users posts
 
     // iterate over all friends add their posts into a array
     for (i = 0; i < user.friends.length; i++) {
-        friend = User.findOne({_id: user.friends[i]})
-        
+        friend = User.findOne({ _id: user.friends[i] })
+
         posts = await friend.populate({
             path: 'posts',
             options: { lean: true },
@@ -68,10 +67,10 @@ const getFriendsPosts = async (user) => {
         posts = posts.toObject()
 
         friendPosts = posts.posts
-        
+
         // now iterate through that array and check whether the logged in user can see the post
-        for (j = 0; j < friendPosts.length; j++){
-            if (friendPosts[j].visibility === "Friends"){
+        for (j = 0; j < friendPosts.length; j++) {
+            if (friendPosts[j].visibility === 'Friends') {
                 allPosts.push(friendPosts[j])
             }
         }
@@ -83,9 +82,7 @@ const getFriendsPosts = async (user) => {
     })
 
     return allPosts
-    
 }
-
 
 // Removes a post from a user's post list
 const delistPost = async (post) => {
@@ -94,7 +91,7 @@ const delistPost = async (post) => {
 }
 
 // Checks if the given user has permission to edit/delete a given post
-const hasEditPermissions = (post, user) => {
+const hasPostEditPermissions = (post, user) => {
     if (user) {
         console.log(post.createdBy)
         if (user._id.equals(post.createdBy) || user.role === 'Admin') {
@@ -106,7 +103,7 @@ const hasEditPermissions = (post, user) => {
 }
 
 // Checks if the given user has permission to download a given post
-const hasDownloadPermissions = (post, user) => {
+const hasPostDownloadPermissions = (post, user) => {
     try {
         if (post.visibility === 'Public') {
             return true
@@ -147,11 +144,12 @@ const makePost = async (req, res) => {
     })
 }
 
-// Deletes a post and its associated file, checking if the associated user has permission to delete that post
+// Deletes a post and its associated file
+// checking if the associated user has permission to delete that post
 const deletePost = async (postId, user) => {
     try {
         const post = await Post.findOne({ _id: postId })
-        if (hasEditPermissions(post, user)) {
+        if (hasPostEditPermissions(post, user)) {
             try {
                 const fileId = post.fileId
                 if (fileId) {
@@ -174,7 +172,7 @@ const deletePost = async (postId, user) => {
 const changePostname = async (postId, user, filename) => {
     try {
         const post = await Post.findOne({ _id: postId })
-        if (hasEditPermissions(post, user)) {
+        if (hasPostEditPermissions(post, user)) {
             try {
                 const fileId = post.fileId
                 if (fileId) {
@@ -194,7 +192,7 @@ const changePostname = async (postId, user, filename) => {
 const downloadPost = async (postId, user, res) => {
     try {
         const post = await Post.findOne({ _id: postId })
-        if (hasDownloadPermissions(post, user)) {
+        if (hasPostDownloadPermissions(post, user)) {
             await DB.downloadFile(post.fileId, res)
         }
     } catch (err) {
@@ -202,6 +200,8 @@ const downloadPost = async (postId, user, res) => {
         return res.redirect('/dashboard')
     }
 }
+
+const assignToCategory = () => {}
 
 module.exports = {
     Post,
@@ -212,4 +212,6 @@ module.exports = {
     getFriendsPosts,
     downloadPost,
     makePost,
+    hasPostEditPermissions,
+    hasPostDownloadPermissions,
 }
