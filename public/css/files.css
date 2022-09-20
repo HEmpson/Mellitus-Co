@@ -6,27 +6,27 @@ img.profile-photo-md {
 
 
 /*==================================================
-  Friend List CSS
+  File List CSS
   ==================================================*/
 
-.friend-card{
+.file-card{
   border-radius: 4px;
   border-bottom: 1px solid #f1f2f2;
   overflow: hidden;
   margin-bottom: 20px;
 }
 
-.friend-card .img-responsive{
+.file-card .img-responsive{
     height: 100px;
     width: 400px;
 }
 
 
-.friend-card .card-info{
+.file-card .card-info{
   padding: 0 20px 10px;
 }
 
-.friend-card .card-info img.profile-photo-lg{
+.file-card .card-info img.profile-photo-lg{
   margin-top: -60px;
   border: 7px solid #fff;
 }
@@ -38,6 +38,6 @@ img.profile-photo-lg {
 }
 
 .text-green {
-    color: #8dc63f;
+    color: #363983;
 }
 

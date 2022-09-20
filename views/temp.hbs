@@ -1,0 +1,59 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="css/temp.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <div class="w-25">
+                <input type="text" class="form-control rounded-0 bg-dark ser-input" id="ser-input" placeholder="Search...">
+                <div class="search-full-view">
+                    <form action="submit">
+                        <div class="input-group">
+                            <input type="text" class="form-control" onfocus="exampleModalCenter" placeholder="Search...">
+                            <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                        </div>
+                    </form>
+                    
+
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle"> Check one</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    {{!-- <script>
+        $(document).ready(function() {
+
+            $("#ser-input").focus(function() {
+                $('.search-full-view').addClass("search-normal-screen");
+            });
+
+            $("#search-close").click(function() {
+                $('.search-full-view').removeClass("search-normal-screen");
+            });
+        });
+    </script> --}}
+    <!-- Navigation -->
+
