@@ -32,14 +32,14 @@ categoryRouter.post(
 
 // Route for handling renaming of categories
 categoryRouter.post(
-    '/rename',
+    '/rename/:id',
     isAuthenticated,
     categoryController.renameCategoryController
 )
 
 // Route for handling deletion of categories
 categoryRouter.post(
-    '/delete',
+    '/delete/:id',
     isAuthenticated,
     categoryController.deleteCategoryController
 )

@@ -14,9 +14,15 @@ const categorySchema = new mongoose.Schema({
 const Category = mongoose.model('Category', categorySchema, 'category')
 
 // Checks if User has permission to make changes to a category
-const hasCategoryEditPermission = (category, user) => {
+const hasCategoryEditPermissions = (category, user) => {
     try {
-        if (user.role === 'Admin' || user.categories.includes(category._id)) {
+        let inCategoriesList = false
+        for (let i = 0; i < user.categories.length; i++) {
+            if (user.categories[i].equals(category._id)) {
+                inCategoriesList = true
+            }
+        }
+        if (user.role === 'Admin' || inCategoriesList) {
             return true
         }
         return false
@@ -52,7 +58,7 @@ const renameCategory = async (categoryId, name, user) => {
         const category = await Category.findOne({ _id: categoryId }).lean()
 
         // If user has permission to edit category, allow user to rename category
-        if (hasCategoryEditPermission(category, user)) {
+        if (hasCategoryEditPermissions(category, user)) {
             // Rename the category
             await Category.updateOne({ _id: categoryId }, { name: name })
         }
@@ -68,9 +74,14 @@ const deleteCategory = async (categoryId, user) => {
         const category = await Category.findOne({ _id: categoryId }).lean()
 
         // If user has permission to edit category, allow user to rename category
-        if (hasCategoryEditPermission(category, user)) {
+        if (hasCategoryEditPermissions(category, user)) {
             // Delete the category
             await Category.deleteOne({ _id: categoryId })
+            // Delist Category from User Category list
+            await Category.updateOne(
+                { _id: user._id },
+                { $pull: { categories: categoryId } }
+            )
         }
     } catch (err) {
         console.log(err)
@@ -84,5 +95,5 @@ module.exports = {
     createCategory,
     renameCategory,
     deleteCategory,
-    hasCategoryEditPermission,
+    hasCategoryEditPermissions,
 }

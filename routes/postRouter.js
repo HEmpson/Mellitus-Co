@@ -32,9 +32,23 @@ postRouter.post(
 )
 
 // Deletes a given post (provided the user has significant permissions)
-postRouter.post('/removePost/:id', isAuthenticated, postController.removePost)
+postRouter.post(
+    '/removePost/:id',
+    isAuthenticated,
+    postController.removePostController
+)
 
-postRouter.post('/renamePost/:id', isAuthenticated, postController.renamePost)
+postRouter.post(
+    '/renamePost/:id',
+    isAuthenticated,
+    postController.renamePostController
+)
+
+postRouter.post(
+    '/assignToCategory/:id',
+    isAuthenticated,
+    postController.assignToCategoryController
+)
 
 postRouter.get(
     '/download/:id',

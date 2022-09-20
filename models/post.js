@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const { User } = require('./user')
+const { hasCategoryEditPermissions, Category } = require('./category')
 const DB = require('./index')
+const { post } = require('../routes/categoryRouter')
 
 const postSchema = new mongoose.Schema({
     visibility: String,
@@ -90,6 +92,15 @@ const delistPost = async (post) => {
     await User.updateOne({ _id: userId }, { $pull: { posts: post._id } })
 }
 
+const delistPostFromCategory = async (post) => {
+    if (post.categoryId) {
+        await Category.updateOne(
+            { _id: post.categoryId },
+            { $pull: { posts: post._id } }
+        )
+    }
+}
+
 // Checks if the given user has permission to edit/delete a given post
 const hasPostEditPermissions = (post, user) => {
     if (user) {
@@ -141,6 +152,12 @@ const makePost = async (req, res) => {
             { _id: req.user._id },
             { $push: { posts: post._id } }
         )
+        if (req.body.categoryId) {
+            await Category.updateOne(
+                { _id: req.body.categoryId },
+                { $push: { posts: post._id } }
+            )
+        }
     })
 }
 
@@ -201,7 +218,44 @@ const downloadPost = async (postId, user, res) => {
     }
 }
 
-const assignToCategory = () => {}
+// Assigns a post to a category, checking if the user has permission to do so
+const assignToCategory = async (postId, categoryId, user) => {
+    try {
+        const post = await Post.findOne({ _id: postId }).lean()
+        // Check if reassigning to new category or assigning to no category
+        if (categoryId) {
+            const category = await Category.findOne({ _id: categoryId }).lean()
+
+            // Check if user has permission to edit both
+            if (
+                hasPostEditPermissions(post, user) &&
+                hasCategoryEditPermissions(category, user)
+            ) {
+                // Add post to list of posts in categories
+                console.log('HUH')
+                await Category.updateOne(
+                    { _id: categoryId },
+                    { $push: { posts: post._id } }
+                )
+            }
+        }
+
+        // Change category ID field in post
+        if (hasPostEditPermissions(post, user)) {
+            delistPostFromCategory(post)
+            if (categoryId) {
+                await Post.updateOne(
+                    { _id: postId },
+                    { categoryId: categoryId }
+                )
+            } else {
+                await Post.updateOne({ _id: postId }, { categoryId: null })
+            }
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 module.exports = {
     Post,
@@ -212,6 +266,7 @@ module.exports = {
     getFriendsPosts,
     downloadPost,
     makePost,
+    assignToCategory,
     hasPostEditPermissions,
     hasPostDownloadPermissions,
 }
