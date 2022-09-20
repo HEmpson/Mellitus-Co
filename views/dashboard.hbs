@@ -132,14 +132,14 @@
                                 <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
                                 <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
                                 <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                                <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter">
+                                <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter{{@index}}">
                                     View Details
                                 </a>
                             </div>
                         </div>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal fade" id="exampleModalCenter{{@index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                 <div class="modal-header">
@@ -157,7 +157,7 @@
                                     {{#if user.hasEditPermissions}}
                                         <button type="button" class = "btn btn-secondary" data-dismiss="modal">Delete</button>
                                         <button type="button" class = "btn btn-secondary" data-dismiss="modal">Rename</button>
-                                        <abutton type="button" class = "btn btn-secondary" data-dismiss="modal">Visible to</button>
+                                        <button type="button" class = "btn btn-secondary" data-dismiss="modal">Visible to </button>
                                     {{/if}}
                                     <a type="button" class="btn btn-primary" href="/posts/download/{{this._id}}">Download</a>
                                 </div>
