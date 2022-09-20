@@ -48,14 +48,19 @@ const getPublicPosts = async () => {
     publicPosts.sort((a, b) => {
         return b.dateCreated - a.dateCreated
     })
-
+    
     return publicPosts
 }
 
 // gets a user posts + their friends posts
 const getFriendsPosts = async (user) => {
+    allPosts = await getUserPosts(user)  // gets the logged in users posts
+
+
+    // iterate over all friends add their posts into a array
     for (i = 0; i < user.friends.length; i++) {
-        friend = user.friends[i]
+        friend = User.findOne({_id: user.friends[i]})
+        
         posts = await friend.populate({
             path: 'posts',
             options: { lean: true },
@@ -63,8 +68,19 @@ const getFriendsPosts = async (user) => {
         posts = posts.toObject()
 
         friendPosts = posts.posts
+        console.log(friendPosts)
+        
+        // now iterate through that array and check whether the logged in user can see the post
+        for (j = 0; j < friendPosts.length; j++){
+            if (friendPosts[j].visibility === "Friends"){
+                allPosts.push(friendPosts[j])
+            }
+        }
     }
+
+    return allPosts
 }
+
 
 // Removes a post from a user's post list
 const delistPost = async (post) => {

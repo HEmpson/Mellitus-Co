@@ -11,23 +11,23 @@ const getLoginPage = async (req, res) => {
 }
 
 const getDashboard = async (req, res) => {
-    const posts = await Post.getPublicPosts()
+    const publicPosts = await Post.getUserPosts(req.user)
     
 
     const dashboardPosts = []
 
-    for (let i = 0; i < posts.length; i++) {
-        let newPost = posts[i]
-        newPost.filename = await DB.getFilename(posts[i].fileId)
+    for (let i = 0; i < publicPosts.length; i++) {
+        let newPost = publicPosts[i]
+        newPost.filename = await DB.getFilename(publicPosts[i].fileId)
         newPost.createdByName = (
-            await User.findOne({ _id: posts[i].createdBy })
+            await User.findOne({ _id: publicPosts[i].createdBy })
         ).displayName
         dashboardPosts[i] = newPost
     }
 
     res.render('dashboard.hbs', {
         pageName: 'Dashboard',
-        posts: dashboardPosts,
+        publicPosts: dashboardPosts,
     })
 }
 
