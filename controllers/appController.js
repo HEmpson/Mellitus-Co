@@ -11,23 +11,36 @@ const getLoginPage = async (req, res) => {
 }
 
 const getDashboard = async (req, res) => {
-    const posts = await Post.getPublicPosts()
-    
+    const publicPosts = await Post.getPublicPosts(req.user)
+    const friendsPosts = await Post.getFriendsPosts(req.user)
 
-    const dashboardPosts = []
+    const publicDashboardPosts = []
+    const friendDashboardPosts = []
 
-    for (let i = 0; i < posts.length; i++) {
-        let newPost = posts[i]
-        newPost.filename = await DB.getFilename(posts[i].fileId)
-        newPost.createdByName = (
-            await User.findOne({ _id: posts[i].createdBy })
+    // get all public posts
+    for (let i = 0; i < publicPosts.length; i++) {
+        let newPublicPost = publicPosts[i]
+        newPublicPost.filename = await DB.getFilename(publicPosts[i].fileId)
+        newPublicPost.createdByName = (
+            await User.findOne({ _id: publicPosts[i].createdBy })
         ).displayName
-        dashboardPosts[i] = newPost
+        publicDashboardPosts[i] = newPublicPost
+    }
+
+    // get all friends posts
+    for (let i = 0; i < friendsPosts.length; i++) {
+        let newFriendPost = friendsPosts[i]
+        newFriendPost.filename = await DB.getFilename(friendsPosts[i].fileId)
+        newFriendPost.createdByName = (
+            await User.findOne({ _id: friendsPosts[i].createdBy })
+        ).displayName
+        friendDashboardPosts[i] = newFriendPost
     }
 
     res.render('dashboard.hbs', {
         pageName: 'Dashboard',
-        posts: dashboardPosts,
+        publicPosts: publicDashboardPosts,
+        friendsPosts: friendDashboardPosts,
     })
 }
 

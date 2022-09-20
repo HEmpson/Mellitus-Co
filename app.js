@@ -2,9 +2,12 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const req = require('express/lib/request')
+
+// Import Routers
 const appRouter = require('./routes/appRouter')
 const postRouter = require('./routes/postRouter')
 const userRouter = require('./routes/userRouter')
+const categoryRouter = require('./routes/categoryRouter')
 const models = require('./models')
 const flash = require('express-flash')
 const session = require('express-session')
@@ -52,13 +55,17 @@ app.use(
 const passport = require('./passport')
 app.use(passport.authenticate('session'))
 
-// File upload and download routes
-
+// Primary UI Routes
 app.use('/', appRouter)
 
+// API Routes for dealing with posts and files
 app.use('/posts', postRouter)
 
+// API Routes for User Authentication and other Account Operations
 app.use('/user', userRouter)
+
+// API Routes for Categories
+app.use('/categories', categoryRouter)
 
 app.use(
     '/bootstrap',
