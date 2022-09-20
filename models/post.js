@@ -68,7 +68,6 @@ const getFriendsPosts = async (user) => {
         posts = posts.toObject()
 
         friendPosts = posts.posts
-        console.log(friendPosts)
         
         // now iterate through that array and check whether the logged in user can see the post
         for (j = 0; j < friendPosts.length; j++){
@@ -78,7 +77,13 @@ const getFriendsPosts = async (user) => {
         }
     }
 
+    // finally sort
+    allPosts.sort((a, b) => {
+        return b.dateCreated - a.dateCreated
+    })
+
     return allPosts
+    
 }
 
 
