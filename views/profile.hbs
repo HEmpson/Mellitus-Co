@@ -1,8 +1,9 @@
 <head>
     <link rel="stylesheet" href="css/profile.css">
+    
 </head>
 <section class="vh-100">
-    <div class = "container-lg">
+    <div class = "container-fluid">
         <div class="row  justify-content-center h-100">
             <div class="col col-sm-8 col-lg-6 text-lg-right text-sm-center align-self-center"> 
                 <p class="lead display-6"> Lewis Hamilton &nbsp&nbsp&nbsp</p>
@@ -25,7 +26,7 @@
                 
             </div>
             
-            <div class="col-8 my-3">
+            <div class="col-8 my-4">
                <div class="status-container">
                     <p class="font-weight-bold">Online</p>
                </div> 
@@ -37,7 +38,7 @@
                 <p class="font-weight-bold text-lg-right text-sm-center"> About&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</p>
 
             </div>
-            <div class="col-lg-8 col-sm-12 my-5">
+            <div class="col-lg-8 col-sm-12 my-3">
                 <div class="description-container">
                     <p class="font-weight-bold">Sir Lewis Carl Davidson Hamilton MBE HonFREng Kt is a British racing driver currently competing in Formula One for Mercedes. In Formula One, Hamilton has won a joint-record seven World Drivers' Championship titles, and holds the records for the most wins, pole positions, and podium finishes, among others.</p>
                </div> 
@@ -47,4 +48,62 @@
         <hr/>
     </div>
     <p class="display-6 font-weight-bold" style="color: rgba(106, 27, 189,0.4); margin-left: 11vw;"> Latest Uploads</p>
+
+
 </section>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="image-cropper">
+            <img src="https://www.sportscasting.com/wp-content/uploads/2020/08/Lewis-Hamilton-Smiling.jpg"
+                  alt="Generic placeholder image" class="img-fluid  profile-img">            
+        </div>
+
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3 category"> 
+                    <div class="tag-container-1 font-weight-bold">Category</div>
+                </div>
+                <div class="col-3">
+                     <div class="tag-container-2 font-weight-bold">Symbol</div>
+                </div>
+               <div class="col-5">
+                    <h5 class="post-title text-right font-weight-bold">Post Title </h5>
+               </div>   
+            </div>
+            <div class="row justify-content-center">
+                    <div class="col-12 text-center">
+                        <img src="https://cdn.wionews.com/sites/default/files/styles/story_page/public/2022/07/25/281855-ive-got-plenty-of-fuel-left-in-the-tank-lewis-hamilton-opens-up-on-f1-future.jpg"
+                    alt="IMG" class = "post-content-container">     
+                    </div>
+                    <div class="col-12 small-text"> 
+                         <small><i class="bi bi-heart"></i> 103</small>
+                         <small class="time">11:08 PM - Sep 19,2022</small>
+                         <a href="#" style="margin-left: 33%;"> download </a>
+                         <a href="#" style="margin-left: 3%;" > delete </a>
+                    </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-11">
+                    <p class="lead comment">Another win at France Grand Prix. Have a good day everybody! </p>
+                </div>
+            </div>
+            
+        </div>
+
+      </div>
+      
+    </div>
+ </div>
+</div>

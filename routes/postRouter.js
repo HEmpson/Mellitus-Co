@@ -25,7 +25,11 @@ const hasRole = (thisRole) => {
     }
 }
 
-postRouter.post('/makePost', upload.single('file'), postController.makePost)
+postRouter.post(
+    '/makePost',
+    upload.single('file'),
+    postController.makePostController
+)
 
 // Deletes a given post (provided the user has significant permissions)
 postRouter.post('/removePost/:id', isAuthenticated, postController.removePost)

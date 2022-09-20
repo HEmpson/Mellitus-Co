@@ -131,8 +131,41 @@ const addFriends = async (req, res) => {
     try {
         // if friend exists
         if (friend) {
-            req.user.friends.push(friend._id)
-            friend.friends.push(req.user._id)
+            await User.updateOne(
+                { _id: friend._id },
+                { $push: { friends: req.user._id } }
+            )
+            await User.updateOne(
+                { _id: req.user._id },
+                { $push: { friends: friend._id } }
+            )
+        }
+
+        // friend doesn't exist
+        else {
+            req.flash('noFriendError', 'Friend does not exist')
+            redirect('/') // edit this redirect
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+const removeFriends = async (req, res) => {
+    friendName = req.body.displayName
+    friend = await User.findOne({ displayName: friendName })
+
+    try {
+        // if friend exists
+        if (friend) {
+            await User.updateOne(
+                { _id: friend._id },
+                { $pull: { friends: req.user._id } }
+            )
+            await User.updateOne(
+                { _id: req.user._id },
+                { $pull: { friends: friend._id } }
+            )
         }
 
         // friend doesn't exist
@@ -152,4 +185,5 @@ module.exports = {
     createAccount,
     verifyNewPatientProfile,
     addFriends,
+    removeFriends,
 }

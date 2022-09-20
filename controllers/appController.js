@@ -11,7 +11,8 @@ const getLoginPage = async (req, res) => {
 }
 
 const getDashboard = async (req, res) => {
-    const posts = await Post.getUserPosts(req.user)
+    const posts = await Post.getPublicPosts()
+    
 
     const dashboardPosts = []
 

@@ -27,18 +27,19 @@
                 <div class="modal-body mx-3">
 
                     {{!-- FORM TO SEARCH NEW FRIEND --}}
-                    <form action="">
+                    <form action="/user/addNewFriend" method="POST">
                         <div class="md-form mb-5">
-                            <input type="email" id="defaultForm-email" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="defaultForm-email">Search Name or Username</label>
+                            <input type="text" id="displayName" name="displayName" class="form-control validate">
+                            <label data-error="wrong" data-success="right" for="defaultForm-email">Search Display Name</label>
                         </div>
-                    </form>     
+                        
                 </div>
 
-                {{!-- BUTTON TO ADD NEW FRIEND --}}
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-default">Add Friend</button>
-                </div>
+                    {{!-- BUTTON TO ADD NEW FRIEND --}}
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class="btn btn-default">Add Friend</button>
+                    </div>
+                    </form> 
             </div>
         </div>
     </div>
