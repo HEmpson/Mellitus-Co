@@ -45,7 +45,7 @@ const createCategory = async (name, user) => {
     }
 }
 
-// Renames the category with the given category ID
+// Renames the category with the given category ID after checking user has permission
 const renameCategory = async (categoryId, name, user) => {
     try {
         // Find category
@@ -61,7 +61,21 @@ const renameCategory = async (categoryId, name, user) => {
     }
 }
 
-const deleteCategory = () => {}
+// Deletes the category with the given category ID after checking user has permission
+const deleteCategory = async (categoryId, user) => {
+    try {
+        // Find category
+        const category = await Category.findOne({ _id: categoryId }).lean()
+
+        // If user has permission to edit category, allow user to rename category
+        if (hasCategoryEditPermission(category, user)) {
+            // Delete the category
+            await Category.deleteOne({ _id: categoryId })
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 const getAllInCategory = () => {}
 
@@ -69,5 +83,6 @@ module.exports = {
     Category,
     createCategory,
     renameCategory,
+    deleteCategory,
     hasCategoryEditPermission,
 }

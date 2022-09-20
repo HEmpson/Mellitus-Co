@@ -37,4 +37,11 @@ categoryRouter.post(
     categoryController.renameCategoryController
 )
 
+// Route for handling deletion of categories
+categoryRouter.post(
+    '/delete',
+    isAuthenticated,
+    categoryController.deleteCategoryController
+)
+
 module.exports = categoryRouter
