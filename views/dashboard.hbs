@@ -12,18 +12,76 @@
             crossorigin="anonymous"></script>
 </head>
 
+
+<!-- Layout of the page -->
 <form class="form-inline">
     <div class="d-flex">
-        <input class="form-control mr-1" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </div>
+        <input class="form-control mr-1" type="search" id = "city" placeholder="Search" aria-label="Search">
+    </div>    
 </form>
+
+<!-- Search modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="inputName" placeholder="Search Documents">
+                    </div>
+                </form>
+
+                <div>
+                    <h1>Search Results Looped Below</h1>
+                </div>
+
+                <div class="card gedf-card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="mr-2">
+                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                </div>
+                                <div class="ml-2">
+                                    <div class="h5 m-0">Post Author</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>Created Date</div>
+
+                        <!-- Placeholder link, Instead of opening detailed view it currently downloads file immediately -->
+                    
+                        <a>
+                            <h5 class="card-title">FileName</h5>
+                        </a>
+
+                        <p class="card-text" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                            Post Description
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 <div class="container-fluid gedf-wrapper">
     <div class="row">
-        {{!-- This div is the upload feature --}}
-        {{!-- Note: Although this div is above the document post div, 
-        it is only rendered first if the viewport is <=992 - using bootstrap "order-md-2"  --}}
+        <!-- This div is the upload feature, Note: Although this div is above the document post div, 
+        it is only rendered first if the viewport is <=992 - using bootstrap "order-md-2" -->
+        
         <div class="col-md-3 order-md-2">
             <div class="card gedf-card">
                 <div class="card-header">
@@ -58,9 +116,9 @@
                                     <div class="btn-group">
                                         <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
-                                            {{!-- <div class="inv"><i class="fa fa-globe"></i></div> --}}
+                                            <!-- <div class="inv"><i class="fa fa-globe"></i></div> 
                                             <div class="inv"><i class="fa fa-users"></i></div>
-                                            {{!-- <div class="inv"><i class="fa fa-user"></i></div>                               --}}
+                                            <div class="inv"><i class="fa fa-user"></i></div>                               -->
                                         </button>
                                         
                                         <select  aria-labelledby="btnGroupDrop1" id="visibility" name="visibility">
@@ -79,7 +137,7 @@
 
 
 
-        {{!-- This div is the wide document pane --}}
+        <!-- This div is the wide document pane -->
         <div class="col-md-9 gedf-main order-md-1">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
@@ -120,7 +178,7 @@
                             <div class="card-body">
                                 <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}</div>
                                 {{!-- PLACEHOLDER LINK!!! Instead of opening detailed view it currently downloads file immediately --}}
-                                <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter">
+                                <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter{{@index}}">
                                     <h5 class="card-title">{{this.filename}}</h5>
                                 </a>
 
@@ -165,11 +223,13 @@
                             </div>
                         </div>
                         {{/each}}
-                        <!-- End of a single document post /////-->
+                        <!-- End of a single document post -->
                     </div>
 
+                    {{!-- FOR YOU POSTS TAB --}}
                     <div class="tab-pane fade" id="postsPrivate" role="tabpanel" aria-labelledby="private-tab">
                         {{!-- HBS each loop to display private posts --}}
+                        
                         {{#each friendsPosts}}
                         <div class="card gedf-card">
                             <div class="card-header">
@@ -188,11 +248,11 @@
                             <div class="card-body">
                                 <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}</div>
                                 {{!-- PLACEHOLDER LINK!!! Instead of opening detailed view it currently downloads file immediately --}}
-                                <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter">
+                                <a class="card-link" data-toggle="modal" data-target="#ForYouModalCenter{{@index}}">
                                     <h5 class="card-title">{{this.filename}}</h5>
                                 </a>
 
-                                <p class="card-text" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                <p class="card-text" class="btn btn-primary" data-toggle="modal" data-target="#ForYouModalCenter{{@index}}">
                                     {{this.description}}
                                 </p>
                             </div>
@@ -200,14 +260,14 @@
                                 <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
                                 <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
                                 <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                                <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter{{@index}}">
+                                <a class="card-link" data-toggle="modal" data-target="#ForYouModalCenter{{@index}}">
                                     View Details
                                 </a>
                             </div>
                         </div>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter{{@index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal fade" id="ForYouModalCenter{{@index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                 <div class="modal-header">
@@ -239,3 +299,21 @@
         </div>
     </div>
 </div>
+
+
+
+
+<script>
+        $('#city').focus(function(){
+            //open bootsrap modal
+            $('#myModal').modal({
+                show: true
+            });
+        });
+
+        $(document).ready(function(){
+            $("#myModal").on('shown.bs.modal', function(){
+                $(this).find('input[type="text"]').focus();
+            });
+        });
+</script>

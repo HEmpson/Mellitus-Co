@@ -1,14 +1,12 @@
 // Imports
 const express = require('express')
 const exphbs = require('express-handlebars')
-const req = require('express/lib/request')
 
 // Import Routers
 const appRouter = require('./routes/appRouter')
 const postRouter = require('./routes/postRouter')
 const userRouter = require('./routes/userRouter')
 const categoryRouter = require('./routes/categoryRouter')
-const models = require('./models')
 const flash = require('express-flash')
 const session = require('express-session')
 
@@ -29,6 +27,10 @@ app.engine(
     exphbs.engine({
         defaultLayout: 'main',
         extname: 'hbs',
+        runtimeOptions: {
+            allowProtoPropertiesByDefault: true,
+            allowProtoMethodsByDefault: true,
+        },
     })
 )
 

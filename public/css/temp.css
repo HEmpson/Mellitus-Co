@@ -1,0 +1,67 @@
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css');
+
+.ser-input{
+    border-color: transparent;
+    border-bottom-color: #fff;
+    color: #fff;
+}
+.ser-input:focus {
+    border-color: transparent;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.search-full-view {
+    /* text-align: center; */
+    position:fixed;
+    width: 50%;
+    height: 50%;
+    left: 0;
+    top: 0;
+    background: rgb(0, 0, 0);
+    opacity: 0;
+    z-index: -1;
+    transition: .5s all;
+    transform: scale(0);
+}
+.search-full-view.search-normal-screen {
+    opacity: 1;
+    z-index: 1;
+    transform: scale(1);
+}
+
+.search-full-view .input-group {
+    width: 80%;
+    margin: 0 auto;
+    top: 40%;
+    height: 100px;
+}
+.search-full-view .input-group .form-control {
+    background: transparent;
+    border-bottom: 2px solid #fff;
+    font-size: 6em;
+    padding: 10px;
+    vertical-align: unset;
+    color: #cdcdcd;
+}
+.search-full-view .input-group .form-control:focus{
+    border-color: #fff;
+    border:0 !important;
+    border-bottom: 2px solid #fff !important;
+}
+.search-full-view .input-group .input-group-addon {
+    background: transparent;
+    font-size: 4em;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+}
+.search-full-view .btn-close {
+    background: transparent;
+    border: 0;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.search-full-view .btn-close img { width: 60px; }

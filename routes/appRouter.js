@@ -27,7 +27,7 @@ const hasRole = (thisRole) => {
 
 appRouter.get('/', appController.getLoginPage)
 appRouter.get('/dashboard', isAuthenticated, appController.getDashboard)
-appRouter.get('/profile', isAuthenticated, appController.getProfile)
+appRouter.get('/profile/:id', isAuthenticated, appController.getProfile)
 appRouter.get('/files', isAuthenticated, appController.getFile)
 appRouter.get('/friends', isAuthenticated, appController.getFriends)
 appRouter.get('/allfiles', isAuthenticated, appController.getAllFiles)
