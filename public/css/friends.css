@@ -10,10 +10,10 @@ img.profile-photo-md {
   ==================================================*/
 
 .friend-list .friend-card{
-  border-radius: 4px;
-  border-bottom: 1px solid #f1f2f2;
-  overflow: hidden;
-  margin-bottom: 20px;
+    border-radius: 4px;
+    border-bottom: 1px solid #f1f2f2;
+    overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .friend-list .friend-card .img-responsive{
@@ -23,12 +23,12 @@ img.profile-photo-md {
 
 
 .friend-list .friend-card .card-info{
-  padding: 0 20px 10px;
+    padding: 0 20px 10px;
 }
 
 .friend-list .friend-card .card-info img.profile-photo-lg{
-  margin-top: -60px;
-  border: 7px solid #fff;
+    margin-top: -60px;
+    border: 7px solid #fff;
 }
 
 img.profile-photo-lg {
@@ -41,3 +41,6 @@ img.profile-photo-lg {
     color: #8dc63f;
 }
 
+.modal-content {
+    background: linear-gradient(60deg, var(--color-taupe) , var(--color-pink));
+}
