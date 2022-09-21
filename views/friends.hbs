@@ -7,39 +7,40 @@
     <!-- Categories Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">My Friends</h1>
-        <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#modalLoginForm">
+        <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm " data-toggle="modal" data-target="#modalLoginForm">
             + Add Friend
         </a>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <div class="modal-content" >
 
                 <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">Add Friend</h4>
+
+                    <h4 class="modal-title w-100 font-weight-bold text-white">Add Friend</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
+                        <span aria-hidden="true">&times;</span>
+                    </button> 
                 </div>
 
                 <div class="modal-body mx-3">
 
-                    {{!-- FORM TO SEARCH NEW FRIEND --}}
+                    <!-- Form to search for new friends -->
                     <form action="/user/addNewFriend" method="POST">
                         <div class="md-form mb-5">
+                            <label class="text-white"  data-error="wrong" data-success="right" for="defaultForm-email">Search Display Name</label>
                             <input type="text" id="displayName" name="displayName" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="defaultForm-email">Search Display Name</label>
                         </div>
                         
                 </div>
 
-                    {{!-- BUTTON TO ADD NEW FRIEND --}}
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button class="btn btn-default">Add Friend</button>
-                    </div>
-                    </form> 
+                <!--  Button to add new friends  -->
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit" class="btn btn-dark">Add Friend</button>
+                </div>
+    
             </div>
         </div>
     </div>
@@ -91,13 +92,13 @@
             
             <div class="col-md-4 col-sm-6">
                 <div class="friend-card">
-                    <img src="https://via.placeholder.com/400x100/228B22" alt="profile-cover" class="img-responsive cover">
+                    <img src="https://wallpapercave.com/wp/wp2809357.jpg" alt="profile-cover" class="img-responsive cover">
                     <div class="card-info">
                         <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="user" class="profile-photo-lg">
                         <div class="friend-info">
                             <a href="#" class="pull-right text-green">My Friend</a>
                             <h5><a href="timeline.html" class="profile-link">Raphael Chen</a></h5>
-                            <p>Student</p>
+                            <p>Rhodes Scholarship reciever for Master of Science in Financial Economics programme, Saïd Business School, Oxford University</p>
                         </div>
                     </div>
                 </div>

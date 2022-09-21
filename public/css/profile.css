@@ -12,7 +12,7 @@
     background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
 }
 
-.status-container{
+.status-container {
     width:15rem;
     height: 3rem;
     padding: 10px 0;
@@ -45,7 +45,7 @@ hr {
     border-width: 1px;
   }
 
-.modal .tag-container-1{
+.modal .tag-container-1 {
     border: 2px solid rgba(106, 27, 189,0.4);
     border-radius: 10px;
     border-width: 1px;
@@ -57,7 +57,7 @@ hr {
     margin-top: 0.8rem;
 }
 
-.tag-container-2{
+.tag-container-2 {
     border: 2px solid rgba(106, 27, 189,0.4);
     border-radius: 10px;
     border-width: 1px;
@@ -70,13 +70,13 @@ hr {
   
 }
 
-.post-content-container{
+.post-content-container {
     margin-top: 1rem;
     width: 100%;
     height: auto;
     border-width: 1px;
 }
-.modal-content img{
+.modal-content img {
     border-radius: 2rem;
 }
 .post-title{
@@ -90,7 +90,7 @@ small {
     margin-left: 5%;
 }
 
-.time{
+.time {
 margin-left: 8%;
 }
 
@@ -98,11 +98,11 @@ margin-left: 8%;
     margin-top: 3px;
 }
 
-.category{
+.category {
     margin-left: 3%;
 }
 
-.comment{
+.comment {
     font-size:15px;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -123,7 +123,7 @@ margin-left: 8%;
 }
 
 
-.small-text a{
+.small-text a {
     font-size: 9px;
     font-family: Arial, Helvetica, sans-serif; 
     
