@@ -90,12 +90,8 @@ const getFile = async (req, res) => {
     }
     res.render('files.hbs', {
         pageName: 'File',
-<<<<<<< HEAD
-        user: req.user,
-=======
         categories: categoryList,
         posts: filteredPostList.slice(0, NUM_DISPLAY_HEAD),
->>>>>>> d5b517a9a3ff31174e1916ea01d863fb27b92df9
     })
 }
 
