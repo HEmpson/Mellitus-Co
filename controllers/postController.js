@@ -7,7 +7,6 @@ const { assignToCategory } = require('../models/post')
 // Makes a new post
 const makePostController = async (req, res) => {
     await makePost(req, res)
-    return res.redirect('/dashboard')
 }
 
 // Removes a post and returns the user back to the dashboard
