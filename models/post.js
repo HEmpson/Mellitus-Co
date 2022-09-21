@@ -57,10 +57,10 @@ const getPublicPosts = async () => {
 // gets a user posts + their friends posts
 const getFriendsPosts = async (user) => {
     allPosts = await getUserPosts(user) // gets the logged in users posts
-
+    console.log(allPosts)
     // iterate over all friends add their posts into a array
     for (i = 0; i < user.friends.length; i++) {
-        friend = User.findOne({ _id: user.friends[i] })
+        friend = await User.findOne({ _id: user.friends[i] })
 
         posts = await friend.populate({
             path: 'posts',
@@ -83,7 +83,6 @@ const getFriendsPosts = async (user) => {
         return b.dateCreated - a.dateCreated
     })
 
-    
     return allPosts
 }
 
@@ -148,7 +147,7 @@ const makePost = async (req, res) => {
         fileId: mongoose.Types.ObjectId(req.file.id),
         createdBy: req.user._id,
     })
-    await newPost.save(async (err, post) => {
+    newPost.save(async (err, post) => {
         await User.updateOne(
             { _id: req.user._id },
             { $push: { posts: post._id } }
@@ -159,6 +158,7 @@ const makePost = async (req, res) => {
                 { $push: { posts: post._id } }
             )
         }
+        return res.redirect('/dashboard')
     })
 }
 
