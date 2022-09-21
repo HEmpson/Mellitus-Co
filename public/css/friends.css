@@ -41,6 +41,12 @@ img.profile-photo-lg {
     color: #8dc63f;
 }
 
+/*-- modal area --*/
+
 .modal-content {
     background: linear-gradient(60deg, var(--color-taupe) , var(--color-pink));
+}
+
+.text-white {
+  margin-bottom: 1rem;
 }
