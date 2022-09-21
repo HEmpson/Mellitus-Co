@@ -2,6 +2,7 @@ const { NONAME } = require('dns')
 const Post = require('../models/post')
 const { User } = require('../models/user')
 const DB = require('../models/index')
+const { Category } = require('../models/category')
 
 const getLoginPage = async (req, res) => {
     res.render('login.hbs', {
@@ -68,9 +69,45 @@ const getCategories = async (req, res) => {
     })
 }
 
+const NUM_DISPLAY_HEAD = 4
+
+// Gets the page for the all files page
 const getAllFiles = async (req, res) => {
+    const user = await User.findOne({ _id: req.params.id }).lean()
+    const categoryIds = user.categories
+    const categoryList = []
+
+    // Get head of categories
+    for (let i = 0; i < categories.length && i < NUM_DISPLAY_HEAD; i++) {
+        let category = await Category.findOne({ _id: categoryIds[i] })
+        categoryList[i] = {
+            _id: categoryIds[i],
+            name: category.name,
+            documentCount: category.posts.length,
+        }
+    }
+
+    // Find all files in latest order
+    const postIds = user.posts
+    const postList = []
+    for (let i = 0; i < posts.length && i < NUM_DISPLAY_HEAD; i++) {
+        let post = await Post.findOne({ _id: postIds[i] })
+        postList[i] = post
+    }
+
+    const filteredPostList = []
+
+    // Filter posts
+    for (let i = 0; i < postList.length; i++) {
+        if (Post.hasPostDownloadPermissions(postList[i])) {
+            filteredPostList[filteredPostList.length] = postList[i]
+        }
+    }
+
     res.render('allFiles.hbs', {
         pageName: 'All Files',
+        categories: categoryList,
+        posts: filteredPostList.slice(0, NUM_DISPLAY_HEAD),
     })
 }
 
