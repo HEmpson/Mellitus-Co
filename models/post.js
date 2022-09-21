@@ -83,7 +83,6 @@ const getFriendsPosts = async (user) => {
         return b.dateCreated - a.dateCreated
     })
 
-    
     return allPosts
 }
 
@@ -148,7 +147,7 @@ const makePost = async (req, res) => {
         fileId: mongoose.Types.ObjectId(req.file.id),
         createdBy: req.user._id,
     })
-    await newPost.save(async (err, post) => {
+    newPost.save(async (err, post) => {
         await User.updateOne(
             { _id: req.user._id },
             { $push: { posts: post._id } }
@@ -159,6 +158,7 @@ const makePost = async (req, res) => {
                 { $push: { posts: post._id } }
             )
         }
+        return res.redirect('/dashboard')
     })
 }
 
