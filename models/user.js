@@ -178,6 +178,19 @@ const removeFriends = async (req, res) => {
     }
 }
 
+const getAllFriends = async (user) => {
+    friends = await user.populate({
+        path: 'friends',
+        options: {lean: true}
+    })
+
+    friends = friends.toObject()
+
+    allFriends = friends.friends
+
+    return friends
+}
+
 const User = mongoose.model('User', userSchema, 'user')
 
 module.exports = {
@@ -186,4 +199,5 @@ module.exports = {
     verifyNewPatientProfile,
     addFriends,
     removeFriends,
+    getAllFriends,
 }

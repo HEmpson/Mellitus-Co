@@ -1,6 +1,5 @@
-const { NONAME } = require('dns')
 const Post = require('../models/post')
-const { User } = require('../models/user')
+const { User, getAllFriends } = require('../models/user')
 const DB = require('../models/index')
 
 const getLoginPage = async (req, res) => {
@@ -36,41 +35,48 @@ const getDashboard = async (req, res) => {
         ).displayName
         friendDashboardPosts[i] = newFriendPost
     }
-
     res.render('dashboard.hbs', {
         pageName: 'Dashboard',
         publicPosts: publicDashboardPosts,
         friendsPosts: friendDashboardPosts,
+        user: req.user,
     })
 }
 
 const getProfile = async (req, res) => {
     res.render('profile.hbs', {
         pageName: 'Profile',
+        user: req.user,
     })
 }
 
 const getFile = async (req, res) => {
     res.render('files.hbs', {
         pageName: 'File',
+        user: req.user,
     })
 }
 
 const getFriends = async (req, res) => {
+    friends = getAllFriends(req.user)
     res.render('friends.hbs', {
         pageName: 'Friends',
+        friends: friends,
+        user: req.user,
     })
 }
 
 const getCategories = async (req, res) => {
     res.render('categories.hbs', {
         pageName: 'Categories',
+        user: req.user,
     })
 }
 
 const getAllFiles = async (req, res) => {
     res.render('allFiles.hbs', {
         pageName: 'All Files',
+        user: req.user,
     })
 }
 
@@ -78,8 +84,11 @@ const getRegistration = async (req, res) => {
     res.render('registration.hbs', {
         pageName: 'Registration',
         layout: '',
+        user: req.user,
     })
 }
+
+
 
 module.exports = {
     getLoginPage,

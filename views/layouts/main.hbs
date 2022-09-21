@@ -7,7 +7,7 @@
     <!-- bootstrap 5 css -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
     <!-- custom css -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
     <!-- boostrap icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
@@ -37,7 +37,7 @@
                 <a href="/friends" class="nav-link text-light pl-4">Friends</a>
             </li>
             <li class="nav-item w-100">
-                <a href="/profile" class="nav-link text-light pl-4">My Profile</a>
+                <a href="/profile/{{user.id}}" class="nav-link text-light pl-4">My Profile</a>
             </li>
         </ul>
     </nav>
@@ -51,7 +51,7 @@
         
     
         {{{body}}}
-    </div>    
+        </div>    
      <!-- side bar ends here -->
 
     <!-- bootsrap js resource -->
