@@ -83,6 +83,7 @@ const getFriendsPosts = async (user) => {
         return b.dateCreated - a.dateCreated
     })
 
+    
     return allPosts
 }
 
