@@ -55,31 +55,10 @@ const getProfile = async (req, res) => {
     })
 }
 
-// direct to file page
-const getFile = async (req, res) => {
-    res.render('files.hbs', {
-        pageName: 'File',
-    })
-}
-
-// direct to friends page
-const getFriends = async (req, res) => {
-    res.render('friends.hbs', {
-        pageName: 'Friends',
-    })
-}
-
-// direct to categories page
-const getCategories = async (req, res) => {
-    res.render('categories.hbs', {
-        pageName: 'Categories',
-    })
-}
-
 const NUM_DISPLAY_HEAD = 4
 
-// Gets the page for the all files page
-const getAllFiles = async (req, res) => {
+// direct to file page
+const getFile = async (req, res) => {
     const user = await User.findOne({ _id: req.params.id }).lean()
     const categoryIds = user.categories
     const categoryList = []
@@ -99,6 +78,7 @@ const getAllFiles = async (req, res) => {
     const postList = []
     for (let i = 0; i < posts.length && i < NUM_DISPLAY_HEAD; i++) {
         let post = await Post.findOne({ _id: postIds[i] })
+        post.filename = DB.getFilename(post._id)
         postList[i] = post
     }
 
@@ -110,11 +90,31 @@ const getAllFiles = async (req, res) => {
             filteredPostList[filteredPostList.length] = postList[i]
         }
     }
-
-    res.render('allFiles.hbs', {
-        pageName: 'All Files',
+    res.render('files.hbs', {
+        pageName: 'File',
         categories: categoryList,
         posts: filteredPostList.slice(0, NUM_DISPLAY_HEAD),
+    })
+}
+
+// direct to friends page
+const getFriends = async (req, res) => {
+    res.render('friends.hbs', {
+        pageName: 'Friends',
+    })
+}
+
+// direct to categories page
+const getCategories = async (req, res) => {
+    res.render('categories.hbs', {
+        pageName: 'Categories',
+    })
+}
+
+// Gets the page for the all files page
+const getAllFiles = async (req, res) => {
+    res.render('allFiles.hbs', {
+        pageName: 'All Files',
     })
 }
 
