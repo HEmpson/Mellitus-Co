@@ -1,3 +1,5 @@
+// import variables
+
 const { NONAME } = require('dns')
 const Post = require('../models/post')
 const { User } = require('../models/user')
@@ -11,6 +13,7 @@ const getLoginPage = async (req, res) => {
     })
 }
 
+// direct to dashboard page
 const getDashboard = async (req, res) => {
     const publicPosts = await Post.getPublicPosts(req.user)
     const friendsPosts = await Post.getFriendsPosts(req.user)
@@ -45,24 +48,28 @@ const getDashboard = async (req, res) => {
     })
 }
 
+// direct to profile page
 const getProfile = async (req, res) => {
     res.render('profile.hbs', {
         pageName: 'Profile',
     })
 }
 
+// direct to file page
 const getFile = async (req, res) => {
     res.render('files.hbs', {
         pageName: 'File',
     })
 }
 
+// direct to friends page
 const getFriends = async (req, res) => {
     res.render('friends.hbs', {
         pageName: 'Friends',
     })
 }
 
+// direct to categories page
 const getCategories = async (req, res) => {
     res.render('categories.hbs', {
         pageName: 'Categories',
@@ -111,6 +118,7 @@ const getAllFiles = async (req, res) => {
     })
 }
 
+// direct to registration page
 const getRegistration = async (req, res) => {
     res.render('registration.hbs', {
         pageName: 'Registration',
@@ -118,6 +126,7 @@ const getRegistration = async (req, res) => {
     })
 }
 
+// export the functions
 module.exports = {
     getLoginPage,
     getDashboard,

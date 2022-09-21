@@ -1,0 +1,7 @@
+.modal-content {
+    background: linear-gradient(60deg, var(--color-taupe) , var(--color-pink));;
+}
+
+.text-white {
+    margin-bottom: 1rem;
+  }

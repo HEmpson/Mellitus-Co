@@ -57,10 +57,10 @@ const getPublicPosts = async () => {
 // gets a user posts + their friends posts
 const getFriendsPosts = async (user) => {
     allPosts = await getUserPosts(user) // gets the logged in users posts
-
+    console.log(allPosts)
     // iterate over all friends add their posts into a array
     for (i = 0; i < user.friends.length; i++) {
-        friend = User.findOne({ _id: user.friends[i] })
+        friend = await User.findOne({ _id: user.friends[i] })
 
         posts = await friend.populate({
             path: 'posts',
