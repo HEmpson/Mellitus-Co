@@ -144,7 +144,7 @@ const addFriends = async (req, res) => {
         // friend doesn't exist
         else {
             req.flash('noFriendError', 'Friend does not exist')
-            redirect('/') // edit this redirect
+            return res.redirect('/friends')
         }
     } catch (err) {
         console.log(err)
@@ -171,7 +171,7 @@ const removeFriends = async (req, res) => {
         // friend doesn't exist
         else {
             req.flash('noFriendError', 'Friend does not exist')
-            redirect('/') // edit this redirect
+            return res.redirect('/friends')
         }
     } catch (err) {
         console.log(err)
@@ -181,14 +181,49 @@ const removeFriends = async (req, res) => {
 const getAllFriends = async (user) => {
     friends = await user.populate({
         path: 'friends',
-        options: {lean: true}
+        options: { lean: true },
     })
 
     friends = friends.toObject()
 
     allFriends = friends.friends
 
-    return friends
+    return allFriends
+}
+
+const getUserInfo = async (req, res) => {
+    try {
+        let user = await User.findOne({ _id: req.params.id }).lean()
+        if (user && hasFriendPermissions(user, req)) {
+            return user
+        } else {
+            return undefined
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+// function to determine if a user can access their friends profile
+const hasFriendPermissions = (user, req) => {
+    try {
+        // if the logged in user is trying to see thier own profile
+        if (req.user._id.equals(user._id)) {
+            return true
+        }
+
+        // if the user is trying to access their friends profile
+        for (let i = 0; i < req.user.friends.length; i++) {
+            if (req.user.friends[i] === user) {
+                return true
+            }
+        }
+        // otherwise they are trying to access a profile who is not their friend
+        return false
+    } catch (err) {
+        console.log(err)
+        return false
+    }
 }
 
 const User = mongoose.model('User', userSchema, 'user')
@@ -200,4 +235,6 @@ module.exports = {
     addFriends,
     removeFriends,
     getAllFriends,
+    getUserInfo,
+    hasFriendPermissions,
 }

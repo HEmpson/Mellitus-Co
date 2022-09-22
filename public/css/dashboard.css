@@ -28,3 +28,9 @@ body {
     display: none;
 }
 
+
+.text-red {
+    color: red;
+    font-size: 0.75rem;
+    margin-top: 1.0rem;
+}

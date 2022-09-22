@@ -66,6 +66,12 @@ body{
     margin-left: 0;
 }
 
+.logOut-button {
+    background-color: var(--color-pink);
+    color: var(--color-light);
+    font-size: medium;
+}
+
 
 /* for main section */
 

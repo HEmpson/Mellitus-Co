@@ -1,5 +1,5 @@
 const Post = require('../models/post')
-const { User, getAllFriends } = require('../models/user')
+const { User, getAllFriends, getUserInfo } = require('../models/user')
 const DB = require('../models/index')
 const { Category } = require('../models/category')
 
@@ -47,8 +47,16 @@ const getDashboard = async (req, res) => {
 
 // direct to profile page
 const getProfile = async (req, res) => {
+    let user = await getUserInfo(req, res)
+
+    if (!user) {
+        req.flash('noUserError', 'No access to user')
+        return res.redirect('/dashboard')
+    }
+
     res.render('profile.hbs', {
         pageName: 'Profile',
+        userInfo: user,
         user: req.user,
     })
 }
@@ -90,6 +98,7 @@ const getFile = async (req, res) => {
     }
     res.render('files.hbs', {
         pageName: 'File',
+        user: req.user,
         categories: categoryList,
         posts: filteredPostList.slice(0, NUM_DISPLAY_HEAD),
     })
@@ -97,7 +106,7 @@ const getFile = async (req, res) => {
 
 // direct to friends page
 const getFriends = async (req, res) => {
-    friends = getAllFriends(req.user)
+    friends = await getAllFriends(req.user)
     res.render('friends.hbs', {
         pageName: 'Friends',
         friends: friends,
