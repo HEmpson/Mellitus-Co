@@ -173,9 +173,9 @@
                                         font-weight-bold">Symbol</div>
                                 </div>
                                 <div class="col-5">
-                                    <form>
+                                    <form action = "/renamePost/{{id}}" method = "POST">
                                         <label for="new-name">Name</label>
-                                        <input type="text" name="name" id="new-name" value="Post Title">
+                                        <input type="text" name="name" id="new-name" value="Post Title" required>
                                         <button type="submit">change</button>
                                     </form>
                                 </div>
