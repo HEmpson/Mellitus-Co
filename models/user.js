@@ -144,7 +144,7 @@ const addFriends = async (req, res) => {
         // friend doesn't exist
         else {
             req.flash('noFriendError', 'Friend does not exist')
-            redirect('/') // edit this redirect
+            return res.redirect('/friends')
         }
     } catch (err) {
         console.log(err)
@@ -171,7 +171,7 @@ const removeFriends = async (req, res) => {
         // friend doesn't exist
         else {
             req.flash('noFriendError', 'Friend does not exist')
-            redirect('/') // edit this redirect
+            return res.redirect('/friends')
         }
     } catch (err) {
         console.log(err)
@@ -188,7 +188,23 @@ const getAllFriends = async (user) => {
 
     allFriends = friends.friends
 
-    return friends
+    return allFriends
+}
+
+const getUserInfo = async (req, res) => {
+    try{
+
+        let user = await User.findOne({_id: req.params.id}).lean()
+        if (user){
+            return user
+        }
+        else{
+            req.flash('noUserError', 'No user exists')
+            return res.redirect('/dashboard')
+        }
+    }catch(err){
+        console.log(err)
+    }
 }
 
 const User = mongoose.model('User', userSchema, 'user')
@@ -200,4 +216,5 @@ module.exports = {
     addFriends,
     removeFriends,
     getAllFriends,
+    getUserInfo,
 }

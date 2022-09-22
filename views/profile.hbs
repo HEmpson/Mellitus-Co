@@ -10,11 +10,10 @@
         <div class="row justify-content-center h-100">
             <div class="col col-sm-8 col-lg-6 text-lg-right text-sm-center
                 align-self-center">
-                <p class="lead display-6" style="margin-right: 2.7rem;"> Lewis
-                    Hamilton</p>
+                <p class="lead display-6" style="margin-right: 2.7rem;"> {{userInfo.displayName}}</p>
                 <pre class="text-primary font-weight-bold" style="margin-right:
                     4.2rem; font-size: 16px;font-family: Arial, Helvetica,
-                    sans-serif;">186               1157                44</pre>
+                    sans-serif;">{{userInfo.friends.length}}               1157                {{userInfo.posts.length}}</pre>
                 <pre class="text-primary font-weight-bold" style="font-size:
                     18px;font-family: Arial, Helvetica, sans-serif;"><i class="bi bi-people-fill"></i>Friends      <i class="bi bi-hand-thumbs-up-fill"></i>Likes        <i class="bi bi-file-post"></i>Posts        </pre>
             </div>
@@ -51,13 +50,7 @@
                 </div>
                 <div class="col-lg-8 col-sm-12 my-3">
                     <div class="description-container">
-                        <p class="font-weight-bold">Sir Lewis Carl Davidson
-                            Hamilton MBE HonFREng Kt is a British racing driver
-                            currently competing in Formula One for Mercedes. In
-                            Formula One, Hamilton has won a joint-record seven
-                            World Drivers' Championship titles, and holds the
-                            records for the most wins, pole positions, and
-                            podium finishes, among others.</p>
+                        <p class="font-weight-bold">{{userInfo.description}}</p>
                     </div>
                 </div>
 

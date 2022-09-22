@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" href="css/friends.css">
+    <link rel="stylesheet" href="/css/friends.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
@@ -48,89 +48,21 @@
 
     <div class="friend-list">
         <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="friend-card">
-                    <img src="https://students.unimelb.edu.au/__data/assets/image/0004/3876916/Arts-West-Exterior.jpg" alt="profile-cover" class="img-responsive cover">
-                    <div class="card-info">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
-                        <div class="friend-info">
-                            <a href="#" class="pull-right text-green">My Friend</a>
-                            <h5><a href="timeline.html" class="profile-link">Harry Empson</a></h5>
-                            <p>Student at UniMelb</p>
+            {{#each friends}}
+                <div class="col-md-4 col-sm-6">
+                    <div class="friend-card">
+                        <img src="https://students.unimelb.edu.au/__data/assets/image/0004/3876916/Arts-West-Exterior.jpg" alt="profile-cover" class="img-responsive cover">
+                        <div class="card-info">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                            <div class="friend-info">
+                                <a href="#" class="pull-right text-green">My Friend</a>
+                                <h5><a href="/profile/{{this._id}}" class="profile-link">{{this.displayName}}</a></h5>
+                                <p>{{this.description}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="col-md-4 col-sm-6">
-                <div class="friend-card">
-                    <img src="https://students.unimelb.edu.au/__data/assets/image/0005/3876800/WEBS.png" alt="profile-cover" class="img-responsive cover">
-                    <div class="card-info">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user" class="profile-photo-lg">
-                        <div class="friend-info">
-                            <a href="#" class="pull-right text-green">My Friend</a>
-                            <h5><a href="timeline.html" class="profile-link">Brian Hisa</a></h5>
-                            <p>Student at Harvard</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4 col-sm-6">
-                <div class="friend-card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTd_LWtTof9Ov-xKo-dqAyV0dKO2VsdasQvqaAJXrBXEmbAlt8w9ZPFvg-CcKujqc2Ep8&usqp=CAU" alt="profile-cover" class="img-responsive cover">
-                    <div class="card-info">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="user" class="profile-photo-lg">
-                        <div class="friend-info">
-                            <a href="#" class="pull-right text-green">My Friend</a>
-                            <h5><a href="timeline.html" class="profile-link">Jonathan</a></h5>
-                            <p>Student at UniMelb</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4 col-sm-6">
-                <div class="friend-card">
-                    <img src="https://wallpapercave.com/wp/wp2809357.jpg" alt="profile-cover" class="img-responsive cover">
-                    <div class="card-info">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="user" class="profile-photo-lg">
-                        <div class="friend-info">
-                            <a href="#" class="pull-right text-green">My Friend</a>
-                            <h5><a href="timeline.html" class="profile-link">Raphael Chen</a></h5>
-                            <p>Rhodes Scholarship reciever for Master of Science in Financial Economics programme, Saïd Business School, Oxford University</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4 col-sm-6">
-                <div class="friend-card">
-                    <img src="https://via.placeholder.com/400x100/20B2AA" alt="profile-cover" class="img-responsive cover">
-                    <div class="card-info">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="user" class="profile-photo-lg">
-                        <div class="friend-info">
-                            <a href="#" class="pull-right text-green">My Friend</a>
-                            <h5><a href="timeline.html" class="profile-link">Suren</a></h5>
-                            <p>Student at UniMelb</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4 col-sm-6">
-                <div class="friend-card">
-                    <img src="https://via.placeholder.com/400x100/FF4500" alt="profile-cover" class="img-responsive cover">
-                    <div class="card-info">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="user" class="profile-photo-lg">
-                        <div class="friend-info">
-                            <a href="#" class="pull-right text-green">My Friend</a>
-                            <h5><a href="timeline.html" class="profile-link">Jack Lee</a></h5>
-                            <p>Student at Harvard</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {{/each}}
         </div>
     </div>
 </div>
