@@ -48,6 +48,12 @@ const getDashboard = async (req, res) => {
 // direct to profile page
 const getProfile = async (req, res) => {
     let user = await getUserInfo(req, res)
+    
+    if (!user){
+        req.flash('noUserError', 'No access to user')
+        return res.redirect('/dashboard')
+    }
+
     res.render('profile.hbs', {
         pageName: 'Profile',
         userInfo: user,
