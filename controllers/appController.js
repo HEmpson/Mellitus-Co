@@ -48,8 +48,8 @@ const getDashboard = async (req, res) => {
 // direct to profile page
 const getProfile = async (req, res) => {
     let user = await getUserInfo(req, res)
-    
-    if (!user){
+
+    if (!user) {
         req.flash('noUserError', 'No access to user')
         return res.redirect('/dashboard')
     }
