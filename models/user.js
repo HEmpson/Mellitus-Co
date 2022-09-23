@@ -144,7 +144,6 @@ const addFriends = async (req, res) => {
         // friend doesn't exist
         else {
             req.flash('noFriendError', 'Friend does not exist')
-            return res.redirect('/friends')
         }
     } catch (err) {
         console.log(err)
