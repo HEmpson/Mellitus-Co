@@ -171,7 +171,7 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="postsPublic" role="tabpanel"
                         aria-labelledby="public-tab">
-                        {{!-- A single post or view of the document, loop the below div using hbs variables --}}
+                        <!-- A single post or view of the document, loop the below div using hbs variables -->
                         {{#each publicPosts}}
                         <div class="card gedf-card">
                             <div class="card-header">
@@ -278,9 +278,9 @@
                         <!-- End of a single document post -->
                     </div>
 
-                    {{!-- FOR YOU POSTS TAB --}}
+                    <!-- FOR YOU POSTS TAB -->
                     <div class="tab-pane fade" id="postsPrivate" role="tabpanel" aria-labelledby="private-tab">
-                        {{!-- HBS each loop to display private posts --}}
+                        <!-- HBS each loop to display private posts -->
 
                         {{#each friendsPosts}}
                         <div class="card gedf-card">
@@ -300,8 +300,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}</div>
-                                {{!-- PLACEHOLDER LINK!!! Instead of opening detailed view it currently downloads file
-                                immediately --}}
+                                <!-- PLACEHOLDER LINK!!! Instead of opening detailed view it currently downloads file
+                                immediately -->
                                 <a class="card-link" data-toggle="modal" data-target="#ForYouModalCenter{{@index}}">
                                     <h5 class="card-title">{{this.filename}}</h5>
                                 </a>
