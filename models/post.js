@@ -158,7 +158,7 @@ const makePost = async (req, res) => {
                 { $push: { posts: post._id } }
             )
         }
-        return res.redirect('/dashboard')
+        return res.redirect('back')
     })
 }
 
@@ -216,7 +216,7 @@ const downloadPost = async (postId, user, res) => {
         }
     } catch (err) {
         console.log(err)
-        return res.redirect('/dashboard')
+        return res.redirect('back')
     }
 }
 

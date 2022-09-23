@@ -73,10 +73,10 @@ const NUM_DISPLAY_HEAD = 4
 // direct to file page
 const getFile = async (req, res) => {
     const user = await User.findOne({ _id: req.params.id }).lean()
-    let categories = getCategories(user)
+    let categories = await getCategories(user)
     categories = categories.slice(0, NUM_DISPLAY_HEAD)
 
-    const posts = getUserPosts(user)
+    const posts = await getUserPosts(user)
     let filteredPosts = []
     // Filter the posts which are visible to the user
     for (let i = 0; i < posts.length; i++) {
@@ -108,7 +108,7 @@ const getFriends = async (req, res) => {
 // direct to categories page
 const getCategories = async (req, res) => {
     const user = await User.findOne({ _id: req.params.id }).lean()
-    const categories = getCategories(user)
+    const categories = await getCategories(user)
 
     res.render('categories.hbs', {
         pageName: 'Categories',
@@ -121,7 +121,7 @@ const getCategories = async (req, res) => {
 const getAllFiles = async (req, res) => {
     const user = await User.findOne({ _id: req.params.id }).lean()
 
-    const posts = getUserPosts(user)
+    const posts = await getUserPosts(user)
 
     let filteredPosts = []
 

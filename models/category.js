@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { Post, hasPostDownloadPermissions } = require('./post')
+const { Post, hasPostDownloadPermissions, deletePost } = require('./post')
 const { User } = require('./user')
 const db = require('./index')
 
@@ -77,8 +77,14 @@ const deleteCategory = async (categoryId, user) => {
 
         // If user has permission to edit category, allow user to rename category
         if (hasCategoryEditPermissions(category, user)) {
+            // Delete All files in the category
+            for (let i = 0; i < category.posts.length; i++) {
+                deletePost(category.posts[i])
+            }
+
             // Delete the category
             await Category.deleteOne({ _id: categoryId })
+
             // Delist Category from User Category list
             await Category.updateOne(
                 { _id: user._id },
