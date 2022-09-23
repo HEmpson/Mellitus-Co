@@ -38,24 +38,28 @@ postRouter.post(
     postController.removePostController
 )
 
+// Post Route for renaming posts/files
 postRouter.post(
     '/renamePost/:id',
     isAuthenticated,
     postController.renamePostController
 )
 
+// Post Route for assigning posts to a category/deassigning a post
 postRouter.post(
     '/assignToCategory/:id',
     isAuthenticated,
     postController.assignToCategoryController
 )
 
+// Post Route for changing the visibility of a post
 postRouter.post(
     '/changeVisibility/:id',
     isAuthenticated,
     postController.changeVisibilityController
 )
 
+// Get route for downloading the files
 postRouter.get(
     '/download/:id',
     isAuthenticated,
