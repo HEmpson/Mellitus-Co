@@ -4,22 +4,26 @@
 
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-            
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 </head>
 
 
 <!-- Layout of the page -->
 <form class="form-inline">
     <div class="d-flex">
-        <input class="form-control mr-1" type="search" id = "city" placeholder="Search" aria-label="Search">
-    </div>    
+        <input class="form-control mr-1" type="search" id="city" placeholder="Search" aria-label="Search">
+    </div>
 </form>
 
 <!-- Search modal -->
@@ -55,12 +59,13 @@
                         <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>Created Date</div>
 
                         <!-- Placeholder link, Instead of opening detailed view it currently downloads file immediately -->
-                    
+
                         <a>
                             <h5 class="card-title">FileName</h5>
                         </a>
 
-                        <p class="card-text" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                        <p class="card-text" class="btn btn-primary" data-toggle="modal"
+                            data-target="#exampleModalCenter">
                             Post Description
                         </p>
                     </div>
@@ -83,20 +88,21 @@
     <div class="row">
         <!-- This div is the upload feature, Note: Although this div is above the document post div, 
         it is only rendered first if the viewport is <=992 - using bootstrap "order-md-2" -->
-        
+
         <div class="col-md-3 order-md-2">
             <div class="card gedf-card">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link" id="nfile-tab" data-toggle="tab" role="tab" aria-controls="newfile" aria-selected="false" href="#newfile">+ New File</a>
+                            <a class="nav-link" id="nfile-tab" data-toggle="tab" role="tab" aria-controls="newfile"
+                                aria-selected="false" href="#newfile">+ New File</a>
                         </li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade" id="newfile" role="tabpanel" aria-labelledby="nfile-tab">
-                            <form id = "post-form" action="/posts/makePost" method="post" enctype="multipart/form-data">
+                            <form id="post-form" action="/posts/makePost" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="file" name="file">
@@ -106,33 +112,34 @@
                                     <div class="py-4"></div>
 
                                     <label class="sr-only" for="message">post</label>
-                                    <textarea class="form-control" id="message" rows="3" name="message" placeholder="Description..."></textarea>
+                                    <textarea class="form-control" id="message" rows="3" name="message"
+                                        placeholder="Description..."></textarea>
                                 </div>
 
                                 <div class="py-4"></div>
                                 <div class="btn-toolbar justify-content-between">
 
                                     <div class="btn-group">
-                                        <button type="submit" form = "post-form" class="btn btn-primary">Submit</button>
+                                        <button type="submit" form="post-form" class="btn btn-primary">Submit</button>
                                     </div>
                                     <div class="btn-group">
-                                        <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
+                                        <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <!-- <div class="inv"><i class="fa fa-globe"></i></div> 
                                             <div class="inv"><i class="fa fa-users"></i></div>
                                             <div class="inv"><i class="fa fa-user"></i></div>                               -->
                                         </button>
-                                        
-                                        <select  aria-labelledby="btnGroupDrop1" id="visibility" name="visibility">
+
+                                        <select aria-labelledby="btnGroupDrop1" id="visibility" name="visibility">
                                             <option class="dropdown-item" value="Public"> Public</option>
                                             <option class="dropdown-item" value="Friends"> Friends</option>
                                             <option class="dropdown-item" value="Private"> Private</option>
-                                        </select> 
+                                        </select>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                    </div>   
+                    </div>
                 </div>
             </div>
         </div>
@@ -144,12 +151,14 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="public-tab" data-toggle="tab" href="#postsPublic" role="tab" aria-controls="postsPublic" aria-selected="true">
+                        <a class="nav-link active" id="public-tab" data-toggle="tab" href="#postsPublic" role="tab"
+                            aria-controls="postsPublic" aria-selected="true">
                             Public
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="private-tab" data-toggle="tab" role="tab" aria-controls="postsPrivate" aria-selected="false" href="#postsPrivate">
+                        <a class="nav-link" id="private-tab" data-toggle="tab" role="tab" aria-controls="postsPrivate"
+                            aria-selected="false" href="#postsPrivate">
                             For You
                         </a>
                     </li>
@@ -160,7 +169,8 @@
 
             <div class="card-body">
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="postsPublic" role="tabpanel" aria-labelledby="public-tab">
+                    <div class="tab-pane fade show active" id="postsPublic" role="tabpanel"
+                        aria-labelledby="public-tab">
                         {{!-- A single post or view of the document, loop the below div using hbs variables --}}
                         {{#each publicPosts}}
                         <div class="card gedf-card">
@@ -168,7 +178,8 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="mr-2">
-                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50"
+                                                alt="">
                                         </div>
                                         <div class="ml-2">
                                             <div class="h5 m-0">{{this.createdByName}}</div>
@@ -177,21 +188,25 @@
                                 </div>
 
                             </div>
-                            <button type="button" class="btn" data-toggle="modal"
-            data-target="#postModal" style="padding: 0" >
-                            <div class="card-body">
-                                <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}</div>
-                                {{!-- PLACEHOLDER LINK!!! Instead of opening detailed view it currently downloads file immediately --}}
-                                {{!-- <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter{{@index}}">
-                                    <h5 class="card-title">{{this.filename}}</h5>
-                                </a> --}}
-                                <a>
-                                    <h5 class="card-title">{{this.filename}}</h5>
-                                </a>
-                                <p class="card-text" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                    {{this.description}}
-                                </p>
-                            </div>
+                            <button type="button" class="btn" data-toggle="modal" data-target="#postModal"
+                                style="padding: 0">
+                                <div class="card-body">
+                                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}
+                                    </div>
+                                    {{!-- PLACEHOLDER LINK!!! Instead of opening detailed view it currently downloads
+                                    file immediately --}}
+                                    {{!-- <a class="card-link" data-toggle="modal"
+                                        data-target="#exampleModalCenter{{@index}}">
+                                        <h5 class="card-title">{{this.filename}}</h5>
+                                    </a> --}}
+                                    <a>
+                                        <h5 class="card-title">{{this.filename}}</h5>
+                                    </a>
+                                    <p class="card-text" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModalCenter">
+                                        {{this.description}}
+                                    </p>
+                                </div>
                             </button>
                             <div class="card-footer">
                                 <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
@@ -204,28 +219,34 @@
                         </div>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter{{@index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal fade" id="exampleModalCenter{{@index}}" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">{{this.filename}}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    {{this.description}}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <!-- Delete and Rename only appear if the user has edit permission on the post-->
-                                    {{#if user.hasEditPermissions}}
-                                        <button type="button" class = "btn btn-secondary" data-dismiss="modal">Delete</button>
-                                        <button type="button" class = "btn btn-secondary" data-dismiss="modal">Rename</button>
-                                        <button type="button" class = "btn btn-secondary" data-dismiss="modal">Visible to </button>
-                                    {{/if}}
-                                    <a type="button" class="btn btn-primary" href="/posts/download/{{this._id}}">Download</a>
-                                </div>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">{{this.filename}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{this.description}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <!-- Delete and Rename only appear if the user has edit permission on the post-->
+                                        {{#if user.hasEditPermissions}}
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Delete</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Rename</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Visible to
+                                        </button>
+                                        {{/if}}
+                                        <a type="button" class="btn btn-primary"
+                                            href="/posts/download/{{this._id}}">Download</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -236,14 +257,15 @@
                     {{!-- FOR YOU POSTS TAB --}}
                     <div class="tab-pane fade" id="postsPrivate" role="tabpanel" aria-labelledby="private-tab">
                         {{!-- HBS each loop to display private posts --}}
-                        
+
                         {{#each friendsPosts}}
                         <div class="card gedf-card">
                             <div class="card-header">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="mr-2">
-                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50"
+                                                alt="">
                                         </div>
                                         <div class="ml-2">
                                             <div class="h5 m-0">{{this.createdByName}}</div>
@@ -254,12 +276,14 @@
                             </div>
                             <div class="card-body">
                                 <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}</div>
-                                {{!-- PLACEHOLDER LINK!!! Instead of opening detailed view it currently downloads file immediately --}}
+                                {{!-- PLACEHOLDER LINK!!! Instead of opening detailed view it currently downloads file
+                                immediately --}}
                                 <a class="card-link" data-toggle="modal" data-target="#ForYouModalCenter{{@index}}">
                                     <h5 class="card-title">{{this.filename}}</h5>
                                 </a>
 
-                                <p class="card-text" class="btn btn-primary" data-toggle="modal" data-target="#ForYouModalCenter{{@index}}">
+                                <p class="card-text" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#ForYouModalCenter{{@index}}">
                                     {{this.description}}
                                 </p>
                             </div>
@@ -274,52 +298,180 @@
                         </div>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="ForYouModalCenter{{@index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal fade" id="ForYouModalCenter{{@index}}" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">{{this.filename}}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    {{this.description}}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <!-- Delete and Rename only appear if the user has edit permission on the post-->
-                                    {{#if user.hasEditPermissions}}
-                                        <button type="button" class = "btn btn-secondary" data-dismiss="modal">Delete</button>
-                                        <button type="button" class = "btn btn-secondary" data-dismiss="modal">Rename</button>
-                                        <button type="button" class = "btn btn-secondary" data-dismiss="modal">Visible to </button>
-                                    {{/if}}
-                                    <a type="button" class="btn btn-primary" href="/posts/download/{{this._id}}">Download</a>
-                                </div>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">{{this.filename}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{this.description}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <!-- Delete and Rename only appear if the user has edit permission on the post-->
+                                        {{#if user.hasEditPermissions}}
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Delete</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Rename</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Visible to
+                                        </button>
+                                        {{/if}}
+                                        <a type="button" class="btn btn-primary"
+                                            href="/posts/download/{{this._id}}">Download</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         {{/each}}
                     </div>
                 </div>
-            </div>                
+            </div>
         </div>
     </div>
 </div>
 
-       
+<!-- Detailed Post Modal -->
+<div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="image-cropper">
+                    <img src="https://www.sportscasting.com/wp-content/uploads/2020/08/Lewis-Hamilton-Smiling.jpg"
+                        alt="Generic placeholder image" class="img-fluid
+                                profile-img">
+                </div>
+
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-3 category">
+                            <div class="tag-container-1
+                                        font-weight-bold">Category</div>
+                        </div>
+                        <div class="col-3">
+                            <div class="tag-container-2
+                                        font-weight-bold">Symbol</div>
+                        </div>
+                        <div class="col-5">
+                            <h5 class="post-title text-right
+                                        font-weight-bold">Post Title </h5>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-12 text-center">
+                            <img src="https://cdn.wionews.com/sites/default/files/styles/story_page/public/2022/07/25/281855-ive-got-plenty-of-fuel-left-in-the-tank-lewis-hamilton-opens-up-on-f1-future.jpg"
+                                alt="IMG" class="post-content-container">
+                        </div>
+                        <div class="col-12 small-text">
+                            <small><i class="bi bi-heart"></i> 103</small>
+                            <small class="time">11:08 PM - Sep 19,2022</small>
+                            <!-- the link to open rename modal -->
+                            <a class="card-link" data-dismiss="modal" data-toggle="modal" data-target="#renameModal"
+                                style="margin-left: 20%;"> rename</a>
+                            <a href="#" style="margin-left: 3%;">
+                                download </a>
+                            <a href="#" style="margin-left: 3%;"> delete
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-11">
+                            <p class="lead comment">Another win at
+                                France Grand Prix. Have a good day
+                                everybody! </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- the Rename Post Modal -->
+<div class="modal fade" id="renameModal" tabindex="-1" aria-labelledby="postTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="image-cropper">
+                    <img src="https://www.sportscasting.com/wp-content/uploads/2020/08/Lewis-Hamilton-Smiling.jpg"
+                        alt="Generic placeholder image" class="img-fluid
+                                profile-img">
+                </div>
+
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-3 category">
+                            <div class="tag-container-1
+                                        font-weight-bold">Category</div>
+                        </div>
+                        <div class="col-3">
+                            <div class="tag-container-2
+                                        font-weight-bold">Symbol</div>
+                        </div>
+                        <div class="col-5">
+                            <form action="/renamePost/{{postId}}" method="POST">
+                                <label for="new-name">Name</label>
+                                <input type="text" name="name" id="new-name" value="Post Title" required>
+                                <button type="submit">change</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <div class="col-12 text-center">
+                            <img src="https://cdn.wionews.com/sites/default/files/styles/story_page/public/2022/07/25/281855-ive-got-plenty-of-fuel-left-in-the-tank-lewis-hamilton-opens-up-on-f1-future.jpg"
+                                alt="IMG" class="post-content-container">
+                        </div>
+                        <div class="col-12 small-text">
+                            <small><i class="bi bi-heart"></i> 103</small>
+                            <small class="time">11:08 PM - Sep 19,2022</small>
+                            <a href="#" style="margin-left: 33%;">
+                                download </a>
+                            <a href="#" style="margin-left: 3%;"> delete
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <div class="col-11">
+                            <p class="lead comment">Another win at
+                                France Grand Prix. Have a good day
+                                everybody! </p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
-        $('#city').focus(function(){
-            //open bootsrap modal
-            $('#myModal').modal({
-                show: true
-            });
+    $('#city').focus(function () {
+        //open bootsrap modal
+        $('#myModal').modal({
+            show: true
         });
+    });
 
-        $(document).ready(function(){
-            $("#myModal").on('shown.bs.modal', function(){
-                $(this).find('input[type="text"]').focus();
-            });
+    $(document).ready(function () {
+        $("#myModal").on('shown.bs.modal', function () {
+            $(this).find('input[type="text"]').focus();
         });
+    });
 </script>
