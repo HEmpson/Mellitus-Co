@@ -17,4 +17,10 @@ userRouter.post(
     }
 )
 
+//Logout Route
+userRouter.post('/logout', (req, res) => {
+    req.logOut()
+    return res.redirect('/')
+})
+
 module.exports = userRouter
