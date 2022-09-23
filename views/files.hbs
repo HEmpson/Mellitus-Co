@@ -29,7 +29,7 @@
 
 
     <div class="row">
-
+        {{#each categories}}
         <!-- PDF Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
@@ -37,9 +37,9 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                PDF
+                                {{this.name}}
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">2 Files</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{this.documentCount}} Files</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -48,63 +48,7 @@
                 </div>
             </div>
         </div>
-
-        <!-- Images Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Images
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">6 Files</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Word Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                Word Documents
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">3 Files</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Source Code Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                Source Code/Scripting
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">10 Files</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{/each}}    
     </div>
 
     
@@ -118,46 +62,20 @@
     </div>
 
     <div class="row">
+        {{#each posts}}
         <div class="col-md-4 col-sm-6">
             <div class="file-card">
                 <img src="https://media.istockphoto.com/vectors/contract-or-document-signing-icon-document-folder-with-stamp-and-text-vector-id1179640294?k=20&m=1179640294&s=612x612&w=0&h=O2IBtlV52-6gWSAeyozPIFkfZ-LzHnpXBw2tOuUToj8=" alt="profile-cover" class="img-responsive cover">
                 <div class="card-info">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1667px-PDF_file_icon.svg.png" alt="user" class="profile-photo-lg">
                 <div class="friend-info">
-                <a href="#" class="pull-right text-green">PDF File</a>
-                <h5><a href="timeline.html" class="profile-link">Report.pdf</a></h5>
-                <p>Uploaded : 12/2/2022</p>
+                <a href="#" class="pull-right text-green">Document</a>
+                <h5><a href="timeline.html" class="profile-link">{{this.filename}}</a></h5>
+                <p>Uploaded : {{this.dateCreated}}</p>
                 </div>
             </div>
             </div>
         </div>
-        
-        <div class="col-md-4 col-sm-6">
-            <div class="file-card">
-                <img src="https://media.istockphoto.com/vectors/contract-or-document-signing-icon-document-folder-with-stamp-and-text-vector-id1179640294?k=20&m=1179640294&s=612x612&w=0&h=O2IBtlV52-6gWSAeyozPIFkfZ-LzHnpXBw2tOuUToj8=" alt="profile-cover" class="img-responsive cover">
-                <div class="card-info">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1667px-PDF_file_icon.svg.png" alt="user" class="profile-photo-lg">
-                <div class="friend-info">
-                <a href="#" class="pull-right text-green">PDF File</a>
-                <h5><a href="timeline.html" class="profile-link">Report.pdf</a></h5>
-                <p>Uploaded : 12/2/2022</p>
-                </div>
-            </div>
-            </div>
-        </div>
-        
-        <div class="col-md-4 col-sm-6">
-            <div class="file-card">
-                <img src="https://media.istockphoto.com/vectors/contract-or-document-signing-icon-document-folder-with-stamp-and-text-vector-id1179640294?k=20&m=1179640294&s=612x612&w=0&h=O2IBtlV52-6gWSAeyozPIFkfZ-LzHnpXBw2tOuUToj8=" alt="profile-cover" class="img-responsive cover">
-                <div class="card-info">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1667px-PDF_file_icon.svg.png" alt="user" class="profile-photo-lg">
-                <div class="friend-info">
-                <a href="#" class="pull-right text-green">PDF File</a>
-                <h5><a href="timeline.html" class="profile-link">Report.pdf</a></h5>
-                <p>Uploaded : 12/2/2022</p>
-                </div>
-            </div>
-            </div>
-        </div>  
+        {{/each}}
     </div>
 </div>
