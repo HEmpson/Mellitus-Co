@@ -194,35 +194,13 @@ const getAllFriends = async (user) => {
 const getUserInfo = async (req, res) => {
     try {
         let user = await User.findOne({ _id: req.params.id }).lean()
-        if (user && hasFriendPermissions(user, req)) {
+        if (user) {
             return user
         } else {
             return undefined
         }
     } catch (err) {
         console.log(err)
-    }
-}
-
-// function to determine if a user can access their friends profile
-const hasFriendPermissions = (user, req) => {
-    try {
-        // if the logged in user is trying to see thier own profile
-        if (req.user._id.equals(user._id)) {
-            return true
-        }
-
-        // if the user is trying to access their friends profile
-        for (let i = 0; i < req.user.friends.length; i++) {
-            if (req.user.friends[i] === user) {
-                return true
-            }
-        }
-        // otherwise they are trying to access a profile who is not their friend
-        return false
-    } catch (err) {
-        console.log(err)
-        return false
     }
 }
 
@@ -236,5 +214,4 @@ module.exports = {
     removeFriends,
     getAllFriends,
     getUserInfo,
-    hasFriendPermissions,
 }

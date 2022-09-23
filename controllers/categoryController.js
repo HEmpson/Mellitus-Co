@@ -1,7 +1,7 @@
 const { Category } = require('../models/category')
 const { createCategory } = require('../models/category')
 const { renameCategory } = require('../models/category')
-const { deleteCategory } = require('../models/category')
+const { deleteCategory } = require('../models/post')
 
 // Controller function for handling creation of categories
 const createCategoryController = (req, res) => {
