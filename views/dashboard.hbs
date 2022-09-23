@@ -188,17 +188,10 @@
                                 </div>
 
                             </div>
-                            <button type="button" class="btn" data-toggle="modal" data-target="#postModal"
+                            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter{{@index}}"
                                 style="padding: 0">
                                 <div class="card-body">
-                                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}
-                                    </div>
-                                    {{!-- PLACEHOLDER LINK!!! Instead of opening detailed view it currently downloads
-                                    file immediately --}}
-                                    {{!-- <a class="card-link" data-toggle="modal"
-                                        data-target="#exampleModalCenter{{@index}}">
-                                        <h5 class="card-title">{{this.filename}}</h5>
-                                    </a> --}}
+                                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}</div>
                                     <a>
                                         <h5 class="card-title">{{this.filename}}</h5>
                                     </a>
@@ -208,6 +201,7 @@
                                     </p>
                                 </div>
                             </button>
+
                             <div class="card-footer">
                                 <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
                                 <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
@@ -216,40 +210,70 @@
                                     View Details
                                 </a>
                             </div>
-                        </div>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter{{@index}}" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
+                        </div>
+        
+                        <!-- Detailed Post Modal -->
+                        <div class="modal fade" id="exampleModalCenter{{@index}}" tabindex="-1" aria-labelledby="postTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">{{this.filename}}</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                                        <div class="image-cropper">
+                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                        </div>
+                                        <h5 class="post-title text-right font-weight-bold">{{this.filename}}</h5>
+                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                     </div>
+
                                     <div class="modal-body">
-                                        {{this.description}}
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                        <!-- Delete and Rename only appear if the user has edit permission on the post-->
-                                        {{#if user.hasEditPermissions}}
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Delete</button>
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Rename</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Visible to
-                                        </button>
-                                        {{/if}}
-                                        <a type="button" class="btn btn-primary"
-                                            href="/posts/download/{{this._id}}">Download</a>
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-3 category">
+                                                    <div class="tag-container-1
+                                                                font-weight-bold">Category</div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="tag-container-2
+                                                                font-weight-bold">Symbol</div>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <div class="col-12 text-center">
+                                                    <h1>Image Insert</h1>
+                                                </div>
+                                                <div class="col-12 small-text">
+                                                    <small><i class="bi bi-heart"></i> 103</small>
+                                                    <small class="time"> {{this.dateCreated}} </small>
+                                                    <!-- the link to open rename modal -->
+                                                    <a class="card-link" data-dismiss="modal" data-toggle="modal" data-target="#renameModal"
+                                                        style="margin-left: 20%;"> Rename</a>
+                                                    <a href="#" style="margin-left: 3%;">
+                                                        download </a>
+                                                    <a href="#" style="margin-left: 3%;"> Delete
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <div class="col-11">
+                                                    {{this.description}}
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
+                        <!-- the Rename Post Modal -->
+                        <div class="modal fade" id="renameModal" tabindex="-1" aria-labelledby="postTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                               <h1>Rename form will be displayed</h1>
+                            </div>
+                        </div>
+
+
                         {{/each}}
                         <!-- End of a single document post -->
                     </div>
@@ -331,130 +355,6 @@
                         </div>
                         {{/each}}
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Detailed Post Modal -->
-<div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="image-cropper">
-                    <img src="https://www.sportscasting.com/wp-content/uploads/2020/08/Lewis-Hamilton-Smiling.jpg"
-                        alt="Generic placeholder image" class="img-fluid
-                                profile-img">
-                </div>
-
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-3 category">
-                            <div class="tag-container-1
-                                        font-weight-bold">Category</div>
-                        </div>
-                        <div class="col-3">
-                            <div class="tag-container-2
-                                        font-weight-bold">Symbol</div>
-                        </div>
-                        <div class="col-5">
-                            <h5 class="post-title text-right
-                                        font-weight-bold">Post Title </h5>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-12 text-center">
-                            <img src="https://cdn.wionews.com/sites/default/files/styles/story_page/public/2022/07/25/281855-ive-got-plenty-of-fuel-left-in-the-tank-lewis-hamilton-opens-up-on-f1-future.jpg"
-                                alt="IMG" class="post-content-container">
-                        </div>
-                        <div class="col-12 small-text">
-                            <small><i class="bi bi-heart"></i> 103</small>
-                            <small class="time">11:08 PM - Sep 19,2022</small>
-                            <!-- the link to open rename modal -->
-                            <a class="card-link" data-dismiss="modal" data-toggle="modal" data-target="#renameModal"
-                                style="margin-left: 20%;"> rename</a>
-                            <a href="#" style="margin-left: 3%;">
-                                download </a>
-                            <a href="#" style="margin-left: 3%;"> delete
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-11">
-                            <p class="lead comment">Another win at
-                                France Grand Prix. Have a good day
-                                everybody! </p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<!-- the Rename Post Modal -->
-<div class="modal fade" id="renameModal" tabindex="-1" aria-labelledby="postTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="image-cropper">
-                    <img src="https://www.sportscasting.com/wp-content/uploads/2020/08/Lewis-Hamilton-Smiling.jpg"
-                        alt="Generic placeholder image" class="img-fluid
-                                profile-img">
-                </div>
-
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-3 category">
-                            <div class="tag-container-1
-                                        font-weight-bold">Category</div>
-                        </div>
-                        <div class="col-3">
-                            <div class="tag-container-2
-                                        font-weight-bold">Symbol</div>
-                        </div>
-                        <div class="col-5">
-                            <form action="/renamePost/{{postId}}" method="POST">
-                                <label for="new-name">Name</label>
-                                <input type="text" name="name" id="new-name" value="Post Title" required>
-                                <button type="submit">change</button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-center">
-                        <div class="col-12 text-center">
-                            <img src="https://cdn.wionews.com/sites/default/files/styles/story_page/public/2022/07/25/281855-ive-got-plenty-of-fuel-left-in-the-tank-lewis-hamilton-opens-up-on-f1-future.jpg"
-                                alt="IMG" class="post-content-container">
-                        </div>
-                        <div class="col-12 small-text">
-                            <small><i class="bi bi-heart"></i> 103</small>
-                            <small class="time">11:08 PM - Sep 19,2022</small>
-                            <a href="#" style="margin-left: 33%;">
-                                download </a>
-                            <a href="#" style="margin-left: 3%;"> delete
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-center">
-                        <div class="col-11">
-                            <p class="lead comment">Another win at
-                                France Grand Prix. Have a good day
-                                everybody! </p>
-                        </div>
-                    </div>
-                    
                 </div>
             </div>
         </div>
