@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { Post, hasPostDownloadPermissions, deletePost } = require('./post')
 const { User } = require('./user')
 const db = require('./index')
 
@@ -69,35 +68,8 @@ const renameCategory = async (categoryId, name, user) => {
     }
 }
 
-// Deletes the category with the given category ID after checking user has permission
-const deleteCategory = async (categoryId, user) => {
-    try {
-        // Find category
-        const category = await Category.findOne({ _id: categoryId }).lean()
-
-        // If user has permission to edit category, allow user to rename category
-        if (hasCategoryEditPermissions(category, user)) {
-            // Delete All files in the category
-            for (let i = 0; i < category.posts.length; i++) {
-                deletePost(category.posts[i])
-            }
-
-            // Delete the category
-            await Category.deleteOne({ _id: categoryId })
-
-            // Delist Category from User Category list
-            await Category.updateOne(
-                { _id: user._id },
-                { $pull: { categories: categoryId } }
-            )
-        }
-    } catch (err) {
-        console.log(err)
-    }
-}
-
 // Gets all the categories created by a user
-const getCategories = async (user) => {
+const retriveCategories = async (user) => {
     const categories = []
     // Get all categories made by a user
     for (let i = 0; i < categories.length; i++) {
@@ -108,27 +80,10 @@ const getCategories = async (user) => {
     return categories
 }
 
-// Get all posts in the category which are visible to the user
-const getPostsInCategory = async (category, user) => {
-    const posts = []
-    for (let i = 0; i < category.posts.length; i++) {
-        const categoryPost = await Post.findOne({
-            _id: category.posts[i],
-        }).lean()
-        if (hasPostDownloadPermissions(categoryPost, user)) {
-            categoryPost.filename = db.getFilename(categoryPost)
-            posts[posts.length] = categoryPost
-        }
-    }
-    return posts
-}
-
 module.exports = {
     Category,
     createCategory,
     renameCategory,
-    deleteCategory,
-    getCategories,
-    getPostsInCategory,
+    retriveCategories,
     hasCategoryEditPermissions,
 }

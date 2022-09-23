@@ -1,7 +1,6 @@
 const express = require('express')
 const postRouter = express.Router()
 const { upload } = require('../models/index')
-const { downloadFile } = require('../models/index')
 const postController = require('../controllers/postController')
 
 // Authentication middleware

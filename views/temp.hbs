@@ -1,59 +1,133 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link rel="stylesheet" href="css/temp.css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!-- Include the above in your HEAD tag -->
-
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <div class="container">
-            <div class="w-25">
-                <input type="text" class="form-control rounded-0 bg-dark ser-input" id="ser-input" placeholder="Search...">
-                <div class="search-full-view">
-                    <form action="submit">
-                        <div class="input-group">
-                            <input type="text" class="form-control" onfocus="exampleModalCenter" placeholder="Search...">
-                            <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+<!-- Detailed Post Modal -->
+        <div class="modal fade" id="postModal" tabindex="-1"
+            aria-labelledby="postTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="image-cropper">
+                            <img
+                                src="https://www.sportscasting.com/wp-content/uploads/2020/08/Lewis-Hamilton-Smiling.jpg"
+                                alt="Generic placeholder image" class="img-fluid
+                                profile-img">
                         </div>
-                    </form>
-                    
 
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle"> Check one</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                        <button type="button" class="btn-close"
+                            data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-3 category">
+                                    <div class="tag-container-1
+                                        font-weight-bold">Category</div>
                                 </div>
-
-                                
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <div class="col-3">
+                                    <div class="tag-container-2
+                                        font-weight-bold">Symbol</div>
+                                </div>
+                                <div class="col-5">
+                                    <h5 class="post-title text-right
+                                        font-weight-bold">Post Title </h5>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                            <div class="row justify-content-center">
+                                <div class="col-12 text-center">
+                                    <img
+                                        src="https://cdn.wionews.com/sites/default/files/styles/story_page/public/2022/07/25/281855-ive-got-plenty-of-fuel-left-in-the-tank-lewis-hamilton-opens-up-on-f1-future.jpg"
+                                        alt="IMG" class="post-content-container">
+                                </div>
+                                <div class="col-12 small-text">
+                                    <small><i class="bi bi-heart"></i> 103</small>
+                                    <small class="time">11:08 PM - Sep 19,2022</small>
+                                    <!-- the link to open rename modal --> 
+                                    <a class="card-link" data-dismiss="modal"
+                                        data-toggle="modal"
+                                        data-target="#renameModal"
+                                        style="margin-left: 20%;"> rename</a> 
+                                    <a href="#" style="margin-left: 3%;">
+                                        download </a>
+                                    <a href="#" style="margin-left: 3%;"> delete
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-11">
+                                    <p class="lead comment">Another win at
+                                        France Grand Prix. Have a good day
+                                        everybody! </p>
+                                </div>
+                            </div>
 
+                        </div>
+
+                    </div>
 
                 </div>
             </div>
         </div>
-    </nav>
 
-    {{!-- <script>
-        $(document).ready(function() {
+        <!-- the Rename Post Modal -->
+        <div class="modal fade" id="renameModal" tabindex="-1"
+            aria-labelledby="postTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="image-cropper">
+                            <img
+                                src="https://www.sportscasting.com/wp-content/uploads/2020/08/Lewis-Hamilton-Smiling.jpg"
+                                alt="Generic placeholder image" class="img-fluid
+                                profile-img">
+                        </div>
 
-            $("#ser-input").focus(function() {
-                $('.search-full-view').addClass("search-normal-screen");
-            });
+                        <button type="button" class="btn-close"
+                            data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-3 category">
+                                    <div class="tag-container-1
+                                        font-weight-bold">Category</div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="tag-container-2
+                                        font-weight-bold">Symbol</div>
+                                </div>
+                                <div class="col-5">
+                                    <form action = "/renamePost/{{postId}}" method = "POST">
+                                        <label for="new-name">Name</label>
+                                        <input type="text" name="name" id="new-name" value="Post Title" required>
+                                        <button type="submit">change</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-12 text-center">
+                                    <img
+                                        src="https://cdn.wionews.com/sites/default/files/styles/story_page/public/2022/07/25/281855-ive-got-plenty-of-fuel-left-in-the-tank-lewis-hamilton-opens-up-on-f1-future.jpg"
+                                        alt="IMG" class="post-content-container">
+                                </div>
+                                <div class="col-12 small-text">
+                                    <small><i class="bi bi-heart"></i> 103</small>
+                                    <small class="time">11:08 PM - Sep 19,2022</small>
+                                    <a href="#" style="margin-left: 33%;">
+                                        download </a>
+                                    <a href="#" style="margin-left: 3%;"> delete
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-11">
+                                    <p class="lead comment">Another win at
+                                        France Grand Prix. Have a good day
+                                        everybody! </p>
+                                </div>
+                            </div>
 
-            $("#search-close").click(function() {
-                $('.search-full-view').removeClass("search-normal-screen");
-            });
-        });
-    </script> --}}
-    <!-- Navigation -->
+                        </div>
 
+                    </div>
+
+                </div>
+            </div>
+        </div>

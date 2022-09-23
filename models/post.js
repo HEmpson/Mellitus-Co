@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const { User } = require('./user')
-const { hasCategoryEditPermissions, Category } = require('./category')
-const { post } = require('../routes/categoryRouter')
+const { hasCategoryEditPermissions, Category } = require('../models/category')
 const DB = require('./index')
 
 const postSchema = new mongoose.Schema({
@@ -62,7 +61,7 @@ const getFriendsPosts = async (user) => {
     for (i = 0; i < user.friends.length; i++) {
         friend = await User.findOne({ _id: user.friends[i] })
 
-        posts = await friend.populate({
+        let posts = await friend.populate({
             path: 'posts',
             options: { lean: true },
         })
@@ -276,6 +275,48 @@ const changeVisibility = async (postId, visibility, user) => {
     }
 }
 
+// Get all posts in the category which are visible to the user
+const getPostsInCategory = async (category, user) => {
+    const posts = []
+    for (let i = 0; i < category.posts.length; i++) {
+        const categoryPost = await Post.findOne({
+            _id: category.posts[i],
+        }).lean()
+        if (hasPostDownloadPermissions(categoryPost, user)) {
+            categoryPost.filename = db.getFilename(categoryPost)
+            posts[posts.length] = categoryPost
+        }
+    }
+    return posts
+}
+
+// Deletes the category with the given category ID after checking user has permission
+const deleteCategory = async (categoryId, user) => {
+    try {
+        // Find category
+        const category = await Category.findOne({ _id: categoryId }).lean()
+
+        // If user has permission to edit category, allow user to rename category
+        if (hasCategoryEditPermissions(category, user)) {
+            // Delete All files in the category
+            for (let i = 0; i < category.posts.length; i++) {
+                deletePost(category.posts[i])
+            }
+
+            // Delete the category
+            await Category.deleteOne({ _id: categoryId })
+
+            // Delist Category from User Category list
+            await Category.updateOne(
+                { _id: user._id },
+                { $pull: { categories: categoryId } }
+            )
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 module.exports = {
     Post,
     getUserPosts,
@@ -289,4 +330,6 @@ module.exports = {
     assignToCategory,
     hasPostEditPermissions,
     hasPostDownloadPermissions,
+    getPostsInCategory,
+    deleteCategory,
 }
