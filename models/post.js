@@ -258,12 +258,31 @@ const assignToCategory = async (postId, categoryId, user) => {
     }
 }
 
+// Assigns a new visibility to a post
+const changeVisibility = async (postId, visibility, user) => {
+    try {
+        const post = await Post.findOne({ _id: postId }).lean()
+        if (
+            visibility != 'Public' &&
+            visibility != 'Friends' &&
+            visibility != 'Private'
+        ) {
+            return
+        } else if (hasPostEditPermissions(post, user)) {
+            await Post.updateOne({ _id: postId }, { visibility: visibility })
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 module.exports = {
     Post,
     getUserPosts,
     getPublicPosts,
     deletePost,
     changePostname,
+    changeVisibility,
     getFriendsPosts,
     downloadPost,
     makePost,

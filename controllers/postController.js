@@ -1,4 +1,4 @@
-const { deletePost } = require('../models/post')
+const { deletePost, changeVisibility } = require('../models/post')
 const { downloadPost } = require('../models/post')
 const { changePostname } = require('../models/post')
 const { makePost } = require('../models/post')
@@ -30,17 +30,23 @@ const downloadPostController = async (req, res) => {
     await downloadPost(req.params.id, req.user, res)
 }
 
+// Controller function to assign/change a post's category
 const assignToCategoryController = async (req, res) => {
     await assignToCategory(req.params.id, req.body.categoryId, req.user)
     return res.redirect('back')
 }
 
-// Controller function to assign/change a post's category
+// Changes the visibility status of a post
+const changeVisibilityController = async (req, res) => {
+    await changeVisibility(req.params.id, req.body.visibility, req.user)
+    return res.redirect('back')
+}
 
 module.exports = {
     removePostController,
     renamePostController,
     downloadPostController,
     assignToCategoryController,
+    changeVisibilityController,
     makePostController,
 }

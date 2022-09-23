@@ -50,6 +50,12 @@ postRouter.post(
     postController.assignToCategoryController
 )
 
+postRouter.post(
+    '/changeVisibility/:id',
+    isAuthenticated,
+    postController.changeVisibilityController
+)
+
 postRouter.get(
     '/download/:id',
     isAuthenticated,
