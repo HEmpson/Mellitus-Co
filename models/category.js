@@ -72,8 +72,8 @@ const renameCategory = async (categoryId, name, user) => {
 const retriveCategories = async (user) => {
     const categories = []
     // Get all categories made by a user
-    for (let i = 0; i < categories.length; i++) {
-        let category = await Category.findOne({ _id: categoryIds[i] })
+    for (let i = 0; i < user.categories.length; i++) {
+        let category = await Category.findOne({ _id: user.categories[i] })
         category.documentCount = category.posts.length
         categories[i] = category
     }
