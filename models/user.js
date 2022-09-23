@@ -125,8 +125,8 @@ const verifyNewPatientProfile = (newUser) => {
 }
 
 const addFriends = async (req, res) => {
-    friendName = req.body.displayName
-    friend = await User.findOne({ displayName: friendName })
+    friendEmail = req.body.email
+    friend = await User.findOne({ username: friendEmail })
 
     try {
         // if friend exists
