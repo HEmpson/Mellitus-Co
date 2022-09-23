@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const { User } = require('./user')
 const { hasCategoryEditPermissions, Category } = require('./category')
-const DB = require('./index')
 const { post } = require('../routes/categoryRouter')
+const DB = require('./index')
 
 const postSchema = new mongoose.Schema({
     visibility: String,
@@ -207,6 +207,7 @@ const changePostname = async (postId, user, filename) => {
     }
 }
 
+// Checks if user has download permissions and downloads the file if yes
 const downloadPost = async (postId, user, res) => {
     try {
         const post = await Post.findOne({ _id: postId })
@@ -233,7 +234,6 @@ const assignToCategory = async (postId, categoryId, user) => {
                 hasCategoryEditPermissions(category, user)
             ) {
                 // Add post to list of posts in categories
-                console.log('HUH')
                 await Category.updateOne(
                     { _id: categoryId },
                     { $push: { posts: post._id } }

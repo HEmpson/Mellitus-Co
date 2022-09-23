@@ -1,7 +1,13 @@
-const Post = require('../models/post')
+const {
+    Post,
+    getPublicPosts,
+    getFriendsPosts,
+    getUserPosts,
+    hasPostDownloadPermissions,
+} = require('../models/post')
 const { User, getAllFriends, getUserInfo } = require('../models/user')
-const DB = require('../models/index')
 const { Category } = require('../models/category')
+const db = require('../models/index')
 
 const getLoginPage = async (req, res) => {
     res.render('login.hbs', {
@@ -12,8 +18,8 @@ const getLoginPage = async (req, res) => {
 
 // direct to dashboard page
 const getDashboard = async (req, res) => {
-    const publicPosts = await Post.getPublicPosts(req.user)
-    const friendsPosts = await Post.getFriendsPosts(req.user)
+    const publicPosts = await getPublicPosts(req.user)
+    const friendsPosts = await getFriendsPosts(req.user)
 
     const publicDashboardPosts = []
     const friendDashboardPosts = []
@@ -21,7 +27,7 @@ const getDashboard = async (req, res) => {
     // get all public posts
     for (let i = 0; i < publicPosts.length; i++) {
         let newPublicPost = publicPosts[i]
-        newPublicPost.filename = await DB.getFilename(publicPosts[i].fileId)
+        newPublicPost.filename = await db.getFilename(publicPosts[i].fileId)
         newPublicPost.createdByName = (
             await User.findOne({ _id: publicPosts[i].createdBy })
         ).displayName
@@ -31,7 +37,7 @@ const getDashboard = async (req, res) => {
     // get all friends posts
     for (let i = 0; i < friendsPosts.length; i++) {
         let newFriendPost = friendsPosts[i]
-        newFriendPost.filename = await DB.getFilename(friendsPosts[i].fileId)
+        newFriendPost.filename = await db.getFilename(friendsPosts[i].fileId)
         newFriendPost.createdByName = (
             await User.findOne({ _id: friendsPosts[i].createdBy })
         ).displayName
@@ -61,46 +67,31 @@ const getProfile = async (req, res) => {
     })
 }
 
+// Number of Posts/Categories to display on the files screen at once
 const NUM_DISPLAY_HEAD = 4
 
 // direct to file page
 const getFile = async (req, res) => {
     const user = await User.findOne({ _id: req.params.id }).lean()
-    const categoryIds = user.categories
-    const categoryList = []
+    let categories = getCategories(user)
+    categories = categories.slice(0, NUM_DISPLAY_HEAD)
 
-    // Get head of categories
-    for (let i = 0; i < categories.length && i < NUM_DISPLAY_HEAD; i++) {
-        let category = await Category.findOne({ _id: categoryIds[i] })
-        categoryList[i] = {
-            _id: categoryIds[i],
-            name: category.name,
-            documentCount: category.posts.length,
+    const posts = getUserPosts(user)
+    let filteredPosts = []
+    // Filter the posts which are visible to the user
+    for (let i = 0; i < posts.length; i++) {
+        if (hasPostDownloadPermissions(posts[i], user)) {
+            posts[i].filename = db.getFilename(posts[i])
+            filteredPosts[filteredPosts.length] = posts[i]
         }
     }
+    filteredPosts = filteredPosts.slice(0, NUM_DISPLAY_HEAD)
 
-    // Find all files in latest order
-    const postIds = user.posts
-    const postList = []
-    for (let i = 0; i < posts.length && i < NUM_DISPLAY_HEAD; i++) {
-        let post = await Post.findOne({ _id: postIds[i] })
-        post.filename = DB.getFilename(post._id)
-        postList[i] = post
-    }
-
-    const filteredPostList = []
-
-    // Filter posts
-    for (let i = 0; i < postList.length; i++) {
-        if (Post.hasPostDownloadPermissions(postList[i])) {
-            filteredPostList[filteredPostList.length] = postList[i]
-        }
-    }
     res.render('files.hbs', {
         pageName: 'File',
         user: req.user,
         categories: categoryList,
-        posts: filteredPostList.slice(0, NUM_DISPLAY_HEAD),
+        posts: filteredPosts,
     })
 }
 
@@ -116,16 +107,35 @@ const getFriends = async (req, res) => {
 
 // direct to categories page
 const getCategories = async (req, res) => {
+    const user = await User.findOne({ _id: req.params.id }).lean()
+    const categories = getCategories(user)
+
     res.render('categories.hbs', {
         pageName: 'Categories',
+        categories: categories,
         user: req.user,
     })
 }
 
 // Gets the page for the all files page
 const getAllFiles = async (req, res) => {
+    const user = await User.findOne({ _id: req.params.id }).lean()
+
+    const posts = getUserPosts(user)
+
+    let filteredPosts = []
+
+    // Filter the posts which are visible to the user
+    for (let i = 0; i < posts.length; i++) {
+        if (hasPostDownloadPermissions(posts[i], user)) {
+            posts[i].filename = db.getFilename(posts[i])
+            filteredPosts[filteredPosts.length] = posts[i]
+        }
+    }
+
     res.render('allFiles.hbs', {
         pageName: 'All Files',
+        posts: filteredPosts,
         user: req.user,
     })
 }

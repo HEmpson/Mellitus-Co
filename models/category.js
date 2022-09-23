@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
+const { Post, hasPostDownloadPermissions } = require('./post')
 const { User } = require('./user')
+const db = require('./index')
 
 const categorySchema = new mongoose.Schema({
     name: String,
@@ -88,12 +90,39 @@ const deleteCategory = async (categoryId, user) => {
     }
 }
 
-const getAllInCategory = () => {}
+// Gets all the categories created by a user
+const getCategories = async (user) => {
+    const categories = []
+    // Get all categories made by a user
+    for (let i = 0; i < categories.length; i++) {
+        let category = await Category.findOne({ _id: categoryIds[i] })
+        category.documentCount = category.posts.length
+        categories[i] = category
+    }
+    return categories
+}
+
+// Get all posts in the category which are visible to the user
+const getPostsInCategory = async (category, user) => {
+    const posts = []
+    for (let i = 0; i < category.posts.length; i++) {
+        const categoryPost = await Post.findOne({
+            _id: category.posts[i],
+        }).lean()
+        if (hasPostDownloadPermissions(categoryPost, user)) {
+            categoryPost.filename = db.getFilename(categoryPost)
+            posts[posts.length] = categoryPost
+        }
+    }
+    return posts
+}
 
 module.exports = {
     Category,
     createCategory,
     renameCategory,
     deleteCategory,
+    getCategories,
+    getPostsInCategory,
     hasCategoryEditPermissions,
 }
