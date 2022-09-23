@@ -4,6 +4,7 @@ const {
     getFriendsPosts,
     getUserPosts,
     hasPostDownloadPermissions,
+    getPostsInCategory,
 } = require('../models/post')
 const { User, getAllFriends, getUserInfo } = require('../models/user')
 const { Category, retriveCategories } = require('../models/category')
@@ -91,11 +92,12 @@ const getFile = async (req, res) => {
     // Filter the posts which are visible to the user
     for (let i = 0; i < posts.length; i++) {
         if (hasPostDownloadPermissions(posts[i], user)) {
-            posts[i].filename = db.getFilename(posts[i])
+            posts[i].filename = await db.getFilename(posts[i])
             filteredPosts[filteredPosts.length] = posts[i]
         }
     }
     filteredPosts = filteredPosts.slice(0, NUM_DISPLAY_HEAD)
+
 
     res.render('files.hbs', {
         pageName: 'File',
@@ -124,6 +126,18 @@ const getAllFiles = async (req, res) => {
     res.render('allFiles.hbs', {
         pageName: 'All Files',
         posts: filteredPosts,
+        user: req.user,
+    })
+}
+
+// Gets all visible posts inside a certain category
+const getCategoryFiles = async (req, res) => {
+    const category = await Category.findOne({ _id: req.params.id })
+    const posts = await getPostsInCategory(category, req.user)
+
+    res.render('allFiles.hbs', {
+        pageName: 'All Files',
+        posts: posts,
         user: req.user,
     })
 }
@@ -158,5 +172,6 @@ module.exports = {
     getFriends,
     getAllFiles,
     getCategories,
+    getCategoryFiles,
     getRegistration,
 }
