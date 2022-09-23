@@ -92,11 +92,12 @@ const getFile = async (req, res) => {
     // Filter the posts which are visible to the user
     for (let i = 0; i < posts.length; i++) {
         if (hasPostDownloadPermissions(posts[i], user)) {
-            posts[i].filename = db.getFilename(posts[i])
+            posts[i].filename = await db.getFilename(posts[i])
             filteredPosts[filteredPosts.length] = posts[i]
         }
     }
     filteredPosts = filteredPosts.slice(0, NUM_DISPLAY_HEAD)
+
 
     res.render('files.hbs', {
         pageName: 'File',
@@ -171,5 +172,6 @@ module.exports = {
     getFriends,
     getAllFiles,
     getCategories,
+    getCategoryFiles,
     getRegistration,
 }
