@@ -92,11 +92,13 @@ const getFile = async (req, res) => {
     // Filter the posts which are visible to the user
     for (let i = 0; i < posts.length; i++) {
         if (hasPostDownloadPermissions(posts[i], user)) {
-            posts[i].filename = await db.getFilename(posts[i])
+            posts[i].filename = await db.getFilename(posts[i].fileId)
             filteredPosts[filteredPosts.length] = posts[i]
         }
     }
+    console.log(filteredPosts)
     filteredPosts = filteredPosts.slice(0, NUM_DISPLAY_HEAD)
+    
 
 
     res.render('files.hbs', {
@@ -118,7 +120,7 @@ const getAllFiles = async (req, res) => {
     // Filter the posts which are visible to the user
     for (let i = 0; i < posts.length; i++) {
         if (hasPostDownloadPermissions(posts[i], user)) {
-            posts[i].filename = db.getFilename(posts[i])
+            posts[i].filename = db.getFilename(posts[i].fileId)
             filteredPosts[filteredPosts.length] = posts[i]
         }
     }
