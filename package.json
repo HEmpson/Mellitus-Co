@@ -4,7 +4,7 @@
   "description": "This is our github repo for our COMP300022 IT Project.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node  --trace-warnings app.js",
     "start": "node app.js",
     "prettier": "prettier --single-quote --no-semi --tab-width 4 --write **/*.js *.js"
   },

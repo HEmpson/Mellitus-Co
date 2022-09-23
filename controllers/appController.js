@@ -6,7 +6,7 @@ const {
     hasPostDownloadPermissions,
 } = require('../models/post')
 const { User, getAllFriends, getUserInfo } = require('../models/user')
-const { Category } = require('../models/category')
+const { Category, retriveCategories } = require('../models/category')
 const db = require('../models/index')
 
 const getLoginPage = async (req, res) => {
@@ -82,10 +82,10 @@ const NUM_DISPLAY_HEAD = 4
 
 // direct to file page
 const getFile = async (req, res) => {
-    const user = await User.findOne({ _id: req.params.id }).lean()
-    let categories = await getCategories(user)
+    const user = await User.findOne({ _id: req.params.id })
+    let categories = await retriveCategories(user)
     categories = categories.slice(0, NUM_DISPLAY_HEAD)
-
+    console.log(user)
     const posts = await getUserPosts(user)
     let filteredPosts = []
     // Filter the posts which are visible to the user
@@ -100,14 +100,14 @@ const getFile = async (req, res) => {
     res.render('files.hbs', {
         pageName: 'File',
         user: req.user,
-        categories: categoryList,
+        categories: categories,
         posts: filteredPosts,
     })
 }
 
 // Gets the page for the all files page
 const getAllFiles = async (req, res) => {
-    const user = await User.findOne({ _id: req.params.id }).lean()
+    const user = await User.findOne({ _id: req.params.id })
 
     const posts = await getUserPosts(user)
 
@@ -130,8 +130,8 @@ const getAllFiles = async (req, res) => {
 
 // direct to categories page
 const getCategories = async (req, res) => {
-    const user = await User.findOne({ _id: req.params.id }).lean()
-    const categories = await getCategories(user)
+    const user = await User.findOne({ _id: req.params.id })
+    const categories = await retriveCategories(user)
 
     res.render('categories.hbs', {
         pageName: 'Categories',
