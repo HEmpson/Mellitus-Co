@@ -5,7 +5,6 @@ const {
     getUserPosts,
     hasPostDownloadPermissions,
     getPostsInCategory,
-    hasPostEditPermissions,
 } = require('../models/post')
 const { User, getAllFriends, getUserInfo } = require('../models/user')
 const { Category, retriveCategories } = require('../models/category')
@@ -22,7 +21,7 @@ const getLoginPage = async (req, res) => {
 // direct to dashboard page
 const getDashboard = async (req, res) => {
     const publicPosts = await getPublicPosts(req.user)
-    const friendsPosts = await getFriendsPosts(req.user)
+    const friendsPosts = await getFriendsPosts(req.user, req.user)
 
     const publicDashboardPosts = []
     const friendDashboardPosts = []
@@ -86,20 +85,14 @@ const NUM_DISPLAY_HEAD = 4
 // direct to file page
 const getFile = async (req, res) => {
     const user = await User.findOne({ _id: req.params.id })
+
+    // Get Categories
     let categories = await retriveCategories(user)
     categories = categories.slice(0, NUM_DISPLAY_HEAD)
-    console.log(user)
-    const posts = await getUserPosts(user)
-    let filteredPosts = []
-    // Filter the posts which are visible to the user
-    for (let i = 0; i < posts.length; i++) {
-        if (hasPostDownloadPermissions(posts[i], user)) {
-            posts[i].filename = await db.getFilename(posts[i].fileId)
-            filteredPosts[filteredPosts.length] = posts[i]
-        }
-    }
-    console.log(filteredPosts)
-    filteredPosts = filteredPosts.slice(0, NUM_DISPLAY_HEAD)
+
+    // Get files
+    const posts = await getUserPosts(user, req.user)
+    filteredPosts = posts.slice(0, NUM_DISPLAY_HEAD)
 
     res.render('files.hbs', {
         pageName: 'File',
@@ -113,17 +106,7 @@ const getFile = async (req, res) => {
 const getAllFiles = async (req, res) => {
     const user = await User.findOne({ _id: req.params.id })
 
-    const posts = await getUserPosts(user)
-
-    let filteredPosts = []
-
-    // Filter the posts which are visible to the user
-    for (let i = 0; i < posts.length; i++) {
-        if (hasPostDownloadPermissions(posts[i], user)) {
-            posts[i].filename = db.getFilename(posts[i].fileId)
-            filteredPosts[filteredPosts.length] = posts[i]
-        }
-    }
+    const posts = await getUserPosts(user, req.user)
 
     res.render('allFiles.hbs', {
         pageName: 'All Files',

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const { User } = require('./user')
 const { hasCategoryEditPermissions, Category } = require('../models/category')
-const DB = require('./index')
+const db = require('./index')
 
 const postSchema = new mongoose.Schema({
     visibility: String,
@@ -25,8 +25,25 @@ const postSchema = new mongoose.Schema({
 
 const Post = mongoose.model('Post', postSchema, 'post')
 
+// Gets all the posts in a list which are visible to a user
+const filterVisiblePosts = async (posts, user) => {
+    const filteredPosts = []
+    for (let i = 0; i < posts.length; i++) {
+        let currentPost = posts[i]
+        if (hasPostDownloadPermissions(currentPost, user)) {
+            currentPost.filename = await db.getFilename(currentPost.fileId)
+            currentPost.hasEditPermissions = hasPostEditPermissions(
+                currentPost,
+                user
+            )
+            filteredPosts[filteredPosts.length] = currentPost
+        }
+    }
+    return filteredPosts
+}
+
 // gets all the posts of a single user
-const getUserPosts = async (user) => {
+const getUserPosts = async (user, requestingUser) => {
     posts = await user.populate({
         path: 'posts',
         options: { lean: true },
@@ -35,11 +52,20 @@ const getUserPosts = async (user) => {
 
     userPosts = posts.posts
 
-    userPosts.sort((a, b) => {
+    let filteredPosts
+
+    // Filter visible posts and get filename and permission status of a post
+    if (requestingUser) {
+        filteredPosts = await filterVisiblePosts(userPosts, requestingUser)
+    } else {
+        filteredPosts = await filterVisiblePosts(userPosts, user)
+    }
+
+    filteredPosts.sort((a, b) => {
         return b.dateCreated - a.dateCreated
     })
 
-    return userPosts
+    return filteredPosts
 }
 
 // gets all the public posts
@@ -54,8 +80,8 @@ const getPublicPosts = async () => {
 }
 
 // gets a user posts + their friends posts
-const getFriendsPosts = async (user) => {
-    allPosts = await getUserPosts(user) // gets the logged in users posts
+const getFriendsPosts = async (user, requestingUser) => {
+    allPosts = await getUserPosts(user, requestingUser) // gets the logged in users posts
 
     // iterate over all friends add their posts into a array
     for (i = 0; i < user.friends.length; i++) {
@@ -76,6 +102,9 @@ const getFriendsPosts = async (user) => {
             }
         }
     }
+
+    // filter allPosts and get filename and edit permission status
+    allPosts = await filterVisiblePosts(allPosts, requestingUser)
 
     // finally sort
     allPosts.sort((a, b) => {
@@ -103,7 +132,6 @@ const delistPostFromCategory = async (post) => {
 // Checks if the given user has permission to edit/delete a given post
 const hasPostEditPermissions = (post, user) => {
     if (user) {
-        console.log(post.createdBy)
         if (user._id.equals(post.createdBy) || user.role === 'Admin') {
             return true
         }
@@ -170,7 +198,7 @@ const deletePost = async (postId, user) => {
             try {
                 const fileId = post.fileId
                 if (fileId) {
-                    await DB.deleteFile(fileId)
+                    await db.deleteFile(fileId)
                     await Post.deleteOne({ _id: postId })
                     await delistPost(post)
                 } else {
@@ -193,7 +221,7 @@ const changePostname = async (postId, user, filename) => {
             try {
                 const fileId = post.fileId
                 if (fileId) {
-                    await DB.renameFile(fileId, filename)
+                    await db.renameFile(fileId, filename)
                 } else {
                     console.log('Error: Failed to find post')
                 }
@@ -211,7 +239,7 @@ const downloadPost = async (postId, user, res) => {
     try {
         const post = await Post.findOne({ _id: postId })
         if (hasPostDownloadPermissions(post, user)) {
-            await DB.downloadFile(post.fileId, res)
+            await db.downloadFile(post.fileId, res)
         }
     } catch (err) {
         console.log(err)
@@ -282,12 +310,16 @@ const getPostsInCategory = async (category, user) => {
         const categoryPost = await Post.findOne({
             _id: category.posts[i],
         }).lean()
-        if (hasPostDownloadPermissions(categoryPost, user)) {
-            categoryPost.filename = db.getFilename(categoryPost)
-            posts[posts.length] = categoryPost
-        }
+        posts[posts.length] = categoryPost
     }
-    return posts
+
+    const filteredPosts = filterVisiblePosts(posts, user)
+
+    filteredPosts.sort((a, b) => {
+        return b.dateCreated - a.dateCreated
+    })
+
+    return filteredPosts
 }
 
 // Deletes the category with the given category ID after checking user has permission
