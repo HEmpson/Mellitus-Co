@@ -28,7 +28,9 @@
         <div class="text_form">
             <input placeholder="Password" type="text" id="password" name="password" onclick="HidePassword()" autocomplete="on">
             <span></span>
-
+            {{#each flash}}
+                <p>{{this}}</p>
+            {{/each}}
         </div>
 
         <input type="submit" value="log-in">
