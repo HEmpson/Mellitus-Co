@@ -5,6 +5,7 @@ const {
     getUserPosts,
     hasPostDownloadPermissions,
     getPostsInCategory,
+    hasPostEditPermissions,
 } = require('../models/post')
 const { User, getAllFriends, getUserInfo } = require('../models/user')
 const { Category, retriveCategories } = require('../models/category')
@@ -98,8 +99,6 @@ const getFile = async (req, res) => {
     }
     console.log(filteredPosts)
     filteredPosts = filteredPosts.slice(0, NUM_DISPLAY_HEAD)
-    
-
 
     res.render('files.hbs', {
         pageName: 'File',
