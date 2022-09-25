@@ -15,6 +15,7 @@ const getLoginPage = async (req, res) => {
     res.render('login.hbs', {
         pageName: 'Login',
         layout: '',
+        flash: req.flash('error'),
     })
 }
 
