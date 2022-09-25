@@ -203,6 +203,27 @@ const getUserInfo = async (req, res) => {
     }
 }
 
+const hasProfileEditPermissions = (userId, requestingUser) => {
+    try {
+        if (
+            requestingUser.role === 'Admin' ||
+            requestingUser._id.equals(userId)
+        ) {
+            return true
+        }
+        return false
+    } catch (err) {
+        console.log(err)
+        return false
+    }
+}
+
+const setStatus = async (userId, requestingUser, status) => {
+    if (hasProfileEditPermissions(userId, requestingUser)) {
+        await User.updateOne({ _id: userId }, { status: status })
+    }
+}
+
 const User = mongoose.model('User', userSchema, 'user')
 
 module.exports = {
@@ -213,4 +234,5 @@ module.exports = {
     removeFriends,
     getAllFriends,
     getUserInfo,
+    setStatus,
 }

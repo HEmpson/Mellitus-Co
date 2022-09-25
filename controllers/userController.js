@@ -1,6 +1,9 @@
-const { createAccount } = require('../models/user')
-const { addFriends } = require('../models/user')
-const { removeFriends } = require('../models/user')
+const {
+    createAccount,
+    setStatus,
+    addFriends,
+    removeFriends,
+} = require('../models/user')
 
 const createAccountController = async (req, res) => {
     await createAccount(req, res)
@@ -17,8 +20,14 @@ const removeFriendsController = async (req, res) => {
     return res.redirect('/friends')
 }
 
+const setStatusController = async (req, res) => {
+    await setStatus(req.params.id, req.user, req.body.status)
+    return res.redirect('back')
+}
+
 module.exports = {
     createAccountController,
     addNewFriendController,
     removeFriendsController,
+    setStatusController,
 }

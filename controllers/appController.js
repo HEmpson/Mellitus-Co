@@ -87,7 +87,7 @@ const getFile = async (req, res) => {
     const user = await User.findOne({ _id: req.params.id })
 
     // Get Categories
-    let categories = await retriveCategories(user)
+    let categories = await retriveCategories(user, req.user)
     categories = categories.slice(0, NUM_DISPLAY_HEAD)
 
     // Get files
@@ -130,7 +130,7 @@ const getCategoryFiles = async (req, res) => {
 // direct to categories page
 const getCategories = async (req, res) => {
     const user = await User.findOne({ _id: req.params.id })
-    const categories = await retriveCategories(user)
+    const categories = await retriveCategories(user, req.user)
 
     res.render('categories.hbs', {
         pageName: 'Categories',

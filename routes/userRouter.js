@@ -3,8 +3,28 @@ const express = require('express')
 const userRouter = express.Router()
 const userController = require('../controllers/userController')
 
+// Authentication middleware
+const isAuthenticated = (req, res, next) => {
+    // If user is not authenticated via passport, redirect to login page
+    if (!req.isAuthenticated()) {
+        return res.redirect('/')
+    }
+    // Otherwise, proceed to next middleware function
+    return next()
+}
+
+// Set up role based authentication
+const hasRole = (thisRole) => {
+    return (req, res, next) => {
+        if (req.user.role === thisRole) {
+            return next()
+        } else {
+            res.redirect('/')
+        }
+    }
+}
+
 userRouter.post('/api/createAccount', userController.createAccountController)
-userRouter.post('/addNewFriend', userController.addNewFriendController)
 
 userRouter.post(
     '/login',
@@ -18,10 +38,24 @@ userRouter.post(
 )
 
 //Logout Route
-userRouter.get('/logout', (req, res) => {
+userRouter.get('/logout', isAuthenticated, (req, res) => {
     req.logOut((err) => {
         return res.redirect('/')
     })
 })
+
+// Route to change status message
+userRouter.post(
+    '/changeStatus/:id',
+    isAuthenticated,
+    userController.setStatusController
+)
+
+// Route to add new friends
+userRouter.post(
+    '/addNewFriend',
+    isAuthenticated,
+    userController.addNewFriendController
+)
 
 module.exports = userRouter

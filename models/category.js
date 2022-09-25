@@ -69,12 +69,18 @@ const renameCategory = async (categoryId, name, user) => {
 }
 
 // Gets all the categories created by a user
-const retriveCategories = async (user) => {
+const retriveCategories = async (user, requestingUser) => {
     const categories = []
     // Get all categories made by a user
     for (let i = 0; i < user.categories.length; i++) {
         let category = await Category.findOne({ _id: user.categories[i] })
         category.documentCount = category.posts.length
+        if (requestingUser) {
+            category.hasEditPermissions =
+                hasCategoryEditPermissions(requestingUser)
+        } else {
+            category.hasEditPermissions = true
+        }
         categories[i] = category
     }
     return categories
