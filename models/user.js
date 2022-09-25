@@ -218,9 +218,18 @@ const hasProfileEditPermissions = (userId, requestingUser) => {
     }
 }
 
+// Changes the status message of a user given requesting user has permission
 const setStatus = async (userId, requestingUser, status) => {
     if (hasProfileEditPermissions(userId, requestingUser)) {
         await User.updateOne({ _id: userId }, { status: status })
+    }
+}
+
+// Changes the profile description of a user
+// given requesting user has permission
+const setDescription = async (userId, requestingUser, description) => {
+    if (hasProfileEditPermissions(userId, requestingUser)) {
+        await User.updateOne({ _id: userId }, { description: description })
     }
 }
 
@@ -235,4 +244,5 @@ module.exports = {
     getAllFriends,
     getUserInfo,
     setStatus,
+    setDescription,
 }

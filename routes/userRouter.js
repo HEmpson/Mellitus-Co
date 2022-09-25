@@ -51,6 +51,13 @@ userRouter.post(
     userController.setStatusController
 )
 
+// Route to change profile description
+userRouter.post(
+    '/changeDescription/:id',
+    isAuthenticated,
+    userController.setDescriptionController
+)
+
 // Route to add new friends
 userRouter.post(
     '/addNewFriend',
