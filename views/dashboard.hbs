@@ -202,14 +202,6 @@
                                 </div>
                             </button>
 
-                            <div class="card-footer">
-                                <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                                <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                                <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                                <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter{{@index}}">
-                                    View Details
-                                </a>
-                            </div>
 
                         </div>
         
@@ -217,17 +209,19 @@
                         <div class="modal fade" id="exampleModalCenter{{@index}}" tabindex="-1" aria-labelledby="postTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <div class="image-cropper">
+                                    <div class="modal-header text-center">
+                                        
                                             <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                        </div>
-                                        <h5 class="post-title text-right font-weight-bold">{{this.filename}}</h5>
+                                               
+                                            <h5 class="font-weight-bold ml-auto">{{this.filename}}</h5>
+                                   
+                                        
                                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                     </div>
 
                                     <div class="modal-body">
                                         <div class="container-fluid">
-                                            <div class="row">
+                                            <div class="row align-items-center">
                                                 <div class="col-3 category">
                                                     <div class="tag-container-1
                                                                 font-weight-bold">Category</div>
@@ -236,21 +230,36 @@
                                                     <div class="tag-container-2
                                                                 font-weight-bold">Symbol</div>
                                                 </div>
+                                                <div class="col-5 text-right " >
+                                                    <form action="/changeVisibility/{{@id}}" >
+                                                        <select name="Visibility" id="Visivility" onchange="this.form.submit()">
+                                                            <option value="" selected disabled hidden>Set Visibility</option>
+                                                            <option value="Public" label="Public"></option>
+                                                            <option value="Friends" label="Friends"></option>
+                                                            <option value="Private" label="Private"></option>
+                                                        </select>
+                                                    </form>
+                                                </div>
+
                                             </div>
                                             <div class="row justify-content-center">
                                                 <div class="col-12 text-center">
                                                     <h1>Image Insert</h1>
                                                 </div>
-                                                <div class="col-12 small-text">
-                                                    <small><i class="bi bi-heart"></i> 103</small>
-                                                    <small class="time"> {{this.dateCreated}} </small>
-                                                    <!-- the link to open rename modal -->
+                                                <div class="col-12 text-right">
+                                                   <!-- the link to open rename modal -->
                                                     <a class="card-link" data-dismiss="modal" data-toggle="modal" data-target="#renameModal{{@index}}"
                                                         style="margin-left: 20%;"> Rename</a>
                                                     <a href="#" style="margin-left: 3%;">
                                                         download </a>
                                                     <a href="#" style="margin-left: 3%;"> Delete
                                                     </a>
+                                                </div>
+                                                <div class="col-12 small-text">
+                                                    
+                                                    <small><i class="bi bi-heart"></i> 103</small>
+                                                    <small class="time"> {{this.dateCreated}} </small>
+
                                                 </div>
                                             </div>
                                             <div class="row justify-content-center">
@@ -261,6 +270,14 @@
 
                                         </div>
                                     </div>
+                                <div class="modal-footer text-center">
+                                    <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+                                    <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                                    <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                                    {{!-- <a class="card-link" data-toggle="modal" data-target="#exampleModalCenter{{@index}}">
+                                        View Details
+                                    </a> --}}
+                                </div>
                                 </div>
                             </div>
                         </div>

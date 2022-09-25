@@ -34,3 +34,8 @@ body {
     font-size: 0.75rem;
     margin-top: 1.0rem;
 }
+
+.modal-footer {
+    justify-content: flex-start;
+    padding-left: 2.5rem;
+}
