@@ -234,10 +234,10 @@
                                                                 font-weight-bold">Symbol</div>
                                                 </div>
                                                 <div class="col-5 text-right ">
-                                                    <form action="/changeVisibility/{{@id}}">
+                                                    <form action="/posts/changeVisibility/{{this._id}}" method = "POST">
                                                         <select name="Visibility" id="Visivility"
                                                             onchange="this.form.submit()">
-                                                            <option value="" selected disabled hidden>Set Visibility
+                                                            <option value="" selected disabled hidden>{{this.visibility}}
                                                             </option>
                                                             <option value="Public" label="Public"></option>
                                                             <option value="Friends" label="Friends"></option>
@@ -297,7 +297,7 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-body text-center">
-                                        <form action="/renamePost/{{@index}}" method="POST">
+                                        <form action="/renamePost/{{this.fileId}}" method="POST">
                                             <label for="newname">New Title</label>
                                             <input type="text" name="newname" id="newname" value="{{this.filename}}"
                                                 required>
