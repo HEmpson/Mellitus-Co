@@ -149,13 +149,12 @@ const getRegistration = async (req, res) => {
 }
 
 // direct to edit profile page
-const getEditProfile = async (req,res) => {
-    res.render('editProfile.hbs',{
+const getEditProfile = async (req, res) => {
+    res.render('editProfile.hbs', {
         pageName: 'editProfile',
         layout: '',
     })
 }
-
 
 // export the functions
 module.exports = {
