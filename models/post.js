@@ -42,19 +42,20 @@ const filterVisiblePosts = async (posts, user) => {
         }
         return filteredPosts
     } catch (err) {
+        console.log(err)
         return []
     }
 }
 
 // gets all the posts of a single user
 const getUserPosts = async (user, requestingUser) => {
-    posts = await user.populate({
+    let posts = await user.populate({
         path: 'posts',
         options: { lean: true },
     })
     posts = posts.toObject()
 
-    userPosts = posts.posts
+    let userPosts = posts.posts
 
     let filteredPosts
 
@@ -149,7 +150,9 @@ const hasPostEditPermissions = (post, user) => {
 // Checks if the given user has permission to download a given post
 const hasPostDownloadPermissions = (post, user) => {
     try {
-        if (post.visibility === 'Public') {
+        if (post.createdBy.equals(user._id) || user.role === 'Admin') {
+            return true
+        } else if (post.visibility === 'Public') {
             return true
         } else if (post.visibility === 'Friends') {
             const poster = post.createdBy
@@ -161,9 +164,6 @@ const hasPostDownloadPermissions = (post, user) => {
             }
             return false
         } else {
-            if (post.createdBy.equals(user._id)) {
-                return true
-            }
             return false
         }
     } catch (err) {
