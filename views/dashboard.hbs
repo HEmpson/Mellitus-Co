@@ -333,61 +333,125 @@
                                 </div>
 
                             </div>
-                            <div class="card-body">
-                                <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}</div>
-                                <!-- PLACEHOLDER LINK!!! Instead of opening detailed view it currently downloads file
-                                immediately -->
-                                <a class="card-link" data-toggle="modal" data-target="#ForYouModalCenter{{@index}}">
-                                    <h5 class="card-title">{{this.filename}}</h5>
-                                </a>
+                            <button type="button" class="btn" data-toggle="modal"
+                                data-target="#exampleModalCenter{{@index}}" style="padding: 0">
+                                <div class="card-body">
+                                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}
+                                    </div>
+                                    <a>
+                                        <h5 class="card-title">{{this.filename}}</h5>
+                                    </a>
+                                    <p class="card-text" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModalCenter">
+                                        {{this.description}}
+                                    </p>
+                                </div>
+                            </button>
 
-                                <p class="card-text" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#ForYouModalCenter{{@index}}">
-                                    {{this.description}}
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                                <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                                <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                                <a class="card-link" data-toggle="modal" data-target="#ForYouModalCenter{{@index}}">
-                                    View Details
-                                </a>
-                            </div>
+
                         </div>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="ForYouModalCenter{{@index}}" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
+                        <!-- Detailed Post Modal -->
+                        <div class="modal fade" id="exampleModalCenter{{@index}}" tabindex="-1"
+                            aria-labelledby="postTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">{{this.filename}}</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                                    <div class="modal-header text-center">
+
+                                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+
+                                        <h5 class="font-weight-bold ml-auto">{{this.filename}}</h5>
+
+
+                                        <button type="button" class="btn-close" data-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
+
                                     <div class="modal-body">
-                                        {{this.description}}
+                                        <div class="container-fluid">
+                                            <div class="row align-items-center">
+                                                <div class="col-3 category">
+                                                    <div class="tag-container-1
+                                                                font-weight-bold">Category</div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="tag-container-2
+                                                                font-weight-bold">Symbol</div>
+                                                </div>
+                                                <div class="col-5 text-right ">
+                                                    <form action="/posts/changeVisibility/{{this._id}}" method = "POST">
+                                                        <select name="visibility" id="Visivility"
+                                                            onchange="this.form.submit()">
+                                                            <option value="" selected disabled hidden>{{this.visibility}}
+                                                            </option>
+                                                            <option value="Public" label="Public"></option>
+                                                            <option value="Friends" label="Friends"></option>
+                                                            <option value="Private" label="Private"></option>
+                                                        </select>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <div class="col-12 text-center">
+                                                    <h1>Image Insert</h1>
+                                                </div>
+                                                <div class="col-12 text-right">
+                                                    <!-- the link to open rename modal -->
+
+                                                    <a class="card-link" data-dismiss="modal" data-toggle="modal"
+                                                        data-target="#renameModal{{@index}}" style="margin-left: 20%;">
+                                                        Rename</a>
+                                                    <a href="#" style="margin-left: 3%;">
+                                                        download </a>
+                                                    <a href="#" style="margin-left: 3%;"> Delete
+                                                    </a>
+                                                </div>
+                                                <div class="col-12 small-text">
+
+                                                    <small><i class="bi bi-heart"></i> 103</small>
+                                                    <small class="time"> {{this.dateCreated}} </small>
+
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <div class="col-11">
+                                                    {{this.description}}
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                        <!-- Delete and Rename only appear if the user has edit permission on the post-->
-                                        {{#if user.hasEditPermissions}}
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Delete</button>
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Rename</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Visible to
-                                        </button>
-                                        {{/if}}
-                                        <a type="button" class="btn btn-primary"
-                                            href="/posts/download/{{this._id}}">Download</a>
+                                    <div class="modal-footer text-center">
+                                        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+                                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                                        {{!-- <a class="card-link" data-toggle="modal"
+                                            data-target="#exampleModalCenter{{@index}}">
+                                            View Details
+                                        </a> --}}
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
+                        <!-- the Rename Post Modal -->
+                        <div class="modal fade" id="renameModal{{@index}}" tabindex="-1" aria-labelledby="postTitle"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-body text-center">
+                                        <form action="/renamePost/{{this.fileId}}" method="POST">
+                                            <label for="newname">New Title</label>
+                                            <input type="text" name="newname" id="newname" value="{{this.filename}}"
+                                                required>
+                                            <button type="submit">change</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
                         {{/each}}
                     </div>
                 </div>
