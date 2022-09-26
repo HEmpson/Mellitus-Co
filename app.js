@@ -57,6 +57,10 @@ app.use(
 const passport = require('./passport')
 app.use(passport.authenticate('session'))
 
+app.get('/test', (req, res) => {
+    res.sendFile(__dirname + '/views/test.html')
+})
+
 // Primary UI Routes
 app.use('/', appRouter)
 

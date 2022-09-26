@@ -58,6 +58,13 @@ postRouter.post(
     postController.changeVisibilityController
 )
 
+// Post route for post search bar
+postRouter.post(
+    '/getPosts',
+    isAuthenticated,
+    postController.getPostsLiveController
+)
+
 // Get route for downloading the files
 postRouter.get(
     '/download/:id',

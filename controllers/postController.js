@@ -1,7 +1,8 @@
 const {
+    Post,
     deletePost,
     changeVisibility,
-    updatePostNames,
+    getPostsLive,
 } = require('../models/post')
 const { downloadPost } = require('../models/post')
 const { changePostname } = require('../models/post')
@@ -46,6 +47,13 @@ const changeVisibilityController = async (req, res) => {
     return res.redirect('back')
 }
 
+// Controller for autocomplete search functionality
+const getPostsLiveController = async (req, res) => {
+    let payload = req.body.payload.trim()
+    let search = await getPostsLive(payload, req.user)
+    res.send({ payload: search })
+}
+
 module.exports = {
     removePostController,
     renamePostController,
@@ -53,4 +61,5 @@ module.exports = {
     assignToCategoryController,
     changeVisibilityController,
     makePostController,
+    getPostsLiveController,
 }

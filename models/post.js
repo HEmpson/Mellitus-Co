@@ -364,6 +364,23 @@ const deleteCategory = async (categoryId, user) => {
     }
 }
 
+const NUM_RESULTS_SHOWN = 5
+
+// Gets the posts which best match the current query of the user
+const getPostsLive = async (payload, user) => {
+    let search = await Post.find({
+        filename: { $regex: new RegExp('^' + payload + '.*', 'i') },
+    }).exec()
+
+    // Filter out searches user does not have permissions for
+    search = await filterVisiblePosts(search, user)
+
+    // Limit search results
+    search = search.slice(0, NUM_RESULTS_SHOWN)
+
+    return search
+}
+
 module.exports = {
     Post,
     getUserPosts,
@@ -378,5 +395,6 @@ module.exports = {
     hasPostEditPermissions,
     hasPostDownloadPermissions,
     getPostsInCategory,
+    getPostsLive,
     deleteCategory,
 }
