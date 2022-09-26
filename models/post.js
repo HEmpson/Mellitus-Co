@@ -17,6 +17,7 @@ const postSchema = new mongoose.Schema({
     },
     description: String,
     fileId: mongoose.Schema.Types.ObjectId,
+    filename: String,
     dateCreated: {
         type: Date,
         default: new Date(),
@@ -27,19 +28,22 @@ const Post = mongoose.model('Post', postSchema, 'post')
 
 // Gets all the posts in a list which are visible to a user
 const filterVisiblePosts = async (posts, user) => {
-    const filteredPosts = []
-    for (let i = 0; i < posts.length; i++) {
-        let currentPost = posts[i]
-        if (hasPostDownloadPermissions(currentPost, user)) {
-            currentPost.filename = await db.getFilename(currentPost.fileId)
-            currentPost.hasEditPermissions = hasPostEditPermissions(
-                currentPost,
-                user
-            )
-            filteredPosts[filteredPosts.length] = currentPost
+    try {
+        const filteredPosts = []
+        for (let i = 0; i < posts.length; i++) {
+            let currentPost = posts[i]
+            if (hasPostDownloadPermissions(currentPost, user)) {
+                currentPost.hasEditPermissions = hasPostEditPermissions(
+                    currentPost,
+                    user
+                )
+                filteredPosts[filteredPosts.length] = currentPost
+            }
         }
+        return filteredPosts
+    } catch (err) {
+        return []
     }
-    return filteredPosts
 }
 
 // gets all the posts of a single user
@@ -54,7 +58,7 @@ const getUserPosts = async (user, requestingUser) => {
 
     let filteredPosts
 
-    // Filter visible posts and get filename and permission status of a post
+    // Filter visible posts and get permission status of a post
     if (requestingUser) {
         filteredPosts = await filterVisiblePosts(userPosts, requestingUser)
     } else {
@@ -69,8 +73,10 @@ const getUserPosts = async (user, requestingUser) => {
 }
 
 // gets all the public posts
-const getPublicPosts = async () => {
+const getPublicPosts = async (user) => {
     publicPosts = await Post.find({ visibility: 'Public' }).lean()
+
+    publicPosts = filterVisiblePosts(publicPosts, user)
 
     publicPosts.sort((a, b) => {
         return b.dateCreated - a.dateCreated
@@ -172,18 +178,23 @@ const makePost = async (req, res) => {
         visibility: req.body.visibility,
         description: req.body.message,
         fileId: mongoose.Types.ObjectId(req.file.id),
+        filename: await db.getFilename(req.file.id),
         createdBy: req.user._id,
     })
     newPost.save(async (err, post) => {
-        await User.updateOne(
-            { _id: req.user._id },
-            { $push: { posts: post._id } }
-        )
-        if (req.body.categoryId) {
-            await Category.updateOne(
-                { _id: req.body.categoryId },
+        if (err) {
+            console.log(err)
+        } else {
+            await User.updateOne(
+                { _id: req.user._id },
                 { $push: { posts: post._id } }
             )
+            if (req.body.categoryId) {
+                await Category.updateOne(
+                    { _id: req.body.categoryId },
+                    { $push: { posts: post._id } }
+                )
+            }
         }
         return res.redirect('back')
     })
@@ -222,6 +233,10 @@ const changePostname = async (postId, user, filename) => {
                 const fileId = post.fileId
                 if (fileId) {
                     await db.renameFile(fileId, filename)
+                    await Post.updateOne(
+                        { _id: postId },
+                        { filename: filename }
+                    )
                 } else {
                     console.log('Error: Failed to find post')
                 }

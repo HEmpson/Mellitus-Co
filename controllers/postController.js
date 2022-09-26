@@ -1,4 +1,8 @@
-const { deletePost, changeVisibility } = require('../models/post')
+const {
+    deletePost,
+    changeVisibility,
+    updatePostNames,
+} = require('../models/post')
 const { downloadPost } = require('../models/post')
 const { changePostname } = require('../models/post')
 const { makePost } = require('../models/post')
