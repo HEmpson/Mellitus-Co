@@ -76,7 +76,7 @@ const getUserPosts = async (user, requestingUser) => {
 const getPublicPosts = async (user) => {
     publicPosts = await Post.find({ visibility: 'Public' }).lean()
 
-    publicPosts = filterVisiblePosts(publicPosts, user)
+    publicPosts = await filterVisiblePosts(publicPosts, user)
 
     publicPosts.sort((a, b) => {
         return b.dateCreated - a.dateCreated
