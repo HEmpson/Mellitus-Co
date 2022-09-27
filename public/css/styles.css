@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300&display=swap');
 
+/*-- General styles --*/
 :root {
     --color-bg: #40798c;
     --color-bg-variant: #5c80BC;
@@ -25,6 +26,9 @@
     background: linear-gradient(60deg, var(--color-bg), transparent, var(--color-primary));
     color: var(--color-black);
 } */
+
+
+/*-- Navigation bar --*/
 
 .navbar {
     width: 250px;
@@ -59,9 +63,6 @@
     transition: 0.4s;
 }
 
-
-/* for navbar */
-
 .active-nav {
     margin-left: 0;
 }
@@ -72,8 +73,7 @@
     font-size: medium;
 }
 
-
-/* for main section */
+/*-- Main section --*/
 
 .active-cont {
     margin-left: 250px;
