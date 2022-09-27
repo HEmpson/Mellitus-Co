@@ -313,6 +313,7 @@
                         <!-- End of a single document post -->
                     </div>
 
+
                     <!-- FOR YOU POSTS TAB -->
                     <div class="tab-pane fade" id="postsPrivate" role="tabpanel" aria-labelledby="private-tab">
                         <!-- HBS each loop to display private posts -->
@@ -334,7 +335,7 @@
 
                             </div>
                             <button type="button" class="btn" data-toggle="modal"
-                                data-target="#exampleModalCenter{{@index}}" style="padding: 0">
+                                data-target="#foryouModal{{@index}}" style="padding: 0">
                                 <div class="card-body">
                                     <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}
                                     </div>
@@ -342,7 +343,7 @@
                                         <h5 class="card-title">{{this.filename}}</h5>
                                     </a>
                                     <p class="card-text" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#exampleModalCenter">
+                                        data-target="#foryouModal">
                                         {{this.description}}
                                     </p>
                                 </div>
@@ -352,12 +353,12 @@
                         </div>
 
                         <!-- Detailed Post Modal -->
-                        <div class="modal fade" id="exampleModalCenter{{@index}}" tabindex="-1"
+                        <div class="modal fade" id="foryouModal{{@index}}" tabindex="-1"
                             aria-labelledby="postTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header text-center">
-
+                                        
                                         <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
 
                                         <h5 class="font-weight-bold ml-auto">{{this.filename}}</h5>
@@ -426,10 +427,6 @@
                                         <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
                                         <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
                                         <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                                        {{!-- <a class="card-link" data-toggle="modal"
-                                            data-target="#exampleModalCenter{{@index}}">
-                                            View Details
-                                        </a> --}}
                                     </div>
                                 </div>
                             </div>
@@ -451,7 +448,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>  
+
                         {{/each}}
                     </div>
                 </div>
