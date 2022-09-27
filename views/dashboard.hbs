@@ -298,9 +298,9 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-body text-center">
-                                        <form action="posts/renamePost/{{this.fileId}}" method="POST">
+                                        <form action="posts/renamePost/{{this._id}}" method="POST">
                                             <label for="newname">New Title</label>
-                                            <input type="text" name="newname" id="newname" value="{{this.filename}}"
+                                            <input type="text" name="filename" id="newname" value="{{this.filename}}"
                                                 required>
                                             <button type="submit">change</button>
                                         </form>
@@ -444,7 +444,7 @@
                                     <div class="modal-body text-center">
                                         <form action="/posts/renamePost/{{this._id}}" method="POST">
                                             <label for="newname">New Title</label>
-                                            <input type="text" name="newname" id="newname" value="{{this.filename}}"
+                                            <input type="text" name="filename" id="newname" value="{{this.filename}}"
                                                 required>
                                             <button type="submit">change</button>
                                         </form>
