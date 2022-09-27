@@ -22,7 +22,7 @@ body {
     }
 }
 
-/**Reset Bootstrap*/
+/*-- Reset Bootsrap --*/
 .dropdown-toggle::after {
     content: none;
     display: none;
