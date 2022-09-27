@@ -31,7 +31,7 @@ postRouter.post(
 )
 
 // Deletes a given post (provided the user has significant permissions)
-postRouter.post(
+postRouter.get(
     '/removePost/:id',
     isAuthenticated,
     postController.removePostController
