@@ -6,6 +6,7 @@ const {
     setDescription,
 } = require('../models/user')
 
+// to create a new account for a user
 const createAccountController = async (req, res) => {
     let user = await createAccount(req, res)
     if (user) {
@@ -15,11 +16,13 @@ const createAccountController = async (req, res) => {
     }
 }
 
+// for a user to add a new friend
 const addNewFriendController = async (req, res) => {
     await addFriends(req, res)
     return res.redirect('/friends')
 }
 
+// to allow a user to remove a friend
 const removeFriendsController = async (req, res) => {
     await removeFriends(req, res)
     return res.redirect('/friends')
