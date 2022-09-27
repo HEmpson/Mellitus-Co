@@ -143,7 +143,6 @@ const getCategories = async (req, res) => {
 const getRegistration = async (req, res) => {
     res.render('registration.hbs', {
         pageName: 'Registration',
-        layout: '',
         user: req.user,
         flash: req.flash('newAccountError'),
     })
@@ -153,7 +152,6 @@ const getRegistration = async (req, res) => {
 const getEditProfile = async (req, res) => {
     res.render('editProfile.hbs', {
         pageName: 'editProfile',
-        layout: '',
     })
 }
 
