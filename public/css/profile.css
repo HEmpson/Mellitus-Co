@@ -110,6 +110,12 @@ margin-left: 8%;
     overflow:hidden;
     border-radius: 50%;
 }
+
+.fileImage-container {
+    width: 100%;
+    height: 18rem;
+    justify-content: center;
+}
 .profile-img {
     display: inline;
     margin: 0 auto;
