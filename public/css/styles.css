@@ -19,12 +19,12 @@
     box-sizing: border-box;
 }
 
-body{
+/* body{
     font-family: "Raleway", serif;
     min-height: 100vh;
     background: linear-gradient(60deg, var(--color-bg), transparent, var(--color-primary));
     color: var(--color-black);
-}
+} */
 
 .navbar {
     width: 250px;
