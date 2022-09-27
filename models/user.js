@@ -54,6 +54,7 @@ userSchema.pre('save', function save(next) {
     })
 })
 
+// to create a user a new account
 const createAccount = async (req, res) => {
     const newUser = req.body
 
@@ -126,9 +127,10 @@ const verifyNewPatientProfile = (newUser) => {
     }
 }
 
+// function to allow a user to add friends
 const addFriends = async (req, res) => {
-    friendEmail = req.body.email
-    friend = await User.findOne({ username: friendEmail })
+    const friendEmail = req.body.email
+    const friend = await User.findOne({ username: friendEmail })
 
     try {
         // if friend exists
@@ -152,9 +154,10 @@ const addFriends = async (req, res) => {
     }
 }
 
+// a function to allow a user to remove a friend
 const removeFriends = async (req, res) => {
-    friendName = req.body.displayName
-    friend = await User.findOne({ displayName: friendName })
+    const friendName = req.body.displayName
+    const friend = await User.findOne({ displayName: friendName })
 
     try {
         // if friend exists
@@ -179,6 +182,7 @@ const removeFriends = async (req, res) => {
     }
 }
 
+// gets all the friends of a user
 const getAllFriends = async (user) => {
     friends = await user.populate({
         path: 'friends',
@@ -192,6 +196,7 @@ const getAllFriends = async (user) => {
     return allFriends
 }
 
+// gets the profile information of a user
 const getUserInfo = async (req, res) => {
     try {
         let user = await User.findOne({ _id: req.params.id }).lean()
@@ -205,6 +210,7 @@ const getUserInfo = async (req, res) => {
     }
 }
 
+// checks if a user has permission to change the details of a profile
 const hasProfileEditPermissions = (userId, requestingUser) => {
     try {
         if (
