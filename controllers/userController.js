@@ -7,8 +7,12 @@ const {
 } = require('../models/user')
 
 const createAccountController = async (req, res) => {
-    await createAccount(req, res)
-    return res.redirect('/')
+    let user = await createAccount(req, res)
+    if (user) {
+        return res.redirect('/')
+    } else {
+        return res.redirect('/registration')
+    }
 }
 
 const addNewFriendController = async (req, res) => {

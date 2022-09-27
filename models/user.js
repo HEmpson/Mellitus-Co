@@ -60,13 +60,13 @@ const createAccount = async (req, res) => {
     // checks if email is a valid email
     if (!verifyNewPatientProfile(newUser)) {
         req.flash('newAccountError', 'Invalid Email Address')
-        return res.redirect('/')
+        return
     }
 
     // email already exists
     if (await User.findOne({ username: newUser.username })) {
         req.flash('newAccountError', 'User already exists')
-        return res.redirect('/')
+        return
     }
 
     try {
@@ -84,10 +84,12 @@ const createAccount = async (req, res) => {
 
         // save the new account to the DB
         await newUserProfile.save()
+
+        return newUser
     } catch (err) {
         await User.deleteOne({ username: newUser.username })
         req.flash('newAccountError', 'Invalid Data Type(s) Entered')
-        return res.redirect('/')
+        return
     }
 }
 

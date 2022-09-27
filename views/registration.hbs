@@ -14,10 +14,9 @@
             alt="Sample photo">
           <div class="card-body p-4 p-md-5">
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Registration Page</h3>
-
             <form class="px-md-2" action="/user/api/createAccount" method="POST">
             
-                <!-- User types full name -->
+                <!-- User types display name -->
                 <div class="form-outline mb-4 justify-content-center">
                     <label class=" form-label" for="form3Example1q">Display Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     <input placeholder="Full Name" type="text" id="displayName" name="displayName"/>
@@ -40,6 +39,9 @@
                 <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
 
             </form>
+            {{#each flash}}
+              <p>{{this}}</p>
+            {{/each}}
         </div>
       </div>
     </div>

@@ -145,6 +145,7 @@ const getRegistration = async (req, res) => {
         pageName: 'Registration',
         layout: '',
         user: req.user,
+        flash: req.flash('newAccountError'),
     })
 }
 
