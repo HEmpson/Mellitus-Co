@@ -144,6 +144,7 @@ const getRegistration = async (req, res) => {
     res.render('registration.hbs', {
         pageName: 'Registration',
         user: req.user,
+        layout: '',
         flash: req.flash('newAccountError'),
     })
 }
