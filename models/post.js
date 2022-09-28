@@ -180,6 +180,7 @@ const makePost = async (req, res) => {
         fileId: mongoose.Types.ObjectId(req.file.id),
         filename: await db.getFilename(req.file.id),
         createdBy: req.user._id,
+        dateCreated: new Date(),
     })
     newPost.save(async (err, post) => {
         if (err) {
