@@ -3,7 +3,6 @@ const {
     getPublicPosts,
     getFriendsPosts,
     getUserPosts,
-    hasPostDownloadPermissions,
     getPostsInCategory,
 } = require('../models/post')
 const { User, getAllFriends, getUserInfo } = require('../models/user')
@@ -29,7 +28,6 @@ const getDashboard = async (req, res) => {
     // get all public posts
     for (let i = 0; i < publicPosts.length; i++) {
         let newPublicPost = publicPosts[i]
-        newPublicPost.filename = await db.getFilename(publicPosts[i].fileId)
         newPublicPost.createdByName = (
             await User.findOne({ _id: publicPosts[i].createdBy })
         ).displayName
@@ -39,12 +37,12 @@ const getDashboard = async (req, res) => {
     // get all friends posts
     for (let i = 0; i < friendsPosts.length; i++) {
         let newFriendPost = friendsPosts[i]
-        newFriendPost.filename = await db.getFilename(friendsPosts[i].fileId)
         newFriendPost.createdByName = (
             await User.findOne({ _id: friendsPosts[i].createdBy })
         ).displayName
         friendDashboardPosts[i] = newFriendPost
     }
+
     res.render('dashboard.hbs', {
         pageName: 'Dashboard',
         publicPosts: publicDashboardPosts,
