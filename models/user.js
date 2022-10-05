@@ -228,6 +228,38 @@ const hasProfileEditPermissions = (userId, requestingUser) => {
     }
 }
 
+// function to allow a user to change their password
+const changePassword = async (req, res) => {
+    const user = await User.findOne({ _id: req.user._id })
+
+    // no user exists
+    if (!user) {
+        return res.sendStatus(404)
+    }
+
+    const oldPass = req.body.oldPass
+    const newPass = req.body.newPass
+    const currentPass = user.password
+
+    bcrypt.compare(oldPass, currentPass, async (err, valid) => {
+        if (!valid) {
+            req.flash(
+                'changePasswordError',
+                'Old password does not match current password'
+            )
+            return
+        }
+
+        bcrypt.hash(newPass, 10, async (err, hash) => {
+            if (err) {
+                return next(err)
+            }
+            await User.updateOne({ _id: req.user._id }, { password: hash })
+            return
+        })
+    })
+}
+
 // Changes the status message of a user given requesting user has permission
 const setStatus = async (userId, requestingUser, status) => {
     if (hasProfileEditPermissions(userId, requestingUser)) {
@@ -255,4 +287,5 @@ module.exports = {
     getUserInfo,
     setStatus,
     setDescription,
+    changePassword,
 }
