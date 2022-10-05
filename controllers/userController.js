@@ -4,6 +4,7 @@ const {
     addFriends,
     removeFriends,
     setDescription,
+    User,
 } = require('../models/user')
 
 // to create a new account for a user
@@ -40,10 +41,40 @@ const setDescriptionController = async (req, res) => {
     return res.redirect('back')
 }
 
+// function to allow a user to change their password
+const changePassword = async (req,res) => {
+
+    const oldPass = req.body.oldPass
+    const newPass = req.body.newPass
+    const currentPass = req.user.password
+
+    bcrypt.compare(oldPass, currentPass, async (err, valid) => {
+        if (!valid) {
+            req.flash(
+                'changePasswordError',
+                'Old password does not match current password'
+            )
+            return res.redirect('/profile/:id')
+        }
+
+        bcrypt.hash(newPass, 10, async (err, hash) => {
+            if (err) {
+                return next(err)
+            }
+            await User.updateOne(
+                { _id: req.user._id },
+                { password: hash }
+            )
+            return res.redirect('/profile/:id')
+        })
+    })
+}
+
 module.exports = {
     createAccountController,
     addNewFriendController,
     removeFriendsController,
     setStatusController,
     setDescriptionController,
+    changePassword,
 }
