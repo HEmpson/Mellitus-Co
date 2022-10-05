@@ -6,6 +6,7 @@ const {
     setDescription,
     User,
 } = require('../models/user')
+const bcrypt = require('bcryptjs')
 
 // to create a new account for a user
 const createAccountController = async (req, res) => {
@@ -43,9 +44,16 @@ const setDescriptionController = async (req, res) => {
 
 // function to allow a user to change their password
 const changePassword = async (req, res) => {
+    const user = await User.findOne({ _id: req.user._id })
+
+    // no user exists
+    if (!user) {
+        return res.sendStatus(404)
+    }
+
     const oldPass = req.body.oldPass
     const newPass = req.body.newPass
-    const currentPass = req.user.password
+    const currentPass = user.password
 
     bcrypt.compare(oldPass, currentPass, async (err, valid) => {
         if (!valid) {
@@ -53,7 +61,7 @@ const changePassword = async (req, res) => {
                 'changePasswordError',
                 'Old password does not match current password'
             )
-            return res.redirect('/profile/:id')
+            return res.redirect('back')
         }
 
         bcrypt.hash(newPass, 10, async (err, hash) => {
@@ -61,7 +69,7 @@ const changePassword = async (req, res) => {
                 return next(err)
             }
             await User.updateOne({ _id: req.user._id }, { password: hash })
-            return res.redirect('/profile/:id')
+            return res.redirect('back')
         })
     })
 }
