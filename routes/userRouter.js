@@ -74,7 +74,7 @@ userRouter.get(
 userRouter.post(
     '/changePassword',
     isAuthenticated,
-    userController.changePassword
+    userController.changePasswordController
 )
 
 module.exports = userRouter
