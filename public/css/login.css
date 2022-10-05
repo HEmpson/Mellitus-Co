@@ -82,6 +82,8 @@ input[type = "submit"]:hover{
     text-align: center;
     font-size: 17px;
     color: var(--color-black);
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
 }
 
 .signUpLink a{
