@@ -12,6 +12,12 @@ body {
     margin-top: 0.97rem;
 }
 
+.search-button {
+    margin-top: 2rem;
+    margin-left: 5%;
+}
+
+
 @media (min-width: 992px) {
     .gedf-main {
         padding-left: 4rem;
