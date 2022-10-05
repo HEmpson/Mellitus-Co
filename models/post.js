@@ -329,8 +329,7 @@ const getPostsInCategory = async (category, user) => {
         posts[posts.length] = categoryPost
     }
 
-    const filteredPosts = filterVisiblePosts(posts, user)
-
+    const filteredPosts = await filterVisiblePosts(posts, user)
     filteredPosts.sort((a, b) => {
         return b.dateCreated - a.dateCreated
     })
