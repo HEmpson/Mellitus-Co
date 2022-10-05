@@ -65,6 +65,12 @@ userRouter.post(
     userController.addNewFriendController
 )
 
+userRouter.get(
+    '/removeFriend/:id',
+    isAuthenticated,
+    userController.removeFriendsController
+)
+
 userRouter.post(
     '/changePassword',
     isAuthenticated,

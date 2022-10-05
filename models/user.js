@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     status: String,
     description: String,
     role: String,
+    blocked: Boolean,
     friends: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -78,6 +79,7 @@ const createAccount = async (req, res) => {
             status: ' ',
             description: ' ',
             role: 'User',
+            blocked: false,
             friends: [],
             files: [],
             categories: [],
@@ -156,8 +158,8 @@ const addFriends = async (req, res) => {
 
 // a function to allow a user to remove a friend
 const removeFriends = async (req, res) => {
-    const friendName = req.body.displayName
-    const friend = await User.findOne({ displayName: friendName })
+    const friendID = req.params.id
+    const friend = await User.findOne({ _id: friendID })
 
     try {
         // if friend exists
@@ -175,7 +177,7 @@ const removeFriends = async (req, res) => {
         // friend doesn't exist
         else {
             req.flash('noFriendError', 'Friend does not exist')
-            return res.redirect('/friends')
+            return
         }
     } catch (err) {
         console.log(err)
