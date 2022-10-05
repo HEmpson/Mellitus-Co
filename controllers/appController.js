@@ -43,10 +43,14 @@ const getDashboard = async (req, res) => {
         friendDashboardPosts[i] = newFriendPost
     }
 
+    // Get Categories
+    let categories = await retriveCategories(user, req.user)
+
     res.render('dashboard.hbs', {
         pageName: 'Dashboard',
         publicPosts: publicDashboardPosts,
         friendsPosts: friendDashboardPosts,
+        allCategories: categories,
         user: req.user,
     })
 }
@@ -86,6 +90,7 @@ const getFile = async (req, res) => {
 
     // Get Categories
     let categories = await retriveCategories(user, req.user)
+    const allCategories = categories
     categories = categories.slice(0, NUM_DISPLAY_HEAD)
 
     // Get files
@@ -96,6 +101,7 @@ const getFile = async (req, res) => {
         pageName: 'File',
         user: req.user,
         viewee: user,
+        allCategories: allCategories,
         categories: categories,
         posts: filteredPosts,
     })
@@ -107,10 +113,14 @@ const getAllFiles = async (req, res) => {
 
     const posts = await getUserPosts(user, req.user)
 
+    // Get Categories
+    let categories = await retriveCategories(user, req.user)
+
     res.render('allFiles.hbs', {
         pageName: 'All Files',
         posts: filteredPosts,
         viewee: user,
+        allCategories: categories,
         user: req.user,
     })
 }
@@ -120,10 +130,14 @@ const getCategoryFiles = async (req, res) => {
     const category = await Category.findOne({ _id: req.params.id })
     const posts = await getPostsInCategory(category, req.user)
 
+    // Get Categories
+    let categories = await retriveCategories(user, req.user)
+
     res.render('allFiles.hbs', {
         pageName: 'All Files',
         posts: posts,
         user: req.user,
+        allCategories: categories,
     })
 }
 
