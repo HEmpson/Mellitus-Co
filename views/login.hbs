@@ -28,8 +28,10 @@
         <div class="text_form">
             <input placeholder="Password" type="text" id="password" name="password" onclick="HidePassword()" autocomplete="on">
             <span></span>
+
+            <!-- If the password or account does not match, the message shows up -->
             {{#each flash}}
-                <p>{{this}}</p>
+                <p style = "color: red">{{this}}</p>
             {{/each}}
         </div>
 

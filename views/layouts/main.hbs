@@ -43,11 +43,19 @@
 
             
         </ul>
-        <!--Log out button-->
-        <a href="/user/logout" class="logOut-button btn btn-info btn-lg">
-            <span class="glyphicon glyphicon-log-out"></span> Log out
-        </a>
-           
+        
+        <ul class="navbar-nav align-items-end ml-auto d-flex flex-column mt-5 w-100">
+
+            <li class="nav-item w-100" style="vertical-align: bottom;">
+                <!--Log out button-->
+                <a href="/user/logout" class="nav-link text-light pl-4">
+                    Log out
+                    {{!-- <span class="glyphicon glyphicon-log-out">Log out</span>  --}}
+                </a>
+            </li>
+        </ul>
+        
+           {{!-- class="logOut-button btn btn-info btn-lg" --}}
 
         
     </nav>
