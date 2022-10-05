@@ -45,3 +45,6 @@ body {
     justify-content: flex-start;
     padding-left: 2.5rem;
 }
+.py-2 + .card-body{
+    padding: 0%;
+}
