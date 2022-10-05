@@ -17,7 +17,7 @@
             <form class="px-md-2" action="/user/api/createAccount" method="POST">
 
                 <div class="d-flex flex-column">
-                  <!-- User types display name -->
+                    <!-- User types display name -->
                     <div class="form-outline mb-3">
                         <label class=" form-label" for="form3Example1q" style="margin-left: 18%; margin-right:9%">Display Name</label>
                         <input placeholder="Full Name" type="text" id="displayName" name="displayName"/>
@@ -37,16 +37,18 @@
                     
                     <span></span>
 
+                    <!-- Submit button -->
                     <div class = "text-center">
                         <button type="submit" class="btn btn-success btn-lg mb-1 text-center" style = "margin-top: 2rem;">Submit</button>
                     </div>
-                </div>
-                
-                
 
+                    <!-- return bottun-->
+                    <a href="/" class="text-right"><bi class="bi-arrow-return-left"></bi></a>
+                </div>
             </form>
+
             {{#each flash}}
-              <p>{{this}}</p>
+                <p>{{this}}</p>
             {{/each}}
         </div>
       </div>

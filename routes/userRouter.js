@@ -65,10 +65,16 @@ userRouter.post(
     userController.addNewFriendController
 )
 
+userRouter.get(
+    '/removeFriend/:id',
+    isAuthenticated,
+    userController.removeFriendsController
+)
+
 userRouter.post(
     '/changePassword',
     isAuthenticated,
-    userController.changePassword
+    userController.changePasswordController
 )
 
 module.exports = userRouter
