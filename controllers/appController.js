@@ -44,7 +44,7 @@ const getDashboard = async (req, res) => {
     }
 
     // Get Categories
-    let categories = await retriveCategories(user, req.user)
+    let categories = await retriveCategories(req.user, req.user)
 
     res.render('dashboard.hbs', {
         pageName: 'Dashboard',
@@ -90,8 +90,10 @@ const getFile = async (req, res) => {
 
     // Get Categories
     let categories = await retriveCategories(user, req.user)
-    const allCategories = categories
     categories = categories.slice(0, NUM_DISPLAY_HEAD)
+
+    // Get the requesting user's categories
+    const allCategories = await retriveCategories(req.user, req.user)
 
     // Get files
     const posts = await getUserPosts(user, req.user)
@@ -114,7 +116,7 @@ const getAllFiles = async (req, res) => {
     const posts = await getUserPosts(user, req.user)
 
     // Get Categories
-    let categories = await retriveCategories(user, req.user)
+    let categories = await retriveCategories(req.user, req.user)
 
     res.render('allFiles.hbs', {
         pageName: 'All Files',
@@ -131,7 +133,7 @@ const getCategoryFiles = async (req, res) => {
     const posts = await getPostsInCategory(category, req.user)
 
     // Get Categories
-    let categories = await retriveCategories(user, req.user)
+    let categories = await retriveCategories(req.user, req.user)
 
     res.render('allFiles.hbs', {
         pageName: 'All Files',
