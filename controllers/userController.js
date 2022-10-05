@@ -42,8 +42,7 @@ const setDescriptionController = async (req, res) => {
 }
 
 // function to allow a user to change their password
-const changePassword = async (req,res) => {
-
+const changePassword = async (req, res) => {
     const oldPass = req.body.oldPass
     const newPass = req.body.newPass
     const currentPass = req.user.password
@@ -61,10 +60,7 @@ const changePassword = async (req,res) => {
             if (err) {
                 return next(err)
             }
-            await User.updateOne(
-                { _id: req.user._id },
-                { password: hash }
-            )
+            await User.updateOne({ _id: req.user._id }, { password: hash })
             return res.redirect('/profile/:id')
         })
     })

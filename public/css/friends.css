@@ -38,6 +38,10 @@ img.profile-photo-lg {
     color: #8dc63f;
 }
 
+.text-red {
+    color: red;
+}
+
 /*-- modal area --*/
 
 .modal-content {
