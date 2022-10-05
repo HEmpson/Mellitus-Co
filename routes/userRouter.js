@@ -65,4 +65,10 @@ userRouter.post(
     userController.addNewFriendController
 )
 
+userRouter.post(
+    '/changePassword',
+    isAuthenticated,
+    userController.changePassword
+)
+
 module.exports = userRouter
