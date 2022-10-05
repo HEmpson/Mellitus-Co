@@ -95,7 +95,7 @@ const getFile = async (req, res) => {
     res.render('files.hbs', {
         pageName: 'File',
         user: req.user,
-        viewee: req.params.id,
+        viewee: user,
         categories: categories,
         posts: filteredPosts,
     })
@@ -110,7 +110,7 @@ const getAllFiles = async (req, res) => {
     res.render('allFiles.hbs', {
         pageName: 'All Files',
         posts: filteredPosts,
-        viewee: req.params.id,
+        viewee: user,
         user: req.user,
     })
 }
@@ -123,7 +123,6 @@ const getCategoryFiles = async (req, res) => {
     res.render('allFiles.hbs', {
         pageName: 'All Files',
         posts: posts,
-        viewee: req.params.id,
         user: req.user,
     })
 }
@@ -136,7 +135,7 @@ const getCategories = async (req, res) => {
     res.render('categories.hbs', {
         pageName: 'Categories',
         categories: categories,
-        viewee: req.params.id,
+        viewee: user,
         user: req.user,
     })
 }
