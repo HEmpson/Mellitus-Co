@@ -29,7 +29,11 @@ appRouter.get('/', appController.getLoginPage)
 appRouter.get('/dashboard', isAuthenticated, appController.getDashboard)
 appRouter.get('/profile/:id', isAuthenticated, appController.getProfile)
 appRouter.get('/files/:id', isAuthenticated, appController.getFile)
-appRouter.get('/categoryContents/:id', isAuthenticated, appController.getCategoryFiles)
+appRouter.get(
+    '/categoryContents/:id',
+    isAuthenticated,
+    appController.getCategoryFiles
+)
 appRouter.get('/friends', isAuthenticated, appController.getFriends)
 appRouter.get('/allfiles/:id', isAuthenticated, appController.getAllFiles)
 appRouter.get('/categories/:id', isAuthenticated, appController.getCategories)
