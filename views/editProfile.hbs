@@ -32,7 +32,7 @@
     <div class="row justify-content-center">
         <div class="col-6">
             <!-- change status -->
-            <form action="#" method="POST">
+            <form action="/user/changeStatus/{{user._id}}" method="POST">
                 <div>
                     <label for="newStatus" class="my-3" style="vertical-align: middle;">New Status:&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<textarea id="newStatus" name="newStatus">{{user.status}}</textarea> </label>
                     
