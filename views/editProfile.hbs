@@ -9,7 +9,7 @@
             <form action="#" method="POST" enctype="multipart/form-data">
                 <div>
                     <label for="newName">New Name</label>
-                    <input id="newName" type="text" name="newName" value="name">
+                    <input id="newName" type="text" name="newName" value={{user.displayName}}>
                     <button type="submit">Change</button>
                 </div>
             </form>
@@ -26,14 +26,14 @@
                 </div>
             </form>
         </div>
-    </div>    
+    </div>
     <div class="row">
         <div class="col-12">
             <!-- change status -->
             <form action="#" method="POST" enctype="multipart/form-data">
                 <div>
                     <label for="newStatus">New Status</label>
-                    <input id="newStatus" type="text" name="newStatus" value="Status">
+                    <textarea id="newStatus" name="newStatus">{{user.status}}</textarea>
                     <button type="submit">Change</button>
                 </div>
             </form>
@@ -45,11 +45,10 @@
             <form action="#" method="POST">
                 <div>
                     <label for="newDescription">New Description</label>
-                    <textarea id="newDescription" name="newDescription">description</textarea>
+                    <textarea id="newDescription" name="newDescription">{{user.description}}</textarea>
                     <button type="submit">Change</button>
-                    </div>
+                </div>
             </form>
         </div>
     </div>
 </div>
-        
