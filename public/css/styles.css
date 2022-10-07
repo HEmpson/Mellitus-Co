@@ -68,8 +68,8 @@
 }
 
 .logOut-button {
-    background-color: var(--color-pink);
-    color: var(--color-light);
+    background-color: var(--color-light);
+    color: black;
     font-size: medium;
 }
 
@@ -83,6 +83,7 @@
     background-color: linear-gradient(60deg, var(--color-bg), transparent, var(--color-green));
     color: rgb(0, 0, 0);
     box-shadow: 0 0 0 0.25rem #7952b344;
+    margin-left: 5%;
 }
 
 

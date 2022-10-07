@@ -20,8 +20,8 @@
 
 
 <!-- Layout of the page -->
-<form class="form-inline">
-    <div class="d-flex">
+<form class="search-button form-inline">
+    <div class="d-flex" style="margin-left: 10%">
         <input class="form-control mr-1" type="search" id="city" placeholder="Search" aria-label="Search">
     </div>
 </form>
@@ -38,7 +38,7 @@
                 </form>
 
                 <div>
-                    <h1>Search Results Looped Below</h1>
+                    <h2>Search Results Looped Below</h2>
                 </div>
 
                 <div class="card gedf-card">
@@ -183,7 +183,7 @@
                                                 alt="">
                                         </div>
                                         <div class="ml-2">
-                                            <div class="h5 m-0">{{this.createdByName}}</div>
+                                            <div class="h5 m-0"><a href="/profile/{{this.createdBy}}" class="h5 m-0">{{this.createdByName}}</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -331,7 +331,7 @@
                                                 alt="">
                                         </div>
                                         <div class="ml-2">
-                                            <div class="h5 m-0">{{this.createdByName}}</div>
+                                            <div class="h5 m-0"><a href="/profile/{{this.createdBy}}" class="h5 m-0">{{this.createdByName}}</a></div>
                                         </div>
                                     </div>
                                 </div>

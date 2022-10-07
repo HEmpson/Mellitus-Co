@@ -76,8 +76,10 @@ const retriveCategories = async (user, requestingUser) => {
         let category = await Category.findOne({ _id: user.categories[i] })
         category.documentCount = category.posts.length
         if (requestingUser) {
-            category.hasEditPermissions =
-                hasCategoryEditPermissions(requestingUser)
+            category.hasEditPermissions = hasCategoryEditPermissions(
+                category,
+                requestingUser
+            )
         } else {
             category.hasEditPermissions = true
         }

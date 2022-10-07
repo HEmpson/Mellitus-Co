@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     status: String,
     description: String,
     role: String,
+    blocked: Boolean,
     friends: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -78,6 +79,7 @@ const createAccount = async (req, res) => {
             status: ' ',
             description: ' ',
             role: 'User',
+            blocked: false,
             friends: [],
             files: [],
             categories: [],
@@ -156,8 +158,8 @@ const addFriends = async (req, res) => {
 
 // a function to allow a user to remove a friend
 const removeFriends = async (req, res) => {
-    const friendName = req.body.displayName
-    const friend = await User.findOne({ displayName: friendName })
+    const friendID = req.params.id
+    const friend = await User.findOne({ _id: friendID })
 
     try {
         // if friend exists
@@ -175,7 +177,7 @@ const removeFriends = async (req, res) => {
         // friend doesn't exist
         else {
             req.flash('noFriendError', 'Friend does not exist')
-            return res.redirect('/friends')
+            return
         }
     } catch (err) {
         console.log(err)
@@ -226,6 +228,51 @@ const hasProfileEditPermissions = (userId, requestingUser) => {
     }
 }
 
+// checks if a user has the permission to block a user
+const hasBlockingPermissions = (user) => {
+    try {
+        if (user.role === 'Admin') {
+            return true
+        }
+        return false
+    } catch (err) {
+        console.log(err)
+        return false
+    }
+}
+
+// function to allow a user to change their password
+const changePassword = async (req, res) => {
+    const user = await User.findOne({ _id: req.user._id })
+
+    // no user exists
+    if (!user) {
+        return res.sendStatus(404)
+    }
+
+    const oldPass = req.body.oldPass
+    const newPass = req.body.newPass
+    const currentPass = user.password
+
+    bcrypt.compare(oldPass, currentPass, async (err, valid) => {
+        if (!valid) {
+            req.flash(
+                'changePasswordError',
+                'Old password does not match current password'
+            )
+            return
+        }
+
+        bcrypt.hash(newPass, 10, async (err, hash) => {
+            if (err) {
+                return next(err)
+            }
+            await User.updateOne({ _id: req.user._id }, { password: hash })
+            return
+        })
+    })
+}
+
 // Changes the status message of a user given requesting user has permission
 const setStatus = async (userId, requestingUser, status) => {
     if (hasProfileEditPermissions(userId, requestingUser)) {
@@ -241,6 +288,20 @@ const setDescription = async (userId, requestingUser, description) => {
     }
 }
 
+// allows an admin to block a user
+const blockUser = async (adminUser, normalUserId) => {
+    if (hasBlockingPermissions(adminUser)) {
+        await User.updateOne({ _id: normalUserId, blocked: true })
+    }
+}
+
+// allows an admin to unblock a user
+const unblockUser = async (adminUser, normalUserId) => {
+    if (hasBlockingPermissions(adminUser)) {
+        await User.updateOne({ _id: normalUserId, blocked: false })
+    }
+}
+
 const User = mongoose.model('User', userSchema, 'user')
 
 module.exports = {
@@ -253,4 +314,8 @@ module.exports = {
     getUserInfo,
     setStatus,
     setDescription,
+    changePassword,
+    hasBlockingPermissions,
+    unblockUser,
+    blockUser,
 }

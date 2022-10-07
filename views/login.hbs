@@ -19,24 +19,31 @@
 <div class="login_container">
     <h1>Meldrive</h1>
     <form autocomplete="off" action="/user/login" method="POST">
+
+        <!-- Input username -->
         <div class="text_form">
             <input placeholder="Username" type="text" id="username" name="username" autocomplete="on">
             <span></span>
 
         </div>
 
+        <!-- Input password -->
         <div class="text_form">
             <input placeholder="Password" type="text" id="password" name="password" onclick="HidePassword()" autocomplete="on">
             <span></span>
+
+            <!-- If the password or account does not match, the message shows up -->
             {{#each flash}}
-                <p>{{this}}</p>
+                <p style = "color: red">{{this}}</p>
             {{/each}}
         </div>
 
+        <!-- Login buttom -->
         <input type="submit" value="log-in">
 
+        <!-- Registration link -->
         <div class = "signUpLink">
-            Not a member yet? <a href = "/registration">Click to join!</a>
+            Not a member yet? <a style = "color: blue"href = "/registration">Click to join!</a>
         </div>
     </form>
 </div>

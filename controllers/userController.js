@@ -4,7 +4,10 @@ const {
     addFriends,
     removeFriends,
     setDescription,
+    blockUser,
+    unblockUser,
 } = require('../models/user')
+const bcrypt = require('bcryptjs')
 
 // to create a new account for a user
 const createAccountController = async (req, res) => {
@@ -40,10 +43,31 @@ const setDescriptionController = async (req, res) => {
     return res.redirect('back')
 }
 
+// Controller function for a user to change their password
+const changePasswordController = async (req, res) => {
+    await changePassword(req, res)
+    return res.redirect('back')
+}
+
+// Controller function for an admin to block a user
+const blockUserController = async (req, res) => {
+    await blockUser(req.user, req.params.id)
+    return res.redirect('back')
+}
+
+// Controller function for an admin to unblock a user
+const unblockUserController = async (req, res) => {
+    await unblockUser(req.user, req.params.id)
+    return res.redirect('back')
+}
+
 module.exports = {
     createAccountController,
     addNewFriendController,
     removeFriendsController,
     setStatusController,
     setDescriptionController,
+    changePasswordController,
+    blockUserController,
+    unblockUserController,
 }

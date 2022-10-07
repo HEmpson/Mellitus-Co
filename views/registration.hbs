@@ -13,34 +13,42 @@
             class="w-100 mh-60" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
             alt="Sample photo">
           <div class="card-body p-4 p-md-5">
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Registration Page</h3>
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center">Registration Page</h3>
             <form class="px-md-2" action="/user/api/createAccount" method="POST">
-            
-                <!-- User types display name -->
-                <div class="form-outline mb-4 justify-content-center">
-                    <label class=" form-label" for="form3Example1q">Display Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    <input placeholder="Full Name" type="text" id="displayName" name="displayName"/>
+
+                <div class="d-flex flex-column">
+                    <!-- User types display name -->
+                    <div class="form-outline mb-3">
+                        <label class=" form-label" for="form3Example1q" style="margin-left: 18%; margin-right:9%">Display Name</label>
+                        <input placeholder="Full Name" type="text" id="displayName" name="displayName"/>
+                    </div>
+
+                    <!-- User types username -->
+                    <div class="form-outline mb-3">
+                        <label class="form-label" for="form3Example1q" style="margin-left: 18%; margin-right: 15%" >Username</label>
+                        <input placeholder="Username" type="text" id="username" name="username"/>
+                    </div>
+
+                    <!-- User types password -->
+                    <div class="form-outline mb-3">
+                        <label class="col-sm form-label" for="form3Example1q" style="margin-left: 18%; margin-right: 16%">Password</label>
+                        <input placeholder="Password" type="text" id="password" name="password"/>
+                    </div>
+                    
+                    <span></span>
+
+                    <!-- Submit button -->
+                    <div class = "text-center">
+                        <button type="submit" class="btn btn-success btn-lg mb-1 text-center" style = "margin-top: 2rem;">Submit</button>
+                    </div>
+
+                    <!-- return bottun-->
+                    <a href="/" class="text-right"><bi class="bi-arrow-return-left"></bi></a>
                 </div>
-
-                <!-- User types username -->
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example1q">Username</label>
-                    <input placeholder="Username" type="text" id="username" name="username"/>
-                </div>
-
-                <!-- User types password -->
-                <div class="form-outline mb-4">
-                    <label class="col-sm form-label" for="form3Example1q">Password&nbsp;</label>
-                    <input placeholder="Password" type="text" id="password" name="password"/>
-                </div>
-                
-                <span></span>
-
-                <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
-
             </form>
+
             {{#each flash}}
-              <p>{{this}}</p>
+                <p>{{this}}</p>
             {{/each}}
         </div>
       </div>

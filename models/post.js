@@ -32,7 +32,13 @@ const filterVisiblePosts = async (posts, user) => {
         const filteredPosts = []
         for (let i = 0; i < posts.length; i++) {
             let currentPost = posts[i]
-            if (hasPostDownloadPermissions(currentPost, user)) {
+            let poster = await User.findOne({
+                _id: currentPost.createdBy,
+            }).lean()
+            if (
+                hasPostDownloadPermissions(currentPost, user) &&
+                !poster.blocked
+            ) {
                 currentPost.hasEditPermissions = hasPostEditPermissions(
                     currentPost,
                     user
@@ -268,7 +274,7 @@ const assignToCategory = async (postId, categoryId, user) => {
     try {
         const post = await Post.findOne({ _id: postId }).lean()
         // Check if reassigning to new category or assigning to no category
-        if (categoryId) {
+        if (categoryId && mongoose.Types.ObjectId.isValid(categoryId)) {
             const category = await Category.findOne({ _id: categoryId }).lean()
 
             // Check if user has permission to edit both
@@ -329,8 +335,7 @@ const getPostsInCategory = async (category, user) => {
         posts[posts.length] = categoryPost
     }
 
-    const filteredPosts = filterVisiblePosts(posts, user)
-
+    const filteredPosts = await filterVisiblePosts(posts, user)
     filteredPosts.sort((a, b) => {
         return b.dateCreated - a.dateCreated
     })
@@ -338,7 +343,8 @@ const getPostsInCategory = async (category, user) => {
     return filteredPosts
 }
 
-// Deletes the category with the given category ID after checking user has permission
+// Deletes the category with the
+//given category ID after checking user has permission
 const deleteCategory = async (categoryId, user) => {
     try {
         // Find category
