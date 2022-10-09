@@ -80,7 +80,7 @@ userRouter.post(
 )
 
 // Route to block a specific user
-userRouter.post(
+userRouter.get(
     '/blockUser/:id',
     isAuthenticated,
     userController.blockUserController

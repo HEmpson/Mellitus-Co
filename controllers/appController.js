@@ -5,12 +5,14 @@ const {
     getUserPosts,
     getPostsInCategory,
 } = require('../models/post')
+
 const {
     User,
     getAllFriends,
     getUserInfo,
     getAllBlockedUsers,
 } = require('../models/user')
+
 const { Category, retriveCategories } = require('../models/category')
 const db = require('../models/index')
 
