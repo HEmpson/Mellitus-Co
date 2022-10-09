@@ -34,7 +34,7 @@
             <!-- change status -->
             <form action="/user/changeStatus/{{user._id}}" method="POST">
                 <div>
-                    <label for="newStatus" class="my-3" style="vertical-align: middle;">New Status:&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<textarea id="newStatus" name="status" value = "{{user.status}}"></textarea> </label>
+                    <label for="newStatus" class="my-3" style="vertical-align: middle;">New Status:&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<textarea id="newStatus" name="status" > {{user.status}}</textarea> </label>
                     
                     <button type="submit" style="margin-left: 10%;">Change</button>
                 </div>
@@ -45,9 +45,9 @@
     <div class="row justify-content-center">
         <div class="col-6">
             <!-- change description -->
-            <form action="#" method="POST">
+            <form action="/user/changeDescription/{{user._id}}" method="POST">
                 <div>
-                    <label for="newDescription">New Description: &nbsp; &nbsp; &nbsp; <textarea id="newDescription" name="newDescription">{{user.description}}</textarea></label>
+                    <label for="newDescription">New Description: &nbsp; &nbsp; &nbsp; <textarea id="newDescription" name="description">{{user.description}}</textarea></label>
                     <button type="submit" style="margin-left: 10%;">Change</button>
                 </div>
             </form>
