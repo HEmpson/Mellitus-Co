@@ -40,10 +40,13 @@
             <li class="nav-item w-100">
                 <a href="/profile/{{user.id}}" class="nav-link text-light pl-4">My Profile</a>
             </li>
-
+            
+            <!--Blocked users, can be viewed by admin only-->
+            {{#if checkAdmin}}
             <li class="nav-item w-100">
-                <a href="/blockedUsers/{{user.id}}" class="nav-link text-light pl-4">BlockedUsers</a>
+                <a href="/blockedUsers" class="nav-link text-light pl-4">Blocked Users</a>
             </li>
+            {{/if}}
 
             
         </ul>
