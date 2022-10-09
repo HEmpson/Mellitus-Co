@@ -174,6 +174,14 @@ const getEditProfile = async (req, res) => {
     })
 }
 
+// direct to friends page
+const getAdmin = async (req, res) => {
+    res.render('admin.hbs', {
+        pageName: 'Admin',
+        user: req.user,
+    })
+}
+
 // export the functions
 module.exports = {
     getLoginPage,
@@ -186,4 +194,5 @@ module.exports = {
     getCategoryFiles,
     getRegistration,
     getEditProfile,
+    getAdmin,
 }
