@@ -40,4 +40,6 @@ appRouter.get('/categories/:id', isAuthenticated, appController.getCategories)
 appRouter.get('/registration', appController.getRegistration)
 appRouter.get('/editProfile', isAuthenticated, appController.getEditProfile)
 
+appRouter.get('/blockedUser', appController.getBlockedUsers)
+
 module.exports = appRouter

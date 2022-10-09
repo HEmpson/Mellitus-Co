@@ -5,7 +5,12 @@ const {
     getUserPosts,
     getPostsInCategory,
 } = require('../models/post')
-const { User, getAllFriends, getUserInfo } = require('../models/user')
+const {
+    User,
+    getAllFriends,
+    getUserInfo,
+    getAllBlockedUsers,
+} = require('../models/user')
 const { Category, retriveCategories } = require('../models/category')
 const db = require('../models/index')
 
@@ -174,10 +179,10 @@ const getEditProfile = async (req, res) => {
     })
 }
 
-// direct to friends page
-const getAdmin = async (req, res) => {
-    res.render('admin.hbs', {
-        pageName: 'Admin',
+// direct to admin page so users can be unblocked
+const getBlockedUsers = async (req, res) => {
+    res.render('blockedUsers.hbs', {
+        pageName: 'blockedUsers',
         user: req.user,
     })
 }
@@ -194,5 +199,5 @@ module.exports = {
     getCategoryFiles,
     getRegistration,
     getEditProfile,
-    getAdmin,
+    getBlockedUsers,
 }
