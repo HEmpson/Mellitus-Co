@@ -14,6 +14,15 @@ const categorySchema = new mongoose.Schema({
 
 const Category = mongoose.model('Category', categorySchema, 'category')
 
+// Gets the name of a category from its id
+const getCategoryName = async (categoryId) => {
+    try {
+        return await Category.findOne({ _id: categoryId }).name
+    } catch (err) {
+        return 'None'
+    }
+}
+
 // Checks if User has permission to make changes to a category
 const hasCategoryEditPermissions = (category, user) => {
     try {
@@ -93,5 +102,6 @@ module.exports = {
     createCategory,
     renameCategory,
     retriveCategories,
+    getCategoryName,
     hasCategoryEditPermissions,
 }
