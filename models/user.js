@@ -291,14 +291,14 @@ const setDescription = async (userId, requestingUser, description) => {
 // allows an admin to block a user
 const blockUser = async (adminUser, normalUserId) => {
     if (hasBlockingPermissions(adminUser)) {
-        await User.updateOne({ _id: normalUserId}, {blocked: true})
+        await User.updateOne({ _id: normalUserId }, { blocked: true })
     }
 }
 
 // allows an admin to unblock a user
 const unblockUser = async (adminUser, normalUserId) => {
     if (hasBlockingPermissions(adminUser)) {
-        await User.updateOne({ _id: normalUserId}, {blocked: false})
+        await User.updateOne({ _id: normalUserId }, { blocked: false })
     }
 }
 
