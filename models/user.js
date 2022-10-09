@@ -302,6 +302,12 @@ const unblockUser = async (adminUser, normalUserId) => {
     }
 }
 
+const getAllBlockedUsers = async () => {
+    const blockedUsers = await User.find({ blocked: true })
+    console.log(blockedUsers)
+    return blockedUsers
+}
+
 const User = mongoose.model('User', userSchema, 'user')
 
 module.exports = {
@@ -318,4 +324,5 @@ module.exports = {
     hasBlockingPermissions,
     unblockUser,
     blockUser,
+    getAllBlockedUsers,
 }
