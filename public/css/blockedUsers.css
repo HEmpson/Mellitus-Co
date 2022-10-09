@@ -1,0 +1,9 @@
+.unblockPhoto {
+    height: 12rem;
+    align-items: center;
+}
+
+.unblockButton {
+    background-color: green;
+    color:aliceblue;
+}
