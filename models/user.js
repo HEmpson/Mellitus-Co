@@ -304,7 +304,6 @@ const unblockUser = async (adminUser, normalUserId) => {
 
 const getAllBlockedUsers = async () => {
     const blockedUsers = await User.find({ blocked: true })
-    console.log(blockedUsers)
     return blockedUsers
 }
 
