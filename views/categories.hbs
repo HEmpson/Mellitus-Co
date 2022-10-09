@@ -95,9 +95,9 @@
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-body text-center">
-                                                <form action="posts/renamePost/{{this._id}}" method="POST">
+                                                <form action="/categories/rename/{{this._id}}" method="POST">
                                                     <label for="newname">New Category Name: </label>
-                                                    <input type="text" name="filename" id="newname" value="{{this.filename}}"
+                                                    <input type="text" name="name" id="newname" value="{{this.name}}"
                                                         required>
                                                     <button type="submit">Change</button>
                                                 </form>
