@@ -7,7 +7,7 @@ const { deleteCategory } = require('../models/post')
 const createCategoryController = (req, res) => {
     const body = req.body
     createCategory(body.name, req.user)
-    return res.redirect('/dashboard')
+    return res.redirect('back')
 }
 
 // Controller function for renaming categories
@@ -20,7 +20,7 @@ const renameCategoryController = (req, res) => {
 // Controller function for deleting categories
 const deleteCategoryController = (req, res) => {
     deleteCategory(req.params.id, req.user)
-    return res.redirect('/dashboard')
+    return res.redirect('back')
 }
 
 module.exports = {
