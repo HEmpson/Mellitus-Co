@@ -81,14 +81,14 @@ userRouter.post(
 
 // Route to block a specific user
 userRouter.post(
-    '/blockUser',
+    '/blockUser/:id',
     isAuthenticated,
     userController.blockUserController
 )
 
 // Route to unblock a specific user
-userRouter.post(
-    '/unblockUser',
+userRouter.get(
+    '/unblockUser/:id',
     isAuthenticated,
     userController.unblockUserController
 )

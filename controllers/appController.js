@@ -181,9 +181,11 @@ const getEditProfile = async (req, res) => {
 
 // direct to admin page so users can be unblocked
 const getBlockedUsers = async (req, res) => {
+    const blockedUsers = await getAllBlockedUsers()
     res.render('blockedUsers.hbs', {
         pageName: 'blockedUsers',
         user: req.user,
+        blockedUsers: blockedUsers,
     })
 }
 
