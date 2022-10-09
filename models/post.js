@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 const { User } = require('./user')
-const { hasCategoryEditPermissions, Category } = require('../models/category')
+const {
+    hasCategoryEditPermissions,
+    Category,
+    getCategoryName,
+} = require('../models/category')
 const db = require('./index')
 
 const postSchema = new mongoose.Schema({
@@ -43,6 +47,13 @@ const filterVisiblePosts = async (posts, user) => {
                     currentPost,
                     user
                 )
+                if (currentPost.categoryId) {
+                    currentPost.categoryName = await getCategoryName(
+                        currentPost.categoryId
+                    )
+                } else {
+                    currentPost.categoryName = 'None'
+                }
                 filteredPosts[filteredPosts.length] = currentPost
             }
         }
@@ -318,7 +329,7 @@ const changeVisibility = async (postId, visibility, user) => {
         ) {
             return
         } else if (hasPostEditPermissions(post, user)) {
-            await Post.updateOne({ _id: postId }, {visibility: visibility})
+            await Post.updateOne({ _id: postId }, { visibility: visibility })
         }
     } catch (err) {
         console.log(err)
