@@ -14,7 +14,7 @@ const createCategoryController = (req, res) => {
 const renameCategoryController = (req, res) => {
     const body = req.body
     renameCategory(req.params.id, body.name, req.user)
-    return res.redirect('/dashboard')
+    return res.redirect('back')
 }
 
 // Controller function for deleting categories
