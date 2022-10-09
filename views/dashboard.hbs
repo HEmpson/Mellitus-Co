@@ -243,6 +243,9 @@
                                                             <option value="Public" label="Public"></option>
                                                             <option value="Friends" label="Friends"></option>
                                                             <option value="Private" label="Private"></option>
+                                                            {{#each ../allCategories}}
+                                                            <option value="{{this._id}}" label="{{this.name}}"></option>
+                                                            {{/each}}
                                                         </select>
                                                     </form>
                                                 </div>
@@ -356,6 +359,7 @@
                         </div>
 
                         {{!-- PIpeLine Comments --}}
+                        
 
                         <!-- Detailed Post Modal -->
                         <div class="modal fade" id="foryouModal{{@index}}" tabindex="-1"
@@ -393,6 +397,9 @@
                                                             <option value="Public" label="Public"></option>
                                                             <option value="Friends" label="Friends"></option>
                                                             <option value="Private" label="Private"></option>
+                                                            {{#each ../allCategories}}
+                                                            <option value="{{this._id}}" label="{{this.name}}"></option>
+                                                            {{/each}}
                                                         </select>
                                                     </form>
                                                 </div>
@@ -458,12 +465,15 @@
                         </div>  
 
                         {{/each}}
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <script>
     $('#city').focus(function () {
