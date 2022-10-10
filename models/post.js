@@ -372,7 +372,7 @@ const deleteCategory = async (categoryId, user) => {
             await Category.deleteOne({ _id: categoryId })
 
             // Delist Category from User Category list
-            await Category.updateOne(
+            await User.updateOne(
                 { _id: user._id },
                 { $pull: { categories: categoryId } }
             )
