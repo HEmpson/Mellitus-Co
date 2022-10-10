@@ -6,6 +6,7 @@ const {
     setDescription,
     blockUser,
     unblockUser,
+    changePassword,
 } = require('../models/user')
 const bcrypt = require('bcryptjs')
 

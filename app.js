@@ -31,6 +31,9 @@ app.engine(
             allowProtoPropertiesByDefault: true,
             allowProtoMethodsByDefault: true,
         },
+        helpers: {
+            checkAdmin: (role) => role === 'Admin',
+        },
     })
 )
 

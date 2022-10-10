@@ -34,8 +34,10 @@
             <!-- change status -->
             <form action="/user/changeStatus/{{user._id}}" method="POST">
                 <div>
-                    <label for="newStatus" class="my-3" style="vertical-align: middle;">New Status:&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<textarea id="newStatus" name="newStatus">{{user.status}}</textarea> </label>
-                    
+                    <label for="newStatus" class="my-3" style="vertical-align: middle;">New Status:&nbsp; &nbsp;
+                        &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<textarea id="newStatus"
+                            name="status"> {{user.status}}</textarea> </label>
+
                     <button type="submit" style="margin-left: 10%;">Change</button>
                 </div>
             </form>
@@ -45,9 +47,29 @@
     <div class="row justify-content-center">
         <div class="col-6">
             <!-- change description -->
-            <form action="#" method="POST">
+            <form action="/user/changeDescription/{{user._id}}" method="POST">
                 <div>
-                    <label for="newDescription">New Description: &nbsp; &nbsp; &nbsp; <textarea id="newDescription" name="newDescription">{{user.description}}</textarea></label>
+                    <label for="newDescription">New Description: &nbsp; &nbsp; &nbsp; <textarea id="newDescription"
+                            name="description">{{user.description}}</textarea></label>
+                    <button type="submit" style="margin-left: 10%;">Change</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="py-3"></div>
+    <!-- change password -->
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form action="/user/changePassword" method="POST">
+                <div>
+                    <label for="oldPassword">Old Password: </label>
+                    <input id="oldPassword" type="password" name="oldPass" style="margin-left:9%">
+
+                </div>
+                <div class="py-3"></div>
+                <div>
+                    <label for="newPassword">New Password: </label>
+                    <input id="newPassword" type="password" name="newPass" style="margin-left:9%">
                     <button type="submit" style="margin-left: 10%;">Change</button>
                 </div>
             </form>
