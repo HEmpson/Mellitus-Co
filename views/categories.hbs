@@ -83,7 +83,14 @@
                                                         Rename
                                                 </a>
                                             </li>
-                                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                                            <li>
+                                                <form action="/categories/delete/{{this._id}}" method="post">
+                                                    <button type="submit">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                            
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
