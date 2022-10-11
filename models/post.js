@@ -39,6 +39,12 @@ const filterVisiblePosts = async (posts, user) => {
             let poster = await User.findOne({
                 _id: currentPost.createdBy,
             }).lean()
+
+            //get poster name
+            currentPost.createdByName = (
+                await User.findOne({ _id: publicPosts[i].createdBy })
+            ).displayName
+
             if (
                 hasPostDownloadPermissions(currentPost, user) &&
                 !poster.blocked

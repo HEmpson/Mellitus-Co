@@ -29,34 +29,13 @@ const getDashboard = async (req, res) => {
     const publicPosts = await getPublicPosts(req.user)
     const friendsPosts = await getFriendsPosts(req.user, req.user)
 
-    const publicDashboardPosts = []
-    const friendDashboardPosts = []
-
-    // get all public posts
-    for (let i = 0; i < publicPosts.length; i++) {
-        let newPublicPost = publicPosts[i]
-        newPublicPost.createdByName = (
-            await User.findOne({ _id: publicPosts[i].createdBy })
-        ).displayName
-        publicDashboardPosts[i] = newPublicPost
-    }
-
-    // get all friends posts
-    for (let i = 0; i < friendsPosts.length; i++) {
-        let newFriendPost = friendsPosts[i]
-        newFriendPost.createdByName = (
-            await User.findOne({ _id: friendsPosts[i].createdBy })
-        ).displayName
-        friendDashboardPosts[i] = newFriendPost
-    }
-
     // Get Categories
     let categories = await retriveCategories(req.user, req.user)
 
     res.render('dashboard.hbs', {
         pageName: 'Dashboard',
-        publicPosts: publicDashboardPosts,
-        friendsPosts: friendDashboardPosts,
+        publicPosts: publicPosts,
+        friendsPosts: friendsPosts,
         allCategories: categories,
         user: req.user,
     })
