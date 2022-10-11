@@ -33,48 +33,82 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="inputName" placeholder="Search Documents">
+                        <input type="text" id = "search-box" onkeyup="sendData(this)">
                     </div>
                 </form>
+
+        
+                
+                <script>
+                    async function fetchHtmlAsText(url) {
+                        return await (await fetch(url)).text();
+                    }
+
+                    function sendData(search) {
+                        const searchResults = document.getElementById("searchResults");
+                        let match = search.value.match(/^[a-zA-Z ]*/);
+                        let match2 = search.value.match(/\s*/);
+                        fetch('/posts/getPosts', {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({payload: search.value})
+                        }).then(res => res.json()).then( async data => {
+                            let payload = data.payload;
+                            console.log(payload)
+                            searchResults.innerHTML = "";
+                            if (payload.length < 1){
+                                searchResults.innerHTML = "<p> Sorry <p/>";
+                                return;
+                            }
+                            for (x=0; x<payload.length; x++){
+                                searchResults.innerHTML += await fetchHtmlAsText("/views/searchResult.html");
+                            }
+                           
+                            return;
+                        })
+                    }
+                </script>
 
                 <div>
                     <h2>Search Results Looped Below</h2>
                 </div>
 
-                <div class="card gedf-card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
+                <section id="searchResults">
+                    <div class="card gedf-card">
+                        <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="mr-2">
-                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                </div>
-                                <div class="ml-2">
-                                    <div class="h5 m-0">Post Author</div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-2">
+                                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                    </div>
+                                    <div class="ml-2">
+                                        <div class="h5 m-0">Post Author</div>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
+                        <div class="card-body">
+                            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>Created Date</div>
 
+                            <!-- Placeholder link, Instead of opening detailed view it currently downloads file immediately -->
+
+                            <a>
+                                <h5 class="card-title">fileName</h5>
+                            </a>
+
+                            <p class="card-text" class="btn btn-primary" data-toggle="modal"
+                                data-target="#exampleModalCenter">
+                                Post Description
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+                            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                            <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>Created Date</div>
-
-                        <!-- Placeholder link, Instead of opening detailed view it currently downloads file immediately -->
-
-                        <a>
-                            <h5 class="card-title">fileName</h5>
-                        </a>
-
-                        <p class="card-text" class="btn btn-primary" data-toggle="modal"
-                            data-target="#exampleModalCenter">
-                            Post Description
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                    </div>
-                </div>
+                </section>
 
             </div>
         </div>
