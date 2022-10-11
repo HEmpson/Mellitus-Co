@@ -39,16 +39,11 @@ const filterVisiblePosts = async (posts, user) => {
             let poster = await User.findOne({
                 _id: currentPost.createdBy,
             }).lean()
-
-            //get poster name
-            currentPost.createdByName = (
-                await User.findOne({ _id: publicPosts[i].createdBy })
-            ).displayName
-
             if (
                 hasPostDownloadPermissions(currentPost, user) &&
                 !poster.blocked
             ) {
+                currentPost.createdByName = poster.displayName
                 currentPost.hasEditPermissions = hasPostEditPermissions(
                     currentPost,
                     user
@@ -60,6 +55,7 @@ const filterVisiblePosts = async (posts, user) => {
                 } else {
                     currentPost.categoryName = 'None'
                 }
+
                 filteredPosts[filteredPosts.length] = currentPost
             }
         }
@@ -394,7 +390,9 @@ const NUM_RESULTS_SHOWN = 5
 const getPostsLive = async (payload, user) => {
     let search = await Post.find({
         filename: { $regex: new RegExp('^' + payload + '.*', 'i') },
-    }).exec()
+    })
+        .lean()
+        .exec()
 
     // Filter out searches user does not have permissions for
     search = await filterVisiblePosts(search, user)
