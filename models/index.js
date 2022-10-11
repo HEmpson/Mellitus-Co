@@ -76,7 +76,7 @@ const downloadFile = async (fileId, res) => {
     } catch (err) {
         // Return Error message if file failed to download
         console.log('File failed to download')
-        return res.redirect('/dashboard')
+        return res.redirect('back')
     }
 }
 
@@ -100,6 +100,38 @@ const renameFile = async (fileId, newFilename) => {
 // Takes a fileId and deletes the corresponding file with that Id
 const deleteFile = async (fileId) => {
     await bucket.delete(ObjectId(fileId))
+}
+
+// Get Profile Image
+const getProfileImage = async (imageId, res) => {
+    try {
+        // Check if file exists and if it does download it
+        await bucket
+            .find({
+                _id: ObjectId(imageId),
+            })
+            .toArray((err, files) => {
+                if (!files || files.length === 0) {
+                    return res.status(404).json({
+                        err: 'no files exist',
+                    })
+                }
+                const file = files[0]
+
+                // Open read stream to user
+                if (
+                    file.contentType === 'image/jpeg' ||
+                    file.contentType === 'image/png'
+                ) {
+                    bucket
+                        .createReadStream({ _id: ObjectId(imageId) })
+                        .pipe(res)
+                }
+            })
+    } catch (err) {
+        // Return Error message if file failed to download
+        return res.status(404).json({ err: 'Not and image' })
+    }
 }
 
 // Log to console once the database is open

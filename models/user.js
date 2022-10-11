@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema({
     description: String,
     role: String,
     blocked: Boolean,
+    profileImage: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: null,
+    },
     friends: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -302,9 +306,20 @@ const unblockUser = async (adminUser, normalUserId) => {
     }
 }
 
+// Gets the list of all blocked users
 const getAllBlockedUsers = async () => {
     const blockedUsers = await User.find({ blocked: true })
     return blockedUsers
+}
+
+// Change the profile image id on the user
+const uploadProfileImage = async (imageId, user) => {
+    try {
+        await User.updateMany({ _id: user._id }, { profileImage: imageId })
+    } catch (err) {
+        console.log(err)
+        return
+    }
 }
 
 const User = mongoose.model('User', userSchema, 'user')
@@ -324,4 +339,5 @@ module.exports = {
     unblockUser,
     blockUser,
     getAllBlockedUsers,
+    uploadProfileImage,
 }

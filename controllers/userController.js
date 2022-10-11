@@ -62,6 +62,16 @@ const unblockUserController = async (req, res) => {
     return res.redirect('back')
 }
 
+// Controller function for uploading profile images
+const uploadImageController = async (req, res) => {
+    await uploadProfileImage(req.profileImage.id, req.user)
+    return res.redirect('back')
+}
+
+const getImageController = async (req, res) => {
+    await getProfileImage(req.params.id, res)
+}
+
 module.exports = {
     createAccountController,
     addNewFriendController,
@@ -71,4 +81,6 @@ module.exports = {
     changePasswordController,
     blockUserController,
     unblockUserController,
+    uploadImageController,
+    getImageController,
 }

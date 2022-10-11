@@ -2,6 +2,8 @@ const passport = require('passport')
 const express = require('express')
 const userRouter = express.Router()
 const userController = require('../controllers/userController')
+const { upload } = require('../models/index')
+const postRouter = require('./postRouter')
 
 // Authentication middleware
 const isAuthenticated = (req, res, next) => {
@@ -92,5 +94,15 @@ userRouter.get(
     isAuthenticated,
     userController.unblockUserController
 )
+
+// Post Route for uploading profile image
+postRouter.post(
+    '/uploadProfileImage',
+    upload.single('profileImage'),
+    userController.uploadImageController
+)
+
+// Get Route fo rprofile images
+postRouter.get('/profileImage/:id', userController.getImageController)
 
 module.exports = userRouter
