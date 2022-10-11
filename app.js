@@ -27,6 +27,7 @@ app.engine(
     exphbs.engine({
         defaultLayout: 'main',
         extname: 'hbs',
+        partialsDir: __dirname + '/views/partials',
         runtimeOptions: {
             allowProtoPropertiesByDefault: true,
             allowProtoMethodsByDefault: true,
