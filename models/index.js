@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const ObjectId = require('mongodb').ObjectId
 const multer = require('multer')
 const { GridFsStorage } = require('multer-gridfs-storage')
+const { User } = require('./user')
 
 // Connect to your mongo database using the MONGO_URL environmentvariable.
 // Locally, MONGO_URL will be loaded by dotenv from .env.
@@ -102,34 +103,38 @@ const deleteFile = async (fileId) => {
     await bucket.delete(ObjectId(fileId))
 }
 
-// Get Profile Image
-const getProfileImage = async (imageId, res) => {
-    try {
-        // Check if file exists and if it does download it
-        await bucket
-            .find({
-                _id: ObjectId(imageId),
-            })
-            .toArray((err, files) => {
-                if (!files || files.length === 0) {
-                    return res.status(404).json({
-                        err: 'no files exist',
-                    })
-                }
-                const file = files[0]
+// Get Profile Image of a specific user
+const getProfileImage = async (userId, res) => {
+    const user = await User.findOne({ _id: userId }).lean()
+    const imageId = user.profileImage
+    if (imageId) {
+        try {
+            // Check if file exists and if it does download it
+            await bucket
+                .find({
+                    _id: ObjectId(imageId),
+                })
+                .toArray((err, files) => {
+                    if (!files || files.length === 0) {
+                        return res.status(404).json({
+                            err: 'no files exist',
+                        })
+                    }
+                    const file = files[0]
 
-                // Open read stream to user
-                if (
-                    file.contentType === 'image/jpeg' ||
-                    file.contentType === 'image/png'
-                ) {
-                    bucket
-                        .createReadStream({ _id: ObjectId(imageId) })
-                        .pipe(res)
-                }
-            })
-    } catch (err) {
-        // Return Error message if file failed to download
+                    // Open read stream to user
+                    if (
+                        file.contentType === 'image/jpeg' ||
+                        file.contentType === 'image/png'
+                    ) {
+                        bucket.openDownloadStream(ObjectId(imageId)).pipe(res)
+                    }
+                })
+        } catch (err) {
+            // Return Error message if file failed to download
+            return res.status(404).json({ err: 'Not and image' })
+        }
+    } else {
         return res.status(404).json({ err: 'Not and image' })
     }
 }
@@ -139,4 +144,11 @@ db.once('open', async () => {
     console.log(`Mongo connection started on ${db.host}:${db.port}`)
 })
 
-module.exports = { upload, downloadFile, getFilename, renameFile, deleteFile }
+module.exports = {
+    upload,
+    downloadFile,
+    getFilename,
+    renameFile,
+    deleteFile,
+    getProfileImage,
+}

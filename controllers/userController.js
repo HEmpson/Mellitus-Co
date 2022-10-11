@@ -7,7 +7,9 @@ const {
     blockUser,
     unblockUser,
     changePassword,
+    uploadProfileImage,
 } = require('../models/user')
+const { getProfileImage } = require('../models/index')
 const bcrypt = require('bcryptjs')
 
 // to create a new account for a user
@@ -64,8 +66,13 @@ const unblockUserController = async (req, res) => {
 
 // Controller function for uploading profile images
 const uploadImageController = async (req, res) => {
-    await uploadProfileImage(req.profileImage.id, req.user)
-    return res.redirect('back')
+    try {
+        await uploadProfileImage(req.file.id, req.user)
+        return res.redirect('back')
+    } catch (err) {
+        console.log(err)
+        return res.redirect('back')
+    }
 }
 
 const getImageController = async (req, res) => {

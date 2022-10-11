@@ -96,13 +96,13 @@ userRouter.get(
 )
 
 // Post Route for uploading profile image
-postRouter.post(
+userRouter.post(
     '/uploadProfileImage',
-    upload.single('profileImage'),
+    upload.single('file'),
     userController.uploadImageController
 )
 
-// Get Route fo rprofile images
-postRouter.get('/profileImage/:id', userController.getImageController)
+// Get Route for profile images
+userRouter.get('/profileImage/:id', userController.getImageController)
 
 module.exports = userRouter
