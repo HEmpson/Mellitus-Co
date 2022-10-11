@@ -11,6 +11,7 @@
         
                 
                 <script>
+                
                     function sendData(search) {
                         const searchResults = document.getElementById("searchResults");
                         let match = search.value.match(/^[a-zA-Z ]*/);
@@ -29,38 +30,139 @@
                             }
                             searchResults.innerHTML = `<div><h3>Showing ${payload.length} results</h3></div>`
                             for (x=0; x<payload.length; x++){
-                                searchResults.innerHTML += `<div class="card gedf-card">
+                                searchResults.innerHTML += `
+                                <div class="card gedf-card">
                                     <div class="card-header">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="mr-2">
-                                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50"
+                                                        alt="">
                                                 </div>
                                                 <div class="ml-2">
-                                                    <div class="h5 m-0"> ${payload[x].createdByName} </div>
+                                                    <div class="h5 m-0"><a href="/profile/${payload[x].createdBy}" class="h5 m-0">${payload[x].createdByName}</a></div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-                                    <div class="card-body">
-                                        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>${payload[x].dateCreated}</div>
+                                    
+                                    <button type="button" class="btn" data-toggle="modal"
+                                        data-target="#searchResultModal${x}" style="padding: 0">
+                                        <div class="card-body">
+                                            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>${payload[x].dateCreated}
+                                            </div>
+                                            <a>
+                                                <h5 class="card-title">${payload[x].filename}</h5>
+                                            </a>
+                                            <p class="card-text" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#searchResultModal">
+                                                ${payload[x].description}
+                                            </p>
+                                        </div>
+                                    </button>
 
-                                        <!-- Placeholder link, Instead of opening detailed view it currently downloads file immediately -->
+                                </div>
 
-                                        <a>
-                                            <h5 class="card-title">${payload[x].filename}</h5>
-                                        </a>
+                                <!-- Detailed Post Modal -->
+                                <div class="modal fade" id="searchResultModal${x}" tabindex="-1"
+                                    aria-labelledby="postTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header text-center">
 
-                                        <p class="card-text" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#exampleModalCenter">
-                                            ${payload[x].description}
-                                        </p>
+                                                <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+
+                                                <h5 class="font-weight-bold ml-auto">${payload[x].filename}</h5>
+
+
+                                                <button type="button" class="btn-close" data-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <div class="container-fluid">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-3 category">
+                                                            <div class="tag-container-1
+                                                                        font-weight-bold">Category</div>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="tag-container-2
+                                                                        font-weight-bold">Symbol</div>
+                                                        </div>
+                                                        <div class="col-5 text-right ">
+                                                            <form action="/posts/changeVisibility/{{this._id}}" method = "POST">
+                                                                <select name="visibility" id="Visivility"
+                                                                    onchange="this.form.submit()">
+                                                                    <option value="" selected disabled hidden>${payload[x].visibility}
+                                                                    </option>
+                                                                    <option value="Public" label="Public"></option>
+                                                                    <option value="Friends" label="Friends"></option>
+                                                                    <option value="Private" label="Private"></option>
+                                                                    {{#each ../allCategories}}
+                                                                    <option value="{{this._id}}" label="{{this.name}}"></option>
+                                                                    {{/each}}
+                                                                </select>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row justify-content-center" style="margin-top:0.8em">
+                                                        <div class="col-12 fileImage-container text-center">
+                                                            <img src="https://media.istockphoto.com/vectors/contract-or-document-signing-icon-document-folder-with-
+                                                            stamp-and-text-vector-id1179640294?k=20&m=1179640294&s=612x612&w=0&h=O2IBtlV52-6gWSAeyozPIFkfZ-LzHnpXBw2tOuUToj8=" alt="File Img"
+                                                            class="profile-img">
+                                                        </div>
+                                                        <div class="col-12 text-right">
+                                                            <!-- the link to open rename modal -->
+
+                                                            <a class="card-link" data-toggle="modal"
+                                                                data-target="#sRenameModal${x}" style="margin-left: 20%;">
+                                                                Rename</a>
+                                                            <a href="/posts/download/${payload[x]._id}" style="margin-left: 3%;">
+                                                                Download </a>
+                                                            <a href="/posts/removePost/${payload[x]._id}" style="margin-left: 3%;"> Delete
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-12 small-text">
+
+                                                            <small><i class="bi bi-heart"></i> 103</small>
+                                                            <small class="time"> ${payload[x].dateCreated} </small>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-11">
+                                                            ${payload[x].description}
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer text-center">
+                                                <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+                                                <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                                                <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="card-footer">
-                                        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                                </div>
+                                
+                                
+                                <!-- the Rename Post Modal -->
+                                <div class="modal fade" id="sRenameModal${x}" tabindex="-1" aria-labelledby="postTitle"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body text-center">
+                                                <form action="posts/renamePost/${payload[x]._id}" method="POST">
+                                                    <label for="newname">New Title</label>
+                                                    <input type="text" name="filename" id="newname" value="${payload[x].filename}"
+                                                        required>
+                                                    <button type="submit">change</button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>`;
                             }
