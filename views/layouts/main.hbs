@@ -26,12 +26,18 @@
             </li>
             <li class="nav-item dropdown w-100">
                 <div class="d-flex">
-                    <a href="/files/{{user.id}}" class="nav-link text-light pl-4">Files</a>
-                    <a href="#" class="nav-link dropdown-toggle dropdown-toggle-split text-light pl-4" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="true"></a>
-                    <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdown">
-                        <li><a href="/categories/{{user.id}}" class="dropdown-item text-light pl-4 p-2">Categories</a></li>
-                        <li><a href="/allfiles/{{user.id}}" class="dropdown-item text-light pl-4 p-2">All Files</a></li>
-                    </ul>
+                    <span style="width:80%; display:inline-block;">
+                        <a href="/files/{{user.id}}" class="nav-link text-light pl-4">Files</a>
+                    </span>
+                    
+                    <span style="text-align: right;">
+                        <a href="#" class="nav-link dropdown-toggle dropdown-toggle-split text-light pl-4" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="true"></a>
+                        <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdown">
+                            <li><a href="/categories/{{user.id}}" class="dropdown-item text-light pl-4 p-2">Categories</a></li>
+                            <li><a href="/allfiles/{{user.id}}" class="dropdown-item text-light pl-4 p-2">All Files</a></li>
+                        </ul>
+                    </span>
+                    
                 </div>    
             </li>
             <li class="nav-item w-100">
