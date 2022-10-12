@@ -14,7 +14,7 @@
             alt="Sample photo">
           <div class="card-body p-4 p-md-5">
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center">Admin Registration Page</h3>
-            <form class="px-md-2" action="/user/api/createAccount" method="POST">
+            <form class="px-md-2" action="/user/api/createAdminAccount" method="POST">
 
                 <div class="d-flex flex-column">
                     <!-- User types display name -->
@@ -42,13 +42,13 @@
                         <button type="submit" class="btn btn-success btn-lg mb-1 text-center" style = "margin-top: 2rem;">Submit</button>
                     </div>
 
-                    <!-- return bottun-->
-                    <a href="/" class="text-right"><bi class="bi-arrow-return-left"></bi></a>
+                    <!-- return button-->
+                    <a href="/dashboard" class="text-right"><bi class="bi-arrow-return-left"></bi></a>
                 </div>
             </form>
 
             {{#each flash}}
-                <p>{{this}}</p>
+                <p style = "color: red">{{this}}</p>
             {{/each}}
         </div>
       </div>

@@ -26,8 +26,15 @@ const hasRole = (thisRole) => {
     }
 }
 
+// route to create a user account
 userRouter.post('/api/createAccount', userController.createAccountController)
 
+userRouter.post(
+    '/api/createAdminAccount',
+    userController.createAdminAccountController
+)
+
+// route to log into the application
 userRouter.post(
     '/login',
     passport.authenticate('local', {

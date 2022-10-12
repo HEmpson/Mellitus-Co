@@ -14,11 +14,20 @@ const bcrypt = require('bcryptjs')
 
 // to create a new account for a user
 const createAccountController = async (req, res) => {
-    let user = await createAccount(req, res)
+    let user = await createAccount(req, res, 'User')
     if (user) {
         return res.redirect('/')
     } else {
         return res.redirect('/registration')
+    }
+}
+
+const createAdminAccountController = async (req, res) => {
+    let user = await createAccount(req, res, 'Admin')
+    if (user) {
+        return res.redirect('/dashboard')
+    } else {
+        return res.redirect('/adminRegistration')
     }
 }
 
@@ -90,4 +99,5 @@ module.exports = {
     unblockUserController,
     uploadImageController,
     getImageController,
+    createAdminAccountController,
 }
