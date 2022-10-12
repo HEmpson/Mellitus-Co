@@ -152,6 +152,15 @@ const getRegistration = async (req, res) => {
     })
 }
 
+const getAdminRegistration = async (req, res) => {
+    res.render('adminRegistration.hbs', {
+        pageName: 'AdminRegistration',
+        user: req.user,
+        layout: '',
+        flash: req.flash('newAdminAccountError'),
+    })
+}
+
 // direct to edit profile page
 const getEditProfile = async (req, res) => {
     res.render('editProfile.hbs', {
@@ -183,4 +192,5 @@ module.exports = {
     getRegistration,
     getEditProfile,
     getBlockedUsers,
+    getAdminRegistration,
 }

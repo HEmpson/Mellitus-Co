@@ -38,6 +38,12 @@ appRouter.get('/friends', isAuthenticated, appController.getFriends)
 appRouter.get('/allfiles/:id', isAuthenticated, appController.getAllFiles)
 appRouter.get('/categories/:id', isAuthenticated, appController.getCategories)
 appRouter.get('/registration', appController.getRegistration)
+appRouter.get(
+    '/adminRegistration',
+    isAuthenticated,
+    hasRole('Admin'),
+    appController.getAdminRegistration
+)
 appRouter.get('/editProfile', isAuthenticated, appController.getEditProfile)
 
 appRouter.get(
