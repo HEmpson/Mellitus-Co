@@ -63,7 +63,7 @@ const createCategory = async (name, user, res) => {
 }
 
 // Renames the category with the given category ID after checking user has permission
-const renameCategory = async (categoryId, name, user) => {
+const renameCategory = async (categoryId, name, user, res) => {
     try {
         // Find category
         const category = await Category.findOne({ _id: categoryId }).lean()
@@ -73,6 +73,7 @@ const renameCategory = async (categoryId, name, user) => {
             // Rename the category
             await Category.updateOne({ _id: categoryId }, { name: name })
         }
+        return res.redirect('back')
     } catch (err) {
         console.log(err)
     }

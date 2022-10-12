@@ -12,7 +12,7 @@ const createCategoryController = (req, res) => {
 // Controller function for renaming categories
 const renameCategoryController = (req, res) => {
     const body = req.body
-    renameCategory(req.params.id, body.name, req.user)
+    renameCategory(req.params.id, body.name, req.user, res)
 }
 
 // Controller function for deleting categories
