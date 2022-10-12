@@ -43,7 +43,7 @@ const hasCategoryEditPermissions = (category, user) => {
 }
 
 // Creates a new category with the given name and adds it to the list of the user's created categories
-const createCategory = async (name, user) => {
+const createCategory = async (name, user, res) => {
     try {
         const newCategory = new Category({
             name: name,
@@ -55,6 +55,7 @@ const createCategory = async (name, user) => {
                 { _id: user._id },
                 { $push: { categories: category._id } }
             )
+            return res.redirect('back')
         })
     } catch (err) {
         console.log(err)
