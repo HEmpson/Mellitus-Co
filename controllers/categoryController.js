@@ -6,6 +6,7 @@ const { deleteCategory } = require('../models/post')
 // Controller function for handling creation of categories
 const createCategoryController = (req, res) => {
     const body = req.body
+    console.log(12)
     createCategory(body.name, req.user)
     return res.redirect('back')
 }
