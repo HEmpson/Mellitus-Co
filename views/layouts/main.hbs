@@ -42,12 +42,17 @@
             </li>
             
             <!--Blocked users, can be viewed by admin only-->
-            {{#if checkAdmin}}
-            <li class="nav-item w-100">
-                <a href="/blockedUsers" class="nav-link text-light pl-4">Blocked Users</a>
-            </li>
+            {{#if (checkAdmin user.role)}}
+                <li class="nav-item w-100">
+                    <a href="/blockedUsers" class="nav-link text-light pl-4">Blocked Users</a>
+                </li>
             {{/if}}
 
+            {{#if (checkAdmin user.role)}}
+                <li class="nav-item w-100">
+                    <a href="/adminRegistration" class="nav-link text-light pl-4">Register Admin</a>
+                </li>
+            {{/if}}
             
         </ul>
         

@@ -6,21 +6,18 @@ const { deleteCategory } = require('../models/post')
 // Controller function for handling creation of categories
 const createCategoryController = (req, res) => {
     const body = req.body
-    createCategory(body.name, req.user)
-    return res.redirect('back')
+    createCategory(body.name, req.user, res)
 }
 
 // Controller function for renaming categories
 const renameCategoryController = (req, res) => {
     const body = req.body
-    renameCategory(req.params.id, body.name, req.user)
-    return res.redirect('back')
+    renameCategory(req.params.id, body.name, req.user, res)
 }
 
 // Controller function for deleting categories
 const deleteCategoryController = (req, res) => {
-    deleteCategory(req.params.id, req.user)
-    return res.redirect('back')
+    deleteCategory(req.params.id, req.user, res)
 }
 
 module.exports = {

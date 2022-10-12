@@ -60,18 +60,20 @@ userSchema.pre('save', function save(next) {
 })
 
 // to create a user a new account
-const createAccount = async (req, res) => {
+const createAccount = async (req, res, userType) => {
     const newUser = req.body
 
     // checks if email is a valid email
     if (!verifyNewPatientProfile(newUser)) {
         req.flash('newAccountError', 'Invalid Email Address')
+        req.flash('newAdminAccountError', 'Invalid Email Address')
         return
     }
 
     // email already exists
     if (await User.findOne({ username: newUser.username })) {
         req.flash('newAccountError', 'User already exists')
+        req.flash('newAdminAccountError', 'Admin already exists')
         return
     }
 
@@ -82,7 +84,7 @@ const createAccount = async (req, res) => {
             displayName: newUser.displayName,
             status: ' ',
             description: ' ',
-            role: 'User',
+            role: userType,
             blocked: false,
             friends: [],
             files: [],
@@ -96,6 +98,7 @@ const createAccount = async (req, res) => {
     } catch (err) {
         await User.deleteOne({ username: newUser.username })
         req.flash('newAccountError', 'Invalid Data Type(s) Entered')
+        req.flash('newAdminAccountError', 'Invalid Data Type(s) Entered')
         return
     }
 }

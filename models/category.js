@@ -43,7 +43,7 @@ const hasCategoryEditPermissions = (category, user) => {
 }
 
 // Creates a new category with the given name and adds it to the list of the user's created categories
-const createCategory = async (name, user) => {
+const createCategory = async (name, user, res) => {
     try {
         const newCategory = new Category({
             name: name,
@@ -55,6 +55,7 @@ const createCategory = async (name, user) => {
                 { _id: user._id },
                 { $push: { categories: category._id } }
             )
+            return res.redirect('back')
         })
     } catch (err) {
         console.log(err)
@@ -62,7 +63,7 @@ const createCategory = async (name, user) => {
 }
 
 // Renames the category with the given category ID after checking user has permission
-const renameCategory = async (categoryId, name, user) => {
+const renameCategory = async (categoryId, name, user, res) => {
     try {
         // Find category
         const category = await Category.findOne({ _id: categoryId }).lean()
@@ -72,6 +73,7 @@ const renameCategory = async (categoryId, name, user) => {
             // Rename the category
             await Category.updateOne({ _id: categoryId }, { name: name })
         }
+        return res.redirect('back')
     } catch (err) {
         console.log(err)
     }

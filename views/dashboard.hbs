@@ -218,14 +218,16 @@
                                                 </div>
                                                 <div class="col-12 text-right">
                                                     <!-- the link to open rename modal -->
-
+                                                    {{#if hasEditPermissions}}
                                                     <a class="card-link" data-dismiss="modal" data-toggle="modal"
                                                         data-target="#renameModal{{this._id}}" style="margin-left: 20%;">
                                                         Rename</a>
-                                                    <a href="/posts/download/{{this._id}}" style="margin-left: 3%;">
-                                                        download </a>
                                                     <a href="/posts/removePost/{{this._id}}" style="margin-left: 3%;"> Delete
                                                     </a>
+                                                    {{/if}}
+
+                                                    <a href="/posts/download/{{this._id}}" style="margin-left: 3%;">
+                                                        Download </a>
                                                 </div>
                                                 <div class="col-12 small-text">
 
@@ -246,10 +248,6 @@
                                         <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
                                         <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
                                         <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                                        {{!-- <a class="card-link" data-toggle="modal"
-                                            data-target="#exampleModalCenter{{@index}}">
-                                            View Details
-                                        </a> --}}
                                     </div>
                                 </div>
                             </div>
@@ -266,7 +264,7 @@
                                             <label for="newname">New Title</label>
                                             <input type="text" name="filename" id="newname" value="{{this.filename}}"
                                                 required>
-                                            <button type="submit">change</button>
+                                            <button type="submit">Change</button>
                                         </form>
                                     </div>
                                 </div>
