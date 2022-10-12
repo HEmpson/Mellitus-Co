@@ -21,15 +21,13 @@
 
 <!-- Layout of the page -->
 <form class="search-button form-inline">
-    <div class="d-flex" style="margin-left: 10%">
+    <div class="d-flex">
         <input class="form-control mr-1" type="search" id="city" placeholder="Search" aria-label="Search">
     </div>
 </form>
 
 <!-- Search modal -->
 {{> search}}
-
-
 
 
 <div class="container-fluid gedf-wrapper">
@@ -97,9 +95,9 @@
 
         <!-- This div is the wide document pane -->
         <div class="col-md-9 gedf-main order-md-1">
-            <div class="card-header">
+            <div class="card-header border border-secondary">
                 <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
+                    <li class="nav-item border-secondary">
                         <a class="nav-link active" id="public-tab" data-toggle="tab" href="#postsPublic" role="tab"
                             aria-controls="postsPublic" aria-selected="true">
                             Public
@@ -122,7 +120,7 @@
                         aria-labelledby="public-tab">
                         <!-- A single post or view of the document, loop the below div using hbs variables -->
                         {{#each publicPosts}}
-                        <div class="card gedf-card">
+                        <div class="card gedf-card" style="box-shadow: 0px 0px 5px #888888">
                             <div class="card-header">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-between align-items-center">
