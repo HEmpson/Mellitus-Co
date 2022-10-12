@@ -124,3 +124,8 @@ a:hover{
 .sidebar {
     background-color: #86615c;
 }
+
+.login-title{
+    margin-top:12px;
+    font-weight: bold;
+}

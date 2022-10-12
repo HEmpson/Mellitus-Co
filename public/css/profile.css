@@ -103,8 +103,8 @@ margin-left: 8%;
     font-family: Arial, Helvetica, sans-serif;
 }
 .image-cropper {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     position:relative;
     margin-left: 5%;
     overflow:hidden;
