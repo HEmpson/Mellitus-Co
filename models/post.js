@@ -358,7 +358,7 @@ const getPostsInCategory = async (category, user) => {
 
 // Deletes the category with the
 //given category ID after checking user has permission
-const deleteCategory = async (categoryId, user) => {
+const deleteCategory = async (categoryId, user, res) => {
     try {
         // Find category
         const category = await Category.findOne({ _id: categoryId }).lean()
@@ -379,6 +379,7 @@ const deleteCategory = async (categoryId, user) => {
                 { $pull: { categories: categoryId } }
             )
         }
+        return res.redirect('back')
     } catch (err) {
         console.log(err)
     }

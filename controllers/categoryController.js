@@ -17,8 +17,7 @@ const renameCategoryController = (req, res) => {
 
 // Controller function for deleting categories
 const deleteCategoryController = (req, res) => {
-    deleteCategory(req.params.id, req.user)
-    return res.redirect('back')
+    deleteCategory(req.params.id, req.user, res)
 }
 
 module.exports = {
