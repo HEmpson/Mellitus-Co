@@ -45,7 +45,7 @@ img.profile-photo-lg {
 /*-- modal area --*/
 
 .modal-content {
-    background: linear-gradient(60deg, var(--color-taupe) , var(--color-pink));
+    background: whitesmoke;
 }
 
 .text-white {

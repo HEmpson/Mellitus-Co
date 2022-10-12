@@ -19,9 +19,9 @@
 
                 <div class="modal-header text-center">
 
-                    <h4 class="modal-title w-100 font-weight-bold text-white">Add Friend</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <h4 class="modal-title w-100 font-weight-bold">Add Friend</h4>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
                     </button> 
                 </div>
 
@@ -30,15 +30,15 @@
                     <!-- Form to search for new friends -->
                     <form action="/user/addNewFriend" method="POST">
                         <div class="md-form mb-5">
-                            <label class="text-white"  data-error="wrong" data-success="right" for="defaultForm-email">Search email</label>
-                            <input type="text" id="email" name="email" class="form-control validate">
+                            <label class="h5 text-dark"  data-error="wrong" data-success="right" for="defaultForm-email">Search email</label>
+                            <input type="text" id="email" name="email" class="form-control validate" style="margin-top:1.8rem;">
                         </div>
                         
                 </div>
 
                 <!--  Button to add new friends  -->
                 <div class="modal-footer d-flex justify-content-center">
-                    <button type="submit" class="btn btn-dark">Add Friend</button>
+                    <button type="submit" class="btn btn-primary">Add Friend</button>
                 </div>
     
             </div>

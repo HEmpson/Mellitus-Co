@@ -25,7 +25,7 @@
                             console.log(payload)
                             searchResults.innerHTML = "";
                             if (payload.length < 1){
-                                searchResults.innerHTML = "<p> Sorry no matching documents found <p/>";
+                                searchResults.innerHTML = "<p> Sorry, no matching documents found </p>";
                                 return;
                             }
                             searchResults.innerHTML = `<div><h3>Showing ${payload.length} results</h3></div>`
