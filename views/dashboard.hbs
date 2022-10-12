@@ -175,7 +175,19 @@
                                             <div class="row align-items-center">
                                                 <div class="col-3 category">
                                                     <div class="tag-container-1
-                                                                font-weight-bold">Category</div>
+                                                                font-weight-bold">
+                                                        <form action="/posts/assignToCategory/{{this._id}}" method = "POST">
+                                                        <select name="categoryId" id="Visivility"
+                                                            onchange="this.form.submit()">
+                                                            <option value="" selected disabled hidden>{{this.categoryName}}
+                                                            </option>
+                                                            <option value="" label="None"></option>
+                                                            {{#each ../allCategories}}
+                                                            <option value="{{this._id}}" label="{{this.name}}"></option>
+                                                            {{/each}}
+                                                        </select>
+                                                    </form>
+                                                     </div>
                                                 </div>
                                                 <div class="col-3">
                                                     <div class="tag-container-2
@@ -328,7 +340,7 @@
                                             <div class="row align-items-center">
                                                 <div class="col-3 category">
                                                     <div class="tag-container-1
-                                                                font-weight-bold">Category</div>
+                                                                font-weight-bold">{{this.categoryName}}</div>
                                                 </div>
                                                 <div class="col-3">
                                                     <div class="tag-container-2

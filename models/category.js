@@ -17,7 +17,9 @@ const Category = mongoose.model('Category', categorySchema, 'category')
 // Gets the name of a category from its id
 const getCategoryName = async (categoryId) => {
     try {
-        return await Category.findOne({ _id: categoryId }).name
+        const category = await Category.findOne({ _id: categoryId }).lean()
+        const name = category.name
+        return name
     } catch (err) {
         return 'None'
     }
