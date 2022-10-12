@@ -1,52 +1,78 @@
 <head>
-    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/editProfile.css">
 </head>
 <!-- The Froms to edit profile -->
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
+    <div class="row justify-content-center">
+        <div class="col-6">
             <!-- change name -->
             <form action="#" method="POST" enctype="multipart/form-data">
                 <div>
-                    <label for="newName">New Name</label>
-                    <input id="newName" type="text" name="newName" value="name">
-                    <button type="submit">Change</button>
+                    <label for="newName">New Name: </label>
+                    <input id="newName" type="text" name="newName" value={{user.displayName}} style="margin-left:9%">
+                    <button type="submit" style="margin-left: 9%;">Change</button>
                 </div>
             </form>
         </div>
-
-        <div class="col-12">
+        <div class="py-4"></div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-6">
             <!-- change profile image -->
             <form action="#" method="POST" enctype="multipart/form-data">
                 <div>
-                    <label for="profileImg">New Profile Image</label>
-                    <input id="profileImg" type="file" name="profileImg">
+                    <label for="profileImg">New Profile Image:</label>
+                    <input id="profileImg" type="file" name="profileImg" style="width:31.5%;margin-left: 2%;">
                     <button type="submit">Change</button>
                 </div>
             </form>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <!-- change status -->
-                <form action="#" method="POST" enctype="multipart/form-data">
-                    <div>
-                        <label for="newStatus">New Status</label>
-                        <input id="newStatus" type="text" name="newStatus" value="Status">
-                        <button type="submit">Change</button>
-                    </div>
+    </div>
+    <div class="py-3"></div>
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <!-- change status -->
+            <form action="/user/changeStatus/{{user._id}}" method="POST">
+                <div>
+                    <label for="newStatus" class="my-3" style="vertical-align: middle;">New Status:&nbsp; &nbsp;
+                        &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<textarea id="newStatus"
+                            name="status"> {{user.status}}</textarea> </label>
 
-                </form>
-                <div class="row">
-                    <div class="col-12">
-                        <!-- change description -->
-                        <form action="#" method="POST">
-                            <div>
-                                <label for="newDescription">New Description</label>
-                                <textarea id="newDescription" name="newDescription">description</textarea>
-                                <button type="submit">Change</button>
-                            </div>
-                        </form>
-                    </div>
+                    <button type="submit" style="margin-left: 10%;">Change</button>
                 </div>
-            </div>
+            </form>
         </div>
+    </div>
+    <div class="py-3"></div>
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <!-- change description -->
+            <form action="/user/changeDescription/{{user._id}}" method="POST">
+                <div>
+                    <label for="newDescription">New Description: &nbsp; &nbsp; &nbsp; <textarea id="newDescription"
+                            name="description">{{user.description}}</textarea></label>
+                    <button type="submit" style="margin-left: 10%;">Change</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="py-3"></div>
+    <!-- change password -->
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form action="/user/changePassword" method="POST">
+                <div>
+                    <label for="oldPassword">Old Password: </label>
+                    <input id="oldPassword" type="password" name="oldPass" style="margin-left:9%">
+
+                </div>
+                <div class="py-3"></div>
+                <div>
+                    <label for="newPassword">New Password: </label>
+                    <input id="newPassword" type="password" name="newPass" style="margin-left:9%">
+                    <button type="submit" style="margin-left: 10%;">Change</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema({
     description: String,
     role: String,
     blocked: Boolean,
+    profileImage: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: null,
+    },
     friends: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -228,6 +232,19 @@ const hasProfileEditPermissions = (userId, requestingUser) => {
     }
 }
 
+// checks if a user has the permission to block a user
+const hasBlockingPermissions = (user) => {
+    try {
+        if (user.role === 'Admin') {
+            return true
+        }
+        return false
+    } catch (err) {
+        console.log(err)
+        return false
+    }
+}
+
 // function to allow a user to change their password
 const changePassword = async (req, res) => {
     const user = await User.findOne({ _id: req.user._id })
@@ -275,6 +292,36 @@ const setDescription = async (userId, requestingUser, description) => {
     }
 }
 
+// allows an admin to block a user
+const blockUser = async (adminUser, normalUserId) => {
+    if (hasBlockingPermissions(adminUser)) {
+        await User.updateOne({ _id: normalUserId }, { blocked: true })
+    }
+}
+
+// allows an admin to unblock a user
+const unblockUser = async (adminUser, normalUserId) => {
+    if (hasBlockingPermissions(adminUser)) {
+        await User.updateOne({ _id: normalUserId }, { blocked: false })
+    }
+}
+
+// Gets the list of all blocked users
+const getAllBlockedUsers = async () => {
+    const blockedUsers = await User.find({ blocked: true })
+    return blockedUsers
+}
+
+// Change the profile image id on the user
+const uploadProfileImage = async (imageId, user) => {
+    try {
+        await User.updateMany({ _id: user._id }, { profileImage: imageId })
+    } catch (err) {
+        console.log(err)
+        return
+    }
+}
+
 const User = mongoose.model('User', userSchema, 'user')
 
 module.exports = {
@@ -288,4 +335,9 @@ module.exports = {
     setStatus,
     setDescription,
     changePassword,
+    hasBlockingPermissions,
+    unblockUser,
+    blockUser,
+    getAllBlockedUsers,
+    uploadProfileImage,
 }

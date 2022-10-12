@@ -4,8 +4,12 @@ const {
     addFriends,
     removeFriends,
     setDescription,
-    User,
+    blockUser,
+    unblockUser,
+    changePassword,
+    uploadProfileImage,
 } = require('../models/user')
+const { getProfileImage } = require('../models/index')
 const bcrypt = require('bcryptjs')
 
 // to create a new account for a user
@@ -42,9 +46,37 @@ const setDescriptionController = async (req, res) => {
     return res.redirect('back')
 }
 
+// Controller function for a user to change their password
 const changePasswordController = async (req, res) => {
     await changePassword(req, res)
     return res.redirect('back')
+}
+
+// Controller function for an admin to block a user
+const blockUserController = async (req, res) => {
+    await blockUser(req.user, req.params.id)
+    return res.redirect('back')
+}
+
+// Controller function for an admin to unblock a user
+const unblockUserController = async (req, res) => {
+    await unblockUser(req.user, req.params.id)
+    return res.redirect('back')
+}
+
+// Controller function for uploading profile images
+const uploadImageController = async (req, res) => {
+    try {
+        await uploadProfileImage(req.file.id, req.user)
+        return res.redirect('back')
+    } catch (err) {
+        console.log(err)
+        return res.redirect('back')
+    }
+}
+
+const getImageController = async (req, res) => {
+    await getProfileImage(req.params.id, res)
 }
 
 module.exports = {
@@ -54,4 +86,8 @@ module.exports = {
     setStatusController,
     setDescriptionController,
     changePasswordController,
+    blockUserController,
+    unblockUserController,
+    uploadImageController,
+    getImageController,
 }

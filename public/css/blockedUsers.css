@@ -1,0 +1,13 @@
+.unblockPhoto {
+    height: 12rem;
+    align-items: center;
+}
+
+.unblockButton {
+    background-color: green;
+    color:aliceblue;
+}
+
+.BlockedUserCard{
+    box-shadow: 0px 0px 5px #888888;
+}

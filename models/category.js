@@ -14,6 +14,15 @@ const categorySchema = new mongoose.Schema({
 
 const Category = mongoose.model('Category', categorySchema, 'category')
 
+// Gets the name of a category from its id
+const getCategoryName = async (categoryId) => {
+    try {
+        return await Category.findOne({ _id: categoryId }).name
+    } catch (err) {
+        return 'None'
+    }
+}
+
 // Checks if User has permission to make changes to a category
 const hasCategoryEditPermissions = (category, user) => {
     try {
@@ -71,21 +80,26 @@ const renameCategory = async (categoryId, name, user) => {
 // Gets all the categories created by a user
 const retriveCategories = async (user, requestingUser) => {
     const categories = []
-    // Get all categories made by a user
-    for (let i = 0; i < user.categories.length; i++) {
-        let category = await Category.findOne({ _id: user.categories[i] })
-        category.documentCount = category.posts.length
-        if (requestingUser) {
-            category.hasEditPermissions = hasCategoryEditPermissions(
-                category,
-                requestingUser
-            )
-        } else {
-            category.hasEditPermissions = true
+    try {
+        // Get all categories made by a user
+        for (let i = 0; i < user.categories.length; i++) {
+            let category = await Category.findOne({ _id: user.categories[i] })
+            category.documentCount = category.posts.length
+            if (requestingUser) {
+                category.hasEditPermissions = hasCategoryEditPermissions(
+                    category,
+                    requestingUser
+                )
+            } else {
+                category.hasEditPermissions = true
+            }
+            categories[i] = category
         }
-        categories[i] = category
+        return categories
+    } catch (err) {
+        console.log(err)
+        return []
     }
-    return categories
 }
 
 module.exports = {
@@ -93,5 +107,6 @@ module.exports = {
     createCategory,
     renameCategory,
     retriveCategories,
+    getCategoryName,
     hasCategoryEditPermissions,
 }

@@ -27,61 +27,7 @@
 </form>
 
 <!-- Search modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="inputName" placeholder="Search Documents">
-                    </div>
-                </form>
-
-                <div>
-                    <h2>Search Results Looped Below</h2>
-                </div>
-
-                <div class="card gedf-card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="mr-2">
-                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                </div>
-                                <div class="ml-2">
-                                    <div class="h5 m-0">Post Author</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="card-body">
-                        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>Created Date</div>
-
-                        <!-- Placeholder link, Instead of opening detailed view it currently downloads file immediately -->
-
-                        <a>
-                            <h5 class="card-title">fileName</h5>
-                        </a>
-
-                        <p class="card-text" class="btn btn-primary" data-toggle="modal"
-                            data-target="#exampleModalCenter">
-                            Post Description
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
+{{> search}}
 
 
 <div class="container-fluid gedf-wrapper">
@@ -149,9 +95,9 @@
 
         <!-- This div is the wide document pane -->
         <div class="col-md-9 gedf-main order-md-1">
-            <div class="card-header">
+            <div class="card-header border border-secondary">
                 <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
+                    <li class="nav-item border-secondary">
                         <a class="nav-link active" id="public-tab" data-toggle="tab" href="#postsPublic" role="tab"
                             aria-controls="postsPublic" aria-selected="true">
                             Public
@@ -174,13 +120,13 @@
                         aria-labelledby="public-tab">
                         <!-- A single post or view of the document, loop the below div using hbs variables -->
                         {{#each publicPosts}}
-                        <div class="card gedf-card">
+                        <div class="card gedf-card" style="box-shadow: 0px 0px 5px #888888">
                             <div class="card-header">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="mr-2">
-                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50"
-                                                alt="">
+                                            <img class="rounded-circle" width="45" src="/user/profileImage/{{this.createdBy}}"
+                                        onerror="if (this.src != 'error.jpg') this.src = 'https://picsum.photos/50/50';" alt="">
                                         </div>
                                         <div class="ml-2">
                                             <div class="h5 m-0"><a href="/profile/{{this.createdBy}}" class="h5 m-0">{{this.createdByName}}</a></div>
@@ -214,7 +160,8 @@
                                 <div class="modal-content">
                                     <div class="modal-header text-center">
 
-                                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                        <img class="rounded-circle" width="45" src="/user/profileImage/{{this.createdBy}}"
+                                        onerror="if (this.src != 'error.jpg') this.src = 'https://picsum.photos/50/50';" alt="">
 
                                         <h5 class="font-weight-bold ml-auto">{{this.filename}}</h5>
 
@@ -243,6 +190,9 @@
                                                             <option value="Public" label="Public"></option>
                                                             <option value="Friends" label="Friends"></option>
                                                             <option value="Private" label="Private"></option>
+                                                            {{#each ../allCategories}}
+                                                            <option value="{{this._id}}" label="{{this.name}}"></option>
+                                                            {{/each}}
                                                         </select>
                                                     </form>
                                                 </div>
@@ -327,8 +277,8 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="mr-2">
-                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50"
-                                                alt="">
+                                            <img class="rounded-circle" width="45" src="/user/profileImage/{{this.createdBy}}"
+                                                onerror="if (this.src != 'error.jpg') this.src = 'https://picsum.photos/50/50';" alt="">
                                         </div>
                                         <div class="ml-2">
                                             <div class="h5 m-0"><a href="/profile/{{this.createdBy}}" class="h5 m-0">{{this.createdByName}}</a></div>
@@ -356,6 +306,7 @@
                         </div>
 
                         {{!-- PIpeLine Comments --}}
+                        
 
                         <!-- Detailed Post Modal -->
                         <div class="modal fade" id="foryouModal{{@index}}" tabindex="-1"
@@ -364,7 +315,8 @@
                                 <div class="modal-content">
                                     <div class="modal-header text-center">
                                         
-                                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                        <img class="rounded-circle" width="45" src="/user/profileImage/{{this.createdBy}}"
+                                        onerror="if (this.src != 'error.jpg') this.src = 'https://picsum.photos/50/50';" alt="">
 
                                         <h5 class="font-weight-bold ml-auto">{{this.filename}}</h5>
 
@@ -393,6 +345,9 @@
                                                             <option value="Public" label="Public"></option>
                                                             <option value="Friends" label="Friends"></option>
                                                             <option value="Private" label="Private"></option>
+                                                            {{#each ../allCategories}}
+                                                            <option value="{{this._id}}" label="{{this.name}}"></option>
+                                                            {{/each}}
                                                         </select>
                                                     </form>
                                                 </div>
@@ -458,12 +413,15 @@
                         </div>  
 
                         {{/each}}
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <script>
     $('#city').focus(function () {

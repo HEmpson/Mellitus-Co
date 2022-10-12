@@ -61,18 +61,58 @@
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     {{!-- <button type="button" class="btn" href="/categoryContents/{{this._id}}" style="padding: 0"> --}}
-                    <a href="/categoryContents/{{this._id}}">
+                    <a href="/categoryContents/{{this._id}}" style="text-decoration: none; color: inherit;">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
+                                <div class="col-8">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                         {{this.name}}
                                     </div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{this.documentCount}} Files</div>
                                 </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                <div class="col-4">
+                                    <div class="nav-item dropdown" style="padding: none;">
+                                        <a class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </a>
+                                        
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <li>
+                                                <a class="card-link" data-dismiss="modal" data-toggle="modal"
+                                                        data-target="#renameModal{{this._id}}" style="margin-left: 20%;">
+                                                        Rename
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <form action="/categories/delete/{{this._id}}" method="post">
+                                                    <button type="submit">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                            
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
+
+
+                                <!-- the Rename Post Modal -->
+                                <div class="modal fade" id="renameModal{{this._id}}" tabindex="-1" aria-labelledby="postTitle"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body text-center">
+                                                <form action="/categories/rename/{{this._id}}" method="POST">
+                                                    <label for="newname">New Category Name: </label>
+                                                    <input type="text" name="name" id="newname" value="{{this.name}}"
+                                                        required>
+                                                    <button type="submit">Change</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </a>

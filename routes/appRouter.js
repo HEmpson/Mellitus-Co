@@ -18,7 +18,7 @@ const hasRole = (thisRole) => {
         if (req.user.role === thisRole) {
             return next()
         } else {
-            res.redirect('/')
+            res.redirect('/dashboard')
         }
     }
 }
@@ -29,11 +29,22 @@ appRouter.get('/', appController.getLoginPage)
 appRouter.get('/dashboard', isAuthenticated, appController.getDashboard)
 appRouter.get('/profile/:id', isAuthenticated, appController.getProfile)
 appRouter.get('/files/:id', isAuthenticated, appController.getFile)
-appRouter.get('/categoryContents/:id', isAuthenticated, appController.getCategoryFiles)
+appRouter.get(
+    '/categoryContents/:id',
+    isAuthenticated,
+    appController.getCategoryFiles
+)
 appRouter.get('/friends', isAuthenticated, appController.getFriends)
 appRouter.get('/allfiles/:id', isAuthenticated, appController.getAllFiles)
 appRouter.get('/categories/:id', isAuthenticated, appController.getCategories)
 appRouter.get('/registration', appController.getRegistration)
-appRouter.get('/editProfile', appController.getEditProfile)
+appRouter.get('/editProfile', isAuthenticated, appController.getEditProfile)
+
+appRouter.get(
+    '/blockedUsers',
+    isAuthenticated,
+    hasRole('Admin'),
+    appController.getBlockedUsers
+)
 
 module.exports = appRouter
