@@ -5,3 +5,11 @@
 .text-white {
     margin-bottom: 1rem;
   }
+
+.dropdown-menu{
+    background-color: var(--color-lightBlue);
+}
+
+.renameCard {
+    cursor: pointer;
+}
