@@ -287,6 +287,13 @@ const setStatus = async (userId, requestingUser, status) => {
     }
 }
 
+const setDisplayName = async (userId, requestingUser, displayName, res) => {
+    if (hasProfileEditPermissions(userId, requestingUser)){
+        await User.updateOne({_id: userId}, {displayName: displayName})
+    }
+    res.redirect('back')
+}
+
 // Changes the profile description of a user
 // given requesting user has permission
 const setDescription = async (userId, requestingUser, description) => {
@@ -343,4 +350,5 @@ module.exports = {
     blockUser,
     getAllBlockedUsers,
     uploadProfileImage,
+    setDisplayName,
 }

@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-6">
             <!-- change name -->
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="/user/changeDisplayName/{{user._id}}" method="POST">
                 <div>
                     <label for="newName">New Name: </label>
                     <input id="newName" type="text" name="newName" value={{user.displayName}} style="margin-left:9%">

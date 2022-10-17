@@ -8,6 +8,7 @@ const {
     unblockUser,
     changePassword,
     uploadProfileImage,
+    setDisplayName,
 } = require('../models/user')
 const { getProfileImage } = require('../models/index')
 const bcrypt = require('bcryptjs')
@@ -84,8 +85,15 @@ const uploadImageController = async (req, res) => {
     }
 }
 
+// Controller function for getting profile image
 const getImageController = async (req, res) => {
     await getProfileImage(req.params.id, res)
+}
+
+// Controller function for updating displayName
+const setDisplayNameController = async (req, res) => {
+    console.log(req.body.newName)
+    await setDisplayName(req.params.id, req.user, req.body.newName, res)
 }
 
 module.exports = {
@@ -100,4 +108,5 @@ module.exports = {
     uploadImageController,
     getImageController,
     createAdminAccountController,
+    setDisplayNameController,
 }

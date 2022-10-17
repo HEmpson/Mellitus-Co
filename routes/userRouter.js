@@ -60,6 +60,13 @@ userRouter.post(
     userController.setStatusController
 )
 
+// Route to change display name
+userRouter.post(
+    '/changeDisplayName/:id',
+    isAuthenticated,
+    userController.setDisplayNameController
+)
+
 // Route to change profile description
 userRouter.post(
     '/changeDescription/:id',
