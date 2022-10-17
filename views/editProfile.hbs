@@ -1,7 +1,95 @@
 <head>
     <link rel="stylesheet" href="/css/editProfile.css">
 </head>
-<!-- The Froms to edit profile -->
+
+
+<div class="container h-100 py-100">
+    <div class="card editProfileForm">
+        <div class="card-body">
+            <h3 class="card-title text-center">Edit your profile</h3>
+            
+            <div class="card-text">
+                <!-- change name -->
+                <div class="row">
+                    <form action="/user/changeDisplayName/{{user._id}}" method="POST">
+                        <div>
+                            <label for="newName">New Name: </label>
+                            <input id="newName" type="text" name="newName" value={{user.displayName}} style="margin-left:9%">
+                            <button type="submit" class="btn btn-primary">Change</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="row">
+                    <!-- change profile image -->
+                    <form action="/user/uploadProfileImage" method="POST" enctype="multipart/form-data">
+                        <div>
+                            <label for="profileImg">New Profile Image:</label>
+                            <input id="profileImg" type="file" name="file" style="width:31.5%;margin-left: 2%;">
+                            <button type="submit" class="btn btn-primary">Change</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- change status -->
+                <div class="row">
+                    <form action="/user/changeStatus/{{user._id}}" method="POST">
+                        <div>
+                            <label for="newStatus" class="my-3" style="vertical-align: middle;">New Status:&nbsp; &nbsp;
+                                &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<textarea id="newStatus"
+                                    name="status"> {{user.status}}</textarea> </label>
+
+                            <button type="submit" class="btn btn-primary" style="margin-left: 10%;">Change</button>
+                        </div>
+                    </form>
+                </div>
+                
+
+                <!-- change description -->
+                <div class="row">
+                    <form action="/user/changeDescription/{{user._id}}" method="POST">
+                        <div>
+                            <label for="newDescription">New Description: &nbsp; &nbsp; &nbsp; <textarea id="newDescription"
+                                    name="description">{{user.description}}</textarea></label>
+                            <button type="submit" class="btn btn-primary" style="margin-left: 10%;">Change</button>
+                        </div>
+                    </form>
+                </div>
+                
+
+                <!-- change password -->
+                
+                <form action="/user/changePassword" method="POST">
+                    <div class="row">
+                        <div>
+                            <label for="oldPassword">Old Password: </label>
+                            <input id="oldPassword" type="password" name="oldPass" style="margin-left:9%">
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="row">
+                        <div>
+                            <label for="newPassword">New Password: </label>
+                            <input id="newPassword" type="password" name="newPass" style="margin-left:9%">
+                            <button type="submit" class="btn btn-primary" style="margin-left: 10%;">Change</button>
+                        </div>
+                    </div>      
+                </form>
+                    
+
+                <!-- return bottun-->
+                <div>
+                    <a href="/profile/{{user._id}}" class="text-right"><bi class="bi-arrow-return-left"></bi></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{{!-- <!-- The Froms to edit profile -->
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-6">
@@ -79,6 +167,6 @@
     <!-- return bottun-->
     <div>
         <a href="/profile/{{user._id}}" class="text-right"><bi class="bi-arrow-return-left"></bi></a>
-    </div>
-    
+    </div> 
+     --}}
 </div>
