@@ -63,14 +63,16 @@
                     {{!-- <button type="button" class="btn" href="/categoryContents/{{this._id}}" style="padding: 0"> --}}
                     <a href="/categoryContents/{{this._id}}" style="text-decoration: none; color: inherit;">
                         <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-8">
+                            <div class="d-flex">
+                                <span style="width: 80%;">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                         {{this.name}}
                                     </div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{this.documentCount}} Files</div>
-                                </div>
-                                <div class="col-4">
+                                </span>
+                                    
+                                
+                                <div class="col-10" style="text-align: right;">
                                     <div class="nav-item dropdown" style="padding: none;">
                                         <a class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="bi bi-three-dots-vertical"></i>
@@ -79,13 +81,13 @@
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                             <li>
                                                 <a class="card-link" data-dismiss="modal" data-toggle="modal"
-                                                        data-target="#renameModal{{this._id}}" style="margin-left: 20%;">
+                                                        data-target="#renameModal{{this._id}}" style="margin-left: 20%; text-decoration: none; color: inherit; cursor:pointer">
                                                         Rename
                                                 </a>
                                             </li>
                                             <li>
-                                                <form action="/categories/delete/{{this._id}}" method="post">
-                                                    <button type="submit">
+                                                <form action="/categories/delete/{{this._id}}" method="post" style=" margin-left: 20%; text-decoration: none; color: inherit;">
+                                                    <button type="submit" style="text-decoration: none; color: inherit; border:none; background-color: transparent;">
                                                         Delete
                                                     </button>
                                                 </form>
