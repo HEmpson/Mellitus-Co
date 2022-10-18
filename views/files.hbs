@@ -30,25 +30,58 @@
             <div class="card border-left-primary shadow h-100 py-2">
                 <a href="/categoryContents/{{this._id}}" style="text-decoration: none; color: inherit;">
                     <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
+                        <div class="d-flex">
+                            <span style="width: 80%;">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     {{this.name}}
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{this.documentCount}} Files</div>
-                            </div>
-                            <div class="col-auto">
-                                <div class="nav-item dropdown">
+                            </span>
+                                
+                            
+                            <div class="col-10" style="text-align: right;">
+                                <div class="nav-item dropdown" style="padding: none;">
                                     <a class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="bi bi-three-dots-vertical"></i>
                                     </a>
                                     
-                                    <ul class="dropdownCover dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">Rename</a></li>
-                                        <li><a class="dropdown-item" href="#">Delete</a></li>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <li>
+                                            <a class="card-link" data-dismiss="modal" data-toggle="modal"
+                                                    data-target="#renameModal{{this._id}}" style="margin-left: 20%; text-decoration: none; color: inherit; cursor:pointer">
+                                                    Rename
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <form action="/categories/delete/{{this._id}}" method="post" style=" margin-left: 20%; text-decoration: none; color: inherit;">
+                                                <button type="submit" style="text-decoration: none; color: inherit; border:none; background-color: transparent;">
+                                                    Delete
+                                                </button>
+                                            </form>
+                        
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
+
+
+                            <!-- the Rename Post Modal -->
+                            <div class="modal fade" id="renameModal{{this._id}}" tabindex="-1" aria-labelledby="postTitle"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body text-center">
+                                            <form action="/categories/rename/{{this._id}}" method="POST">
+                                                <label for="newname">New Category Name: </label>
+                                                <input type="text" name="name" id="newname" value="{{this.name}}"
+                                                    required>
+                                                <button type="submit">Change</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </a>
@@ -70,16 +103,137 @@
     <div class="row">
         {{#each posts}}
         <div class="col-md-4 col-sm-6">
-            <div class="file-card">
-                <img src="https://media.istockphoto.com/vectors/contract-or-document-signing-icon-document-folder-with-stamp-and-text-vector-id1179640294?k=20&m=1179640294&s=612x612&w=0&h=O2IBtlV52-6gWSAeyozPIFkfZ-LzHnpXBw2tOuUToj8=" alt="profile-cover" class="img-responsive cover">
-                <div class="card-info">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1667px-PDF_file_icon.svg.png" alt="user" class="profile-photo-lg">
-                <div class="friend-info">
-                <a href="#" class="pull-right text-green">Document</a>
-                <h5><a href="timeline.html" class="profile-link">{{this.filename}}</a></h5>
-                <p>Uploaded : {{this.dateCreated}}</p>
+            <button type="button" class="btn" data-toggle="modal"
+                data-target="#exampleModalCenter{{@index}}" style="padding: 0">
+                <div class="file-card">
+                    <img src="https://media.istockphoto.com/vectors/contract-or-document-signing-icon-document-folder-with-stamp-and-text-vector-id1179640294?k=20&m=1179640294&s=612x612&w=0&h=O2IBtlV52-6gWSAeyozPIFkfZ-LzHnpXBw2tOuUToj8=" alt="profile-cover" class="img-responsive cover">
+                    <div class="card-info">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1667px-PDF_file_icon.svg.png" alt="user" class="profile-photo-lg">
+                        <div class="friend-info">
+                            <a href="#" class="pull-right text-green">Document</a>
+                            <h5><a data-target="#exampleModalCenter{{@index}}" class="profile-link">{{this.filename}}</a></h5>
+                            <p>Uploaded : {{this.dateCreated}}</p>
+                        </div>
+                    </div>
+                </div>
+            </button>
+        </div>
+
+        <!-- Detailed Post Modal -->
+        <div class="modal fade" id="exampleModalCenter{{@index}}" tabindex="-1"
+            aria-labelledby="postTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+
+                        <img class="rounded-circle" width="45" src="/user/profileImage/{{this.createdBy}}"
+                        onerror="if (this.src != 'error.jpg') this.src = 'https://picsum.photos/50/50';" alt="">
+
+                        <h5 class="font-weight-bold ml-auto">{{this.filename}}</h5>
+
+
+                        <button type="button" class="btn-close" data-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row align-items-center">
+                                <div class="col-3 category">
+                                    <div class="tag-container-1
+                                                font-weight-bold">
+                                        <form action="/posts/assignToCategory/{{this._id}}" method = "POST">
+                                        <select name="categoryId" id="Visivility"
+                                            onchange="this.form.submit()">
+                                            <option value="" selected disabled hidden>{{this.categoryName}}
+                                            </option>
+                                            <option value="" label="None"></option>
+                                            {{#each ../allCategories}}
+                                            <option value="{{this._id}}" label="{{this.name}}"></option>
+                                            {{/each}}
+                                        </select>
+                                    </form>
+                                        </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="tag-container-2
+                                                font-weight-bold">Symbol</div>
+                                </div>
+                                <div class="col-5 text-right ">
+                                    <form action="/posts/changeVisibility/{{this._id}}" method = "POST">
+                                        <select name="visibility" id="Visivility"
+                                            onchange="this.form.submit()">
+                                            <option value="" selected disabled hidden>{{this.visibility}}
+                                            </option>
+                                            <option value="Public" label="Public"></option>
+                                            <option value="Friends" label="Friends"></option>
+                                            <option value="Private" label="Private"></option>
+                                            {{#each ../allCategories}}
+                                            <option value="{{this._id}}" label="{{this.name}}"></option>
+                                            {{/each}}
+                                        </select>
+                                    </form>
+                                </div>
+
+                            </div>
+                            <div class="row justify-content-center" style="margin-top:0.8em">
+                                <div class="col-12 fileImage-container text-center">
+                                    <img src="https://media.istockphoto.com/vectors/contract-or-document-signing-icon-document-folder-with-
+                                    stamp-and-text-vector-id1179640294?k=20&m=1179640294&s=612x612&w=0&h=O2IBtlV52-6gWSAeyozPIFkfZ-LzHnpXBw2tOuUToj8=" alt="File Img"
+                                    class="profile-img" >
+                                </div>
+                                <div class="col-12 text-right">
+                                    <!-- the link to open rename modal -->
+                                    {{#if hasEditPermissions}}
+                                    <a class="card-link" data-dismiss="modal" data-toggle="modal"
+                                        data-target="#renameModal{{this._id}}" style="margin-left: 20%;">
+                                        Rename</a>
+                                    <a href="/posts/removePost/{{this._id}}" style="margin-left: 3%;"> Delete
+                                    </a>
+                                    {{/if}}
+
+                                    <a href="/posts/download/{{this._id}}" style="margin-left: 3%;">
+                                        Download </a>
+                                </div>
+                                <div class="col-12 small-text">
+
+                                    <small><i class="bi bi-heart"></i> 103</small>
+                                    <small class="time"> {{this.dateCreated}} </small>
+
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-11">
+                                    {{this.description}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                    </div>
                 </div>
             </div>
+        </div>
+
+
+        <!-- the Rename Post Modal -->
+        <div class="modal fade" id="renameModal{{this._id}}" tabindex="-1" aria-labelledby="postTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <form action="/posts/renamePost/{{this._id}}" method="POST">
+                            <label for="newname">New Title</label>
+                            <input type="text" name="filename" id="newname" value="{{this.filename}}"
+                                required>
+                            <button type="submit">Change</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
         {{/each}}

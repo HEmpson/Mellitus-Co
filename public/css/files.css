@@ -22,8 +22,8 @@ img.profile-photo-md {
 }
 
 .file-card .img-responsive{
-    height: 12rem;
-    width: 24rem;
+    height: 14rem;
+    width: 20rem;
     margin: 0.25rem 0.8rem 0 1.1rem;
 }
 
@@ -48,3 +48,8 @@ img.profile-photo-lg {
 }
 
 
+.fileImage-container .profile-img{
+    height: 14rem;
+    width: 20rem;
+    margin: 0.25rem 0.8rem 0 1.1rem;
+}
