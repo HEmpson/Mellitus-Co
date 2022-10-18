@@ -173,9 +173,8 @@
                                     <div class="modal-body">
                                         <div class="container-fluid">
                                             <div class="row align-items-center">
-                                                <div class="col-3 category">
-                                                    <div class="tag-container-1
-                                                                font-weight-bold">
+                                                <div class="col-3 category" style="margin-left: 25px;">
+
                                                         <form action="/posts/assignToCategory/{{this._id}}" method = "POST">
                                                         <select name="categoryId" id="Visivility"
                                                             onchange="this.form.submit()">
@@ -187,24 +186,18 @@
                                                             {{/each}}
                                                         </select>
                                                     </form>
-                                                     </div>
+                                                   
                                                 </div>
-                                                <div class="col-3">
-                                                    <div class="tag-container-2
-                                                                font-weight-bold">Symbol</div>
-                                                </div>
-                                                <div class="col-5 text-right ">
+
+                                                <div class="col-8 text-right">
                                                     <form action="/posts/changeVisibility/{{this._id}}" method = "POST">
-                                                        <select name="visibility" id="Visivility"
+                                                        <select name="visibility" id="Visivility" class="mr-2"
                                                             onchange="this.form.submit()">
                                                             <option value="" selected disabled hidden>{{this.visibility}}
                                                             </option>
                                                             <option value="Public" label="Public"></option>
                                                             <option value="Friends" label="Friends"></option>
                                                             <option value="Private" label="Private"></option>
-                                                            {{#each ../allCategories}}
-                                                            <option value="{{this._id}}" label="{{this.name}}"></option>
-                                                            {{/each}}
                                                         </select>
                                                     </form>
                                                 </div>
