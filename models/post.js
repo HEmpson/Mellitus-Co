@@ -94,7 +94,14 @@ const getUserPosts = async (user, requestingUser) => {
 
 // gets all the public posts
 const getPublicPosts = async (user) => {
-    publicPosts = await Post.find({ visibility: 'Public' }).lean()
+    let publicPosts
+
+    // If user is admin, get all posts, else only get Public posts
+    if (user.role === 'Admin') {
+        publicPosts = await Post.find({}).lean()
+    } else {
+        publicPosts = await Post.find({ visibility: 'Public' }).lean()
+    }
 
     publicPosts = await filterVisiblePosts(publicPosts, user)
 
@@ -113,21 +120,24 @@ const getFriendsPosts = async (user, requestingUser) => {
     for (i = 0; i < user.friends.length; i++) {
         friend = await User.findOne({ _id: user.friends[i] })
 
-        let posts = await friend.populate({
-            path: 'posts',
-            options: { lean: true },
-        })
-        posts = posts.toObject()
+        // Check if friend exists
+        if (friend) {
+            let posts = await friend.populate({
+                path: 'posts',
+                options: { lean: true },
+            })
+            posts = posts.toObject()
 
-        friendPosts = posts.posts
+            friendPosts = posts.posts
 
-        // now iterate through that array and check whether the logged in user can see the post
-        for (j = 0; j < friendPosts.length; j++) {
-            if (
-                friendPosts[j].visibility === 'Friends' ||
-                friendPosts[j].visibility === 'Public'
-            ) {
-                allPosts.push(friendPosts[j])
+            // now iterate through that array and check whether the logged in user can see the post
+            for (j = 0; j < friendPosts.length; j++) {
+                if (
+                    friendPosts[j].visibility === 'Friends' ||
+                    friendPosts[j].visibility === 'Public'
+                ) {
+                    allPosts.push(friendPosts[j])
+                }
             }
         }
     }
