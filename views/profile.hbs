@@ -80,8 +80,10 @@
         <a type="button" class="btn btn-primary" href="../files/{{userInfo._id}}" style="margin-left: 33.5%;"> View
             {{userInfo.displayName}}'s Files</a>
         {{#if (checkAdmin user.role)}}
-        <a type="button" class="btn btn-secondary" href="../user/blockUser/{{userInfo._id}}" style="margin-left: 5.5%;">
-            Block {{userInfo.displayName}}</a>
+            {{#if (checkBlocked userInfo.blocked)}}
+                <a type="button" class="btn btn-secondary" href="../user/blockUser/{{userInfo._id}}" style="margin-left: 5.5%;">
+                    Block {{userInfo.displayName}}</a>
+            {{/if}}
         {{/if}}
 
 
