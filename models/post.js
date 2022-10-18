@@ -370,7 +370,7 @@ const deleteCategory = async (categoryId, user, res) => {
         if (hasCategoryEditPermissions(category, user)) {
             // Delete All files in the category
             for (let i = 0; i < category.posts.length; i++) {
-                deletePost(category.posts[i])
+                await deletePost(category.posts[i], user)
             }
 
             // Delete the category
