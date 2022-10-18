@@ -79,7 +79,7 @@
         <div class="py-3"></div>
         <a type="button" class="btn btn-primary" href="../files/{{userInfo._id}}" style="margin-left: 33.5%;"> View
             {{userInfo.displayName}}'s Files</a>
-        {{#if checkAdmin}}
+        {{#if (checkAdmin user.role)}}
         <a type="button" class="btn btn-secondary" href="../user/blockUser/{{userInfo._id}}" style="margin-left: 5.5%;">
             Block {{userInfo.displayName}}</a>
         {{/if}}
