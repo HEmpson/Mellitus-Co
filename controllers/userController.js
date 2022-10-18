@@ -92,8 +92,8 @@ const getImageController = async (req, res) => {
 
 // Controller function for updating displayName
 const setDisplayNameController = async (req, res) => {
-    console.log(req.body.newName)
     await setDisplayName(req.params.id, req.user, req.body.newName, res)
+    res.redirect('back')
 }
 
 module.exports = {
