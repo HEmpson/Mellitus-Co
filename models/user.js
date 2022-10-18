@@ -291,7 +291,6 @@ const setDisplayName = async (userId, requestingUser, displayName, res) => {
     if (hasProfileEditPermissions(userId, requestingUser)){
         await User.updateOne({_id: userId}, {displayName: displayName})
     }
-    res.redirect('back')
 }
 
 // Changes the profile description of a user
