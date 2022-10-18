@@ -288,8 +288,8 @@ const setStatus = async (userId, requestingUser, status) => {
 }
 
 const setDisplayName = async (userId, requestingUser, displayName, res) => {
-    if (hasProfileEditPermissions(userId, requestingUser)){
-        await User.updateOne({_id: userId}, {displayName: displayName})
+    if (hasProfileEditPermissions(userId, requestingUser)) {
+        await User.updateOne({ _id: userId }, { displayName: displayName })
     }
 }
 

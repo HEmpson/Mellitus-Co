@@ -123,7 +123,10 @@ const getFriendsPosts = async (user, requestingUser) => {
 
         // now iterate through that array and check whether the logged in user can see the post
         for (j = 0; j < friendPosts.length; j++) {
-            if (friendPosts[j].visibility === 'Friends') {
+            if (
+                friendPosts[j].visibility === 'Friends' ||
+                friendPosts[j].visibility === 'Public'
+            ) {
                 allPosts.push(friendPosts[j])
             }
         }

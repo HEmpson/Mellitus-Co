@@ -106,7 +106,7 @@ const getAllFiles = async (req, res) => {
 
     res.render('allFiles.hbs', {
         pageName: 'All Files',
-        posts: filteredPosts,
+        posts: posts,
         viewee: user,
         allCategories: categories,
         user: req.user,
