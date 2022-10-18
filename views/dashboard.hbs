@@ -125,11 +125,14 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="mr-2">
-                                            <img class="rounded-circle" width="45" src="/user/profileImage/{{this.createdBy}}"
-                                        onerror="if (this.src != 'error.jpg') this.src = 'https://picsum.photos/50/50';" alt="">
+                                            <img class="rounded-circle" width="45"
+                                                src="/user/profileImage/{{this.createdBy}}"
+                                                onerror="if (this.src != 'error.jpg') this.src = 'https://picsum.photos/50/50';"
+                                                alt="">
                                         </div>
                                         <div class="ml-2">
-                                            <div class="h5 m-0"><a href="/profile/{{this.createdBy}}" class="h5 m-0">{{this.createdByName}}</a></div>
+                                            <div class="h5 m-0"><a href="/profile/{{this.createdBy}}"
+                                                    class="h5 m-0">{{this.createdByName}}</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -160,8 +163,10 @@
                                 <div class="modal-content">
                                     <div class="modal-header text-center">
 
-                                        <img class="rounded-circle" width="45" src="/user/profileImage/{{this.createdBy}}"
-                                        onerror="if (this.src != 'error.jpg') this.src = 'https://picsum.photos/50/50';" alt="">
+                                        <img class="rounded-circle" width="45"
+                                            src="/user/profileImage/{{this.createdBy}}"
+                                            onerror="if (this.src != 'error.jpg') this.src = 'https://picsum.photos/50/50';"
+                                            alt="">
 
                                         <h5 class="font-weight-bold ml-auto">{{this.filename}}</h5>
 
@@ -175,10 +180,11 @@
                                             <div class="row align-items-center">
                                                 <div class="col-3 category" style="margin-left: 25px;">
 
-                                                        <form action="/posts/assignToCategory/{{this._id}}" method = "POST">
+                                                    <form action="/posts/assignToCategory/{{this._id}}" method="POST">
                                                         <select name="categoryId" id="Visivility"
                                                             onchange="this.form.submit()">
-                                                            <option value="" selected disabled hidden>{{this.categoryName}}
+                                                            <option value="" selected disabled hidden>
+                                                                {{this.categoryName}}
                                                             </option>
                                                             <option value="" label="None"></option>
                                                             {{#each ../allCategories}}
@@ -186,14 +192,15 @@
                                                             {{/each}}
                                                         </select>
                                                     </form>
-                                                   
+
                                                 </div>
 
                                                 <div class="col-8 text-right">
-                                                    <form action="/posts/changeVisibility/{{this._id}}" method = "POST">
+                                                    <form action="/posts/changeVisibility/{{this._id}}" method="POST">
                                                         <select name="visibility" id="Visivility" class="mr-2"
                                                             onchange="this.form.submit()">
-                                                            <option value="" selected disabled hidden>{{this.visibility}}
+                                                            <option value="" selected disabled hidden>
+                                                                {{this.visibility}}
                                                             </option>
                                                             <option value="Public" label="Public"></option>
                                                             <option value="Friends" label="Friends"></option>
@@ -206,16 +213,18 @@
                                             <div class="row justify-content-center" style="margin-top:0.8em">
                                                 <div class="col-12 fileImage-container text-center">
                                                     <img src="https://media.istockphoto.com/vectors/contract-or-document-signing-icon-document-folder-with-
-                                                    stamp-and-text-vector-id1179640294?k=20&m=1179640294&s=612x612&w=0&h=O2IBtlV52-6gWSAeyozPIFkfZ-LzHnpXBw2tOuUToj8=" alt="File Img"
-                                                    class="profile-img">
+                                                    stamp-and-text-vector-id1179640294?k=20&m=1179640294&s=612x612&w=0&h=O2IBtlV52-6gWSAeyozPIFkfZ-LzHnpXBw2tOuUToj8="
+                                                        alt="File Img" class="profile-img">
                                                 </div>
                                                 <div class="col-12 text-right">
                                                     <!-- the link to open rename modal -->
                                                     {{#if hasEditPermissions}}
                                                     <a class="card-link" data-dismiss="modal" data-toggle="modal"
-                                                        data-target="#renameModal{{this._id}}" style="margin-left: 20%;">
+                                                        data-target="#renameModal{{this._id}}"
+                                                        style="margin-left: 20%;">
                                                         Rename</a>
-                                                    <a href="/posts/removePost/{{this._id}}" style="margin-left: 3%;"> Delete
+                                                    <a href="/posts/removePost/{{this._id}}" style="margin-left: 3%;">
+                                                        Delete
                                                     </a>
                                                     {{/if}}
 
@@ -280,18 +289,21 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="mr-2">
-                                            <img class="rounded-circle" width="45" src="/user/profileImage/{{this.createdBy}}"
-                                                onerror="if (this.src != 'error.jpg') this.src = 'https://picsum.photos/50/50';" alt="">
+                                            <img class="rounded-circle" width="45"
+                                                src="/user/profileImage/{{this.createdBy}}"
+                                                onerror="if (this.src != 'error.jpg') this.src = 'https://picsum.photos/50/50';"
+                                                alt="">
                                         </div>
                                         <div class="ml-2">
-                                            <div class="h5 m-0"><a href="/profile/{{this.createdBy}}" class="h5 m-0">{{this.createdByName}}</a></div>
+                                            <div class="h5 m-0"><a href="/profile/{{this.createdBy}}"
+                                                    class="h5 m-0">{{this.createdByName}}</a></div>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
-                            <button type="button" class="btn" data-toggle="modal"
-                                data-target="#foryouModal{{@index}}" style="padding: 0">
+                            <button type="button" class="btn" data-toggle="modal" data-target="#foryouModal{{@index}}"
+                                style="padding: 0">
                                 <div class="card-body">
                                     <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{this.dateCreated}}
                                     </div>
@@ -309,17 +321,19 @@
                         </div>
 
                         {{!-- PIpeLine Comments --}}
-                        
+
 
                         <!-- Detailed Post Modal -->
-                        <div class="modal fade" id="foryouModal{{@index}}" tabindex="-1"
-                            aria-labelledby="postTitle" aria-hidden="true">
+                        <div class="modal fade" id="foryouModal{{@index}}" tabindex="-1" aria-labelledby="postTitle"
+                            aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header text-center">
-                                        
-                                        <img class="rounded-circle" width="45" src="/user/profileImage/{{this.createdBy}}"
-                                        onerror="if (this.src != 'error.jpg') this.src = 'https://picsum.photos/50/50';" alt="">
+
+                                        <img class="rounded-circle" width="45"
+                                            src="/user/profileImage/{{this.createdBy}}"
+                                            onerror="if (this.src != 'error.jpg') this.src = 'https://picsum.photos/50/50';"
+                                            alt="">
 
                                         <h5 class="font-weight-bold ml-auto">{{this.filename}}</h5>
 
@@ -333,10 +347,11 @@
                                             <div class="row align-items-center">
                                                 <div class="col-3 category" style="margin-left: 25px;">
 
-                                                        <form action="/posts/assignToCategory/{{this._id}}" method = "POST">
+                                                    <form action="/posts/assignToCategory/{{this._id}}" method="POST">
                                                         <select name="categoryId" id="Visivility"
                                                             onchange="this.form.submit()">
-                                                            <option value="" selected disabled hidden>{{this.categoryName}}
+                                                            <option value="" selected disabled hidden>
+                                                                {{this.categoryName}}
                                                             </option>
                                                             <option value="" label="None"></option>
                                                             {{#each ../allCategories}}
@@ -344,14 +359,14 @@
                                                             {{/each}}
                                                         </select>
                                                     </form>
-                                                   
+
                                                 </div>
 
                                                 <div class="col-8 text-right">
-                                                    <form action="/posts/changeVisibility/{{this._id}}" method = "POST">
+                                                    <form action="/posts/changeVisibility/{{this._id}}" method="POST">
                                                         <select name="visibility" id="Visivility" class="mr-2"
                                                             onchange="this.form.submit()">
-                                                            <option value=""disabled hidden>{{this.visibility}}
+                                                            <option value="" disabled hidden>{{this.visibility}}
                                                             </option>
                                                             <option value="Public" label="Public"></option>
                                                             <option value="Friends" label="Friends"></option>
@@ -364,18 +379,20 @@
                                             <div class="row justify-content-center" style="margin-top:0.8em">
                                                 <div class="col-12 fileImage-container text-center">
                                                     <img src="https://media.istockphoto.com/vectors/contract-or-document-signing-icon-document-folder-with-
-                                                    stamp-and-text-vector-id1179640294?k=20&m=1179640294&s=612x612&w=0&h=O2IBtlV52-6gWSAeyozPIFkfZ-LzHnpXBw2tOuUToj8=" alt="File Img"
-                                                    class="profile-img">
+                                                    stamp-and-text-vector-id1179640294?k=20&m=1179640294&s=612x612&w=0&h=O2IBtlV52-6gWSAeyozPIFkfZ-LzHnpXBw2tOuUToj8="
+                                                        alt="File Img" class="profile-img">
                                                 </div>
                                                 <div class="col-12 text-right">
                                                     <!-- the link to open rename modal -->
 
                                                     <a class="card-link" data-dismiss="modal" data-toggle="modal"
-                                                        data-target="/renameModal{{this._id}}" style="margin-left: 20%;">
+                                                        data-target="/renameModal{{this._id}}"
+                                                        style="margin-left: 20%;">
                                                         Rename</a>
                                                     <a href="/posts/download/{{this._id}}" style="margin-left: 3%;">
                                                         download </a>
-                                                    <a href="/posts/removePost/{{this._id}}" style="margin-left: 3%;"> Delete
+                                                    <a href="/posts/removePost/{{this._id}}" style="margin-left: 3%;">
+                                                        Delete
                                                     </a>
                                                 </div>
                                                 <div class="col-12 small-text">
@@ -418,10 +435,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
 
                         {{/each}}
-                        
+
                     </div>
                 </div>
             </div>

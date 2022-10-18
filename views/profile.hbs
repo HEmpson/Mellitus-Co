@@ -19,10 +19,11 @@
                     18px;font-family: Arial, Helvetica, sans-serif;"><i class="bi bi-people-fill"></i>Friends      <i class="bi bi-hand-thumbs-up-fill"></i>Likes        <i class="bi bi-file-post"></i>Posts        </pre>
             </div>
 
-            <div class="col-sm-5 col-lg-3 " >
-                <div class="image-cropper" >
-                    <img src="/user/profileImage/{{userInfo._id}}" 
-                       onerror="if (this.src != 'error.jpg') this.src = 'https://picsum.photos/50/50';" alt="Generic placeholder image" class="img-fluid
+            <div class="col-sm-5 col-lg-3 ">
+                <div class="image-cropper">
+                    <img src="/user/profileImage/{{userInfo._id}}"
+                        onerror="if (this.src != 'error.jpg') this.src = 'https://picsum.photos/50/50';"
+                        alt="Generic placeholder image" class="img-fluid
                                 profile-img">
                 </div>
             </div>
@@ -76,12 +77,13 @@
         </div>
         </hr>
         <div class="py-3"></div>
-        <a type="button" class="btn btn-primary" href="../allfiles/{{user.id}}" style="margin-left: 33.5%;"> View {{userInfo.displayName}}'s Files</a>
+        <a type="button" class="btn btn-primary" href="../allfiles/{{user.id}}" style="margin-left: 33.5%;"> View
+            {{userInfo.displayName}}'s Files</a>
         {{#if checkAdmin}}
-         <a type="button" class="btn btn-secondary" href="../user/blockUser/{{user.id}}" style="margin-left: 5.5%;"> Block {{userInfo.displayName}}</a>
+        <a type="button" class="btn btn-secondary" href="../user/blockUser/{{user.id}}" style="margin-left: 5.5%;">
+            Block {{userInfo.displayName}}</a>
         {{/if}}
-       
+
 
 
 </section>
-
