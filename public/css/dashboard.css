@@ -48,6 +48,7 @@ body {
 .py-2 + .card-body{
     padding: 0%;
 }
-option{
-    background-color: #9CC3D5FF;
+
+select{
+    background-color: rgb(201, 206, 255);
 }
