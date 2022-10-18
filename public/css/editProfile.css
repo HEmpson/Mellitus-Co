@@ -2,21 +2,26 @@ label textarea{
     vertical-align: top;
 }
 
+
 body {
-    margin: auto;
     display: -ms-flexbox;
 	display: -webkit-box;
 	display: flex;
 	background-color: #f5f5f5;
 }
 
-.container {
+.btn {
+    margin-left: 2rem;
+}
+
+.Container {
     margin: auto;
+    width: 100%
 }
 
 .editProfileForm {
-    width: 600px;
-	margin: 0 auto;
+    width: 800px;
+	margin: auto;
     display: flex;
 }
 
@@ -29,6 +34,9 @@ body {
 .row {
     grid-template-columns: 1fr 1fr 1fr;
     padding: 12px 6px 8px 2px;
+}
+#statusRow {
+    padding-top: 18px;
 }
 
 .card-title {

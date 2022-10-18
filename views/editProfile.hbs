@@ -1,9 +1,13 @@
+
 <head>
     <link rel="stylesheet" href="/css/editProfile.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
 </head>
 
 
-<div class="container h-100 py-100">
+<div class="Container">
     <div class="card editProfileForm">
         <div class="card-body">
             <h3 class="card-title text-center">Edit your profile</h3>
@@ -12,9 +16,9 @@
                 <!-- change name -->
                 <div class="row">
                     <form action="/user/changeDisplayName/{{user._id}}" method="POST">
-                        <div>
-                            <label for="newName">New Name: </label>
-                            <input id="newName" type="text" name="newName" value={{user.displayName}} style="margin-left:9%">
+                        <div class="form-group">
+                            <label class="col-md-3" for="newName">New Name: </label>
+                            <input class="col-md-5" id="newName" type="text" name="newName" value={{user.displayName}}>
                             <button type="submit" class="btn btn-primary">Change</button>
                         </div>
                     </form>
@@ -23,35 +27,33 @@
                 <div class="row">
                     <!-- change profile image -->
                     <form action="/user/uploadProfileImage" method="POST" enctype="multipart/form-data">
-                        <div>
-                            <label for="profileImg">New Profile Image:</label>
-                            <input id="profileImg" type="file" name="file" style="width:31.5%;margin-left: 2%;">
+                        <div class="form-group">
+                            <label class="col-md-3" for="profileImg">New Profile Image:</label>
+                            <input class="col-md-5" id="profileImg" type="file" name="file">
                             <button type="submit" class="btn btn-primary">Change</button>
                         </div>
                     </form>
                 </div>
                 
                 <!-- change status -->
-                <div class="row">
+                <div class="row" id="statusRow">
                     <form action="/user/changeStatus/{{user._id}}" method="POST">
-                        <div>
-                            <label for="newStatus" class="my-3" style="vertical-align: middle;">New Status:&nbsp; &nbsp;
-                                &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<textarea id="newStatus"
-                                    name="status"> {{user.status}}</textarea> </label>
+                        <div class="form-group">
+                            <label class="col-md-3" for="newStatus">New Status:</label>
+                            <textarea class="col-md-5" id="newStatus"name="status"> {{user.status}}</textarea> 
 
-                            <button type="submit" class="btn btn-primary" style="margin-left: 10%;">Change</button>
+                            <button type="submit" class="btn btn-primary">Change</button>
                         </div>
                     </form>
                 </div>
-                
-
+            
                 <!-- change description -->
                 <div class="row">
                     <form action="/user/changeDescription/{{user._id}}" method="POST">
-                        <div>
-                            <label for="newDescription">New Description: &nbsp; &nbsp; &nbsp; <textarea id="newDescription"
-                                    name="description">{{user.description}}</textarea></label>
-                            <button type="submit" class="btn btn-primary" style="margin-left: 10%;">Change</button>
+                        <div class="form-group">
+                            <label class="col-md-3" for="newDescription">New Description:</label>
+                            <textarea class="col-md-5"id="newDescription" name="description">{{user.description}}</textarea>
+                            <button type="submit" class="btn btn-primary">Change</button>
                         </div>
                     </form>
                 </div>
@@ -61,18 +63,18 @@
                 
                 <form action="/user/changePassword" method="POST">
                     <div class="row">
-                        <div>
-                            <label for="oldPassword">Old Password: </label>
-                            <input id="oldPassword" type="password" name="oldPass" style="margin-left:9%">
+                        <div class="form-group">
+                            <label class="col-md-3"for="oldPassword">Old Password: </label>
+                            <input class="col-md-5"id="oldPassword" type="password" name="oldPass">
                         </div>
                         
                     </div>
                     
                     <div class="row">
-                        <div>
-                            <label for="newPassword">New Password: </label>
-                            <input id="newPassword" type="password" name="newPass" style="margin-left:9%">
-                            <button type="submit" class="btn btn-primary" style="margin-left: 10%;">Change</button>
+                        <div class="form-group">
+                            <label class="col-md-3" for="newPassword">New Password: </label>
+                            <input class="col-md-5" id="newPassword" type="password" name="newPass">
+                            <button type="submit" class="btn btn-primary">Change</button>
                         </div>
                     </div>      
                 </form>
@@ -168,5 +170,5 @@
     <div>
         <a href="/profile/{{user._id}}" class="text-right"><bi class="bi-arrow-return-left"></bi></a>
     </div> 
-     --}}
-</div>
+
+</div> --}}
