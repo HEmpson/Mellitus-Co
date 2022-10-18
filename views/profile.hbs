@@ -28,7 +28,7 @@
                 </div>
             </div>
             <!-- button to editProfile Page -->
-            {{#if (editPermission userInfo._id user._id)}}
+            {{#if (checkSame userInfo._id user._id)}}
                 <div class="col-2 ml-1">
                     <a type="button" class="btn btn-secondary " href="../editProfile">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
@@ -83,8 +83,10 @@
             {{userInfo.displayName}}'s Files</a>
         {{#if (checkAdmin user.role)}}
             {{#if (checkBlocked userInfo.blocked)}}
-                <a type="button" class="btn btn-secondary" href="../user/blockUser/{{userInfo._id}}" style="margin-left: 5.5%;">
-                    Block {{userInfo.displayName}}</a>
+                {{#if (checkDifferent userInfo._id user._id)}}
+                    <a type="button" class="btn btn-secondary" href="../user/blockUser/{{userInfo._id}}" style="margin-left: 5.5%;">
+                        Block {{userInfo.displayName}}</a>
+                {{/if}}
             {{/if}}
         {{/if}}
 
