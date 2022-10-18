@@ -77,6 +77,10 @@
         </hr>
         <div class="py-3"></div>
         <a type="button" class="btn btn-primary" href="../allfiles/{{user.id}}" style="margin-left: 33.5%;"> View {{userInfo.displayName}}'s Files</a>
+        {{#if checkAdmin}}
+         <a type="button" class="btn btn-secondary" href="../user/blockUser/{{user.id}}" style="margin-left: 5.5%;"> Block {{userInfo.displayName}}</a>
+        {{/if}}
+       
 
 
 </section>
