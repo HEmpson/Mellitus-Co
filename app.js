@@ -35,6 +35,7 @@ app.engine(
         helpers: {
             checkAdmin: (role) => role === 'Admin',
             checkBlocked: (blocked) => blocked === false,
+            editPermission: (reqUserID, userID) => reqUserID.equals(userID),
         },
     })
 )

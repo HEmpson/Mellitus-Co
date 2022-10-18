@@ -49,7 +49,7 @@ const getProfile = async (req, res) => {
         req.flash('noUserError', 'No access to user')
         return res.redirect('/dashboard')
     }
-
+    
     res.render('profile.hbs', {
         pageName: 'Profile',
         userInfo: user,
