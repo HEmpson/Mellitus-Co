@@ -59,7 +59,7 @@ const setDescriptionController = async (req, res) => {
 // Controller function for a user to change their password
 const changePasswordController = async (req, res) => {
     await changePassword(req, res)
-    return res.redirect('back')
+    return res.redirect('/editProfile')
 }
 
 // Controller function for an admin to block a user

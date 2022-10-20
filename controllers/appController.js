@@ -166,6 +166,7 @@ const getEditProfile = async (req, res) => {
     res.render('editProfile.hbs', {
         pageName: 'editProfile',
         user: req.user,
+        flash: req.flash('badPassError'),
     })
 }
 

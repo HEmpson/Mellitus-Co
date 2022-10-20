@@ -264,7 +264,7 @@ const changePassword = async (req, res) => {
     bcrypt.compare(oldPass, currentPass, async (err, valid) => {
         if (!valid) {
             req.flash(
-                'changePasswordError',
+                'badPassError',
                 'Old password does not match current password'
             )
             return
