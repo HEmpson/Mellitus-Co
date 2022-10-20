@@ -2,17 +2,20 @@
 
 /*-- General styles --*/
 :root {
-    --color-bg: #c8d7df;
-    --color-bg-variant: #5c80BC;
+    --color-bg: #f1f3f4;
+    --color-bg-variant: #006983;
     --color-black: #0D1321;
     --color-primary: #AFE0CE;
-    --color-primary-variant: #4d5061;
-    --color-lightBlue: rgba(82, 154, 161, 0.98);
+    --color-primary-variant: #7D9AAA;
+    --color-lightBlue: rgb(0, 173, 239);
+    --color-blue: rgb(0, 41, 96);   
     --color-white: white;
     --color-light: #f3ebe5;
     --color-green: #c5D864;
+    --color-yellow: rgb(212, 196, 0);  
     --color-pink: #CCA7A2;
     --color-taupe: #86615c;
+    --color-lightgray: #e0e8e4;
 }
 
 * {
