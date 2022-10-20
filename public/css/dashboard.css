@@ -49,6 +49,12 @@ body {
     padding: 0%;
 }
 
-select{
-    background-color: rgb(201, 206, 255);
+select {
+    background-color: var(--color-lightgray);
+    text-align: center;
+
+}
+
+.custom-file-label {
+    margin-top: 1.2rem;
 }
