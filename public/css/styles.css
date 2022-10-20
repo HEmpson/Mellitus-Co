@@ -2,14 +2,14 @@
 
 /*-- General styles --*/
 :root {
-    --color-bg: #40798c;
+    --color-bg: #c8d7df;
     --color-bg-variant: #5c80BC;
     --color-black: #0D1321;
     --color-primary: #AFE0CE;
     --color-primary-variant: #4d5061;
     --color-lightBlue: rgba(82, 154, 161, 0.98);
     --color-white: white;
-    --color-light: #FFEDDF;
+    --color-light: #f3ebe5;
     --color-green: #c5D864;
     --color-pink: #CCA7A2;
     --color-taupe: #86615c;
@@ -21,12 +21,12 @@
     box-sizing: border-box;
 }
 
-/* body{
+body{
     font-family: "Raleway", serif;
     min-height: 100vh;
-    background: linear-gradient(60deg, var(--color-bg), transparent, var(--color-primary));
+    background: var(--color-bg);
     color: var(--color-black);
-} */
+} 
 
 
 /*-- Navigation bar --*/
