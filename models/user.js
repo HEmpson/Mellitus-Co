@@ -79,7 +79,7 @@ const createAccount = async (req, res, userType) => {
 
     try {
         const newUserProfile = new User({
-            username: newUser.username,
+            username: newUser.username.toLowerCase(),
             password: newUser.password,
             displayName: newUser.displayName,
             status: ' ',
