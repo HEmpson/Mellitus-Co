@@ -32,6 +32,11 @@ passport.use(
                     message: 'Incorrect username or password',
                 })
             }
+            if (user.blocked) {
+                return done(undefined, false, {
+                    message: 'Your Account Has Been Blocked'
+                })
+            }
             // Check password
             user.verifyPassword(password, (err, valid) => {
                 if (err) {
